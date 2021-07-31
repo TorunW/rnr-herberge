@@ -25,7 +25,6 @@ function Admin() {
   const pageType = window.location.pathname.split('/')[2];
   const formType = window.location.pathname.split('/')[3];
   const pageId = window.location.pathname.split('/')[4];
-  console.log(pageId, 'id');
 
   let pageFormDisplay;
   if (pageType === 'pages') {

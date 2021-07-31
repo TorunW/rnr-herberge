@@ -8,9 +8,6 @@ function PageForm(props) {
   const [order, setOrder] = useState('');
   const [posts, setPosts] = useState([]);
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
-  console.log(showCreatePostForm);
-
-  console.log(window.location.pathname);
 
   useEffect(() => {
     if (props.formType === 'edit') {
@@ -21,7 +18,6 @@ function PageForm(props) {
 
   function getPage() {
     const pageId = window.location.pathname.split('/')[4];
-    console.log(pageId, 'page id');
 
     fetch(`/db/pagesbyid/${pageId}`)
       .then(res => res.text())

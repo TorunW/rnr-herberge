@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
+import BookingForm from './bookingForm';
+import MessageForm from './messageForm';
+import TextEditor from '../textEditor';
 
 function PostForm(props) {
   const [title, setTitle] = useState(props.post ? props.post.title : '');
-  const [content, setContent] = useState(props.post ? props.post.content : '');
   const [order, setOrder] = useState(props.post ? props.post.ord : '');
   const [type, setType] = useState(props.post ? props.post.type : '');
+  const [content, setContent] = useState(props.post ? props.post.content : '');
+  console.log(props.post);
 
   function onSubmit() {
     const newPostValues = {
@@ -16,11 +20,8 @@ function PostForm(props) {
       type,
     };
 
-    console.log(newPostValues);
     let ajaxUrl = `/db/posts/` + (props.post ? props.post.post_id : '');
-    console.log(ajaxUrl);
     let ajaxMethod = props.post ? 'PUT' : 'POST';
-    console.log(ajaxMethod);
 
     $.ajax({
       url: ajaxUrl,
@@ -41,6 +42,17 @@ function PostForm(props) {
     });
   }
 
+  let typeDisplay;
+  if (type === 'article') {
+    typeDisplay = <TextEditor val={content} onTextEditorUpdate={setContent} />;
+  } else if (type === 'booking') {
+    typeDisplay = <BookingForm />;
+  } else if (type === 'message') {
+    typeDisplay = <MessageForm />;
+  } else if (type === 'map') {
+    typeDisplay = <div>This will be a map</div>;
+  }
+
   return (
     <div>
       <hr />
@@ -50,12 +62,6 @@ function PostForm(props) {
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
-      <div>Content</div>
-      <input
-        type="text"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-      />
       <div>Order</div>
       <input
         type="text"
@@ -63,7 +69,14 @@ function PostForm(props) {
         onChange={e => setOrder(e.target.value)}
       />
       <div>Type</div>
-      <input type="text" value={type} onChange={e => setType(e.target.value)} />
+      <select value={type} onChange={e => setType(e.target.value)}>
+        <option value="">Choose type</option>
+        <option value="article">Article</option>
+        <option value="booking">Booking form</option>
+        <option value="message">Contact form</option>
+        <option value="map">Map</option>
+      </select>
+      {typeDisplay}
       <button onClick={onSubmit}>Submit</button>
       <button onClick={onDelete}>Delete</button>
     </div>

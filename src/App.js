@@ -1,13 +1,12 @@
-import "./App.css";
-import { useEffect, useState } from "react";
-import Page from "./app/page.js";
-import Header from "./app/header";
-import Footer from "./app/footer";
-import Admin from "./app/admin/admin";
+import './App.css';
+import { useEffect, useState } from 'react';
+import Page from './app/page.js';
+import Header from './app/header';
+import Footer from './app/footer';
+import Admin from './app/admin/admin';
 
 function App() {
-  console.log(window.location.pathname.split("/").join("-"));
-  const path = window.location.pathname.split("/")[1];
+  const path = window.location.pathname.split('/')[1];
 
   let templateDisplay = (
     <main>
@@ -18,7 +17,7 @@ function App() {
     </main>
   );
 
-  if (path === "admin") {
+  if (path === 'admin') {
     templateDisplay = <Admin />;
   }
   return <div className="App">{templateDisplay}</div>;
