@@ -40,6 +40,7 @@
   "devDependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
+    "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
     "jquery": "^3.6.0",
     "md5": "^2.3.0",

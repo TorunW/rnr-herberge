@@ -10,9 +10,8 @@ function App() {
 
   let templateDisplay = (
     <main>
-      <div>Hello I'm App</div>
-      <Page />
       <Header />
+      <Page path={path === '' ? 'home' : path} />
       <Footer />
     </main>
   );
@@ -20,6 +19,7 @@ function App() {
   if (path === 'admin') {
     templateDisplay = <Admin />;
   }
+
   return <div className="App">{templateDisplay}</div>;
 }
 

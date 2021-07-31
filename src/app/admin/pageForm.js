@@ -26,7 +26,6 @@ function PageForm(props) {
         setTitle(page.title);
         setLink(page.link);
         setOrder(page.ord);
-        console.log(page);
       });
   }
 
@@ -35,7 +34,6 @@ function PageForm(props) {
       .then(res => res.text())
       .then(res => {
         setPosts(JSON.parse(res));
-        console.log(res, 'res');
       });
   }
 

@@ -9,7 +9,6 @@ function PostForm(props) {
   const [order, setOrder] = useState(props.post ? props.post.ord : '');
   const [type, setType] = useState(props.post ? props.post.type : '');
   const [content, setContent] = useState(props.post ? props.post.content : '');
-  console.log(props.post);
 
   function onSubmit() {
     const newPostValues = {
