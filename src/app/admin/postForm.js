@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import BookingForm from './bookingForm';
 import MessageForm from './messageForm';
-import TextEditor from '../textEditor';
+import TextEditor from '../partials/textEditor';
 
 function PostForm(props) {
   const [title, setTitle] = useState(props.post ? props.post.title : '');

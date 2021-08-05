@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import '../style/header.css';
 
 // the img as home
 // the menu
@@ -7,6 +8,7 @@ import { useEffect, useState } from 'react';
 // style
 function Header(props) {
   const [menuItems, setMenuItems] = useState();
+  console.log(menuItems);
 
   useEffect(() => {
     getPage();
@@ -30,6 +32,11 @@ function Header(props) {
     ));
   }
 
-  return <div className="Header">{menuItemsDisplay}</div>;
+  return (
+    <div className="Header">
+      <img src="RnR Logo schwarz.png" className="header-img" />
+      <div className="menu-items"> {menuItemsDisplay}</div>
+    </div>
+  );
 }
 export default Header;

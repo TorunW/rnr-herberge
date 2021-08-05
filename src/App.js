@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import Page from './app/page.js';
-import Header from './app/header';
-import Footer from './app/footer';
+import Header from '../src/app/partials/header';
+import Footer from './app/partials/footer';
 import Admin from './app/admin/admin';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
     <main>
       <Header />
       <Page path={path === '' ? 'home' : path} />
+
       <Footer />
     </main>
   );

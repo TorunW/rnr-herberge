@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import './style/text-editor.css';
 import axios from 'axios';
+import './../style/text-editor.css';
 
 function TextEditor(props) {
   const [showHtml, setShowHtml] = useState(false);
