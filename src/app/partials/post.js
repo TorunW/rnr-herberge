@@ -5,7 +5,6 @@ import MyMap from './myMap';
 
 function Post(props) {
   const post = props.post;
-  console.log(post.type, 'type');
 
   let postTypeDisplay;
   if (post.type === 'map') {
@@ -40,6 +39,6 @@ function Post(props) {
       </React.Fragment>
     );
   }
-  return <div className="Post">{postTypeDisplay}</div>;
+  return <div className="post">{postTypeDisplay}</div>;
 }
 export default Post;

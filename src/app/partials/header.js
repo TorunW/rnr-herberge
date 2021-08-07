@@ -8,7 +8,6 @@ import '../style/header.css';
 // style
 function Header(props) {
   const [menuItems, setMenuItems] = useState();
-  console.log(menuItems);
 
   useEffect(() => {
     getPage();
@@ -33,7 +32,7 @@ function Header(props) {
   }
 
   return (
-    <div className="Header">
+    <div className="header">
       <img src="RnR Logo schwarz.png" className="header-img" />
       <div className="menu-items"> {menuItemsDisplay}</div>
     </div>

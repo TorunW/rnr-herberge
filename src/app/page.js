@@ -6,15 +6,12 @@ function Page(props) {
   const [page, setPage] = useState();
   const [posts, setPosts] = useState();
 
-  console.log(posts, 'post');
-
   useEffect(() => {
     getPage();
   }, []);
 
   useEffect(() => {
     if (page) {
-      console.log(page, 'page');
       getPosts();
     }
   }, [page]);
@@ -29,7 +26,6 @@ function Page(props) {
   }
 
   function getPosts() {
-    console.log(page, 'page id');
     fetch(`/db/postsbypageid/${page.page_id}`)
       .then(res => res.text())
       .then(res => {
@@ -75,12 +71,13 @@ function Page(props) {
 
   return (
     <div className="Page">
-      <img
-        src="13221228_781278418639710_4856265870553151313_o.jpg"
-        className="background-img"
-      />
-
-      <div className="post-container"> {postDisplay}</div>
+      <div className="post-container">
+        <img
+          src="13221228_781278418639710_4856265870553151313_o.jpg"
+          className="background-img"
+        />
+        <div className="post-display">{postDisplay}</div>
+      </div>
     </div>
   );
 }

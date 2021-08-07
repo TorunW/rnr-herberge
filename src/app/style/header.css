@@ -1,28 +1,27 @@
 @font-face {
-  font-family: 'Permanent Marker';
+  font-family: 'Six Caps';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/permanentmarker/v10/Fh4uPib9Iyv2ucM6pGQMWimMp004La2Cfw.woff2) format('woff2');
+  src: url(https://fonts.gstatic.com/s/sixcaps/v11/6ae_4KGrU7VR7bNmaYcV_3Q.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-@font-face {
-  font-family: 'Overpass';
-  font-style: normal;
-  font-weight: 100;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/overpass/v5/qFdB35WCmI96Ajtm81nGY9nqxw.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
 }
-.header-img {
+.header .header-img {
   max-width: 100%;
-  max-height: 200px;
+  max-height: 150px;
 }
-.menu-items {
-  font-family: 'Permanent Marker';
-  font-size: 25px;
+.header .menu-items {
+  font-family: 'Six Caps';
+  font-size: 40px;
+  margin-top: 90px;
+  text-align: left;
 }
-.menu-items a {
+.header .menu-items a {
   margin-left: 2vw;
   text-decoration: none;
+  color: black;
 }
