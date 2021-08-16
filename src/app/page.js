@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import './style/page.css';
 import Post from './partials/post';
+import MenuDrinks from './partials/menuDrinks';
 
 function Page(props) {
   const [page, setPage] = useState();
   const [posts, setPosts] = useState();
+  const [drinksMenu, setDrinksMenu] = useState([]);
 
   useEffect(() => {
     getPage();
@@ -30,52 +32,45 @@ function Page(props) {
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res);
+        const filteredArray = result.filter(post => post.type === 'drinks');
+        console.log(filteredArray, 'filer');
+        setDrinksMenu(filteredArray);
+        console.log(result, 'resu');
         setPosts(result);
-        console.log(result);
       });
   }
 
-  // let pageStyle = {};
-  // if (page && page.background_image) {
-  //   let screenRatio = 1.777777777778;
-  //   let bgPosY =
-  //     window.innerHeight * screenRatio < window.innerWidth &&
-  //     page.background_image_bottom
-  //       ? '-' + page.background_image_bottom + 'px'
-  //       : 'top';
-  //   let bgPosX =
-  //     window.innerHeight * screenRatio > window.innerWidth &&
-  //     page.background_image_left
-  //       ? page.background_image_left
-  //       : 'center';
-  //   pageStyle = {
-  //     backgroundImage: `url('${page.background_image}')`,
-  //     backgroundPositionY: bgPosY,
-  //     backgroundPositionX: bgPosX,
-  //   };
-  // }
+  let hasDrinksMenu = false;
 
   let postDisplay = 'This will be a post';
   if (posts) {
-    postDisplay = posts.map((post, index) => (
-      <Post key={index} post={post}>
-        <div className="title">{post.title}</div>
-        <div
-          className="content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        ></div>
-        <hr />
-      </Post>
-    ));
+    postDisplay = posts.map((post, index) => {
+      if (post.type === 'drinks' && hasDrinksMenu === false) {
+        hasDrinksMenu = true;
+        return (
+          <MenuDrinks
+            drinksMenu={drinksMenu}
+            dangerouslySetInnerHTML={{ __html: drinksMenu }}
+          />
+        );
+      } else {
+        return (
+          <Post key={index} post={post}>
+            <div className="title">{post.title}</div>
+            <div
+              className="content"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            ></div>
+            <hr />
+          </Post>
+        );
+      }
+    });
   }
 
   return (
     <div className="Page">
       <div className="post-container">
-        <img
-          src="13221228_781278418639710_4856265870553151313_o.jpg"
-          className="background-img"
-        />
         <div className="post-display">{postDisplay}</div>
       </div>
     </div>

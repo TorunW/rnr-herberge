@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import PostForm from './postForm';
+import TranslationForm from './translationForm';
 
 function PageForm(props) {
-  const [title, setTitle] = useState('');
-  const [link, setLink] = useState('');
-  const [order, setOrder] = useState('');
+  const [title, setTitle] = useState(props.page ? props.page.title : '');
+  const [link, setLink] = useState(props.page ? props.page.link : '');
+  const [order, setOrder] = useState(props.order ? props.order : '');
+  const [language, setLanguage] = useState(
+    props.type === 'translation' ? 'eng' : 'de'
+  );
   const [posts, setPosts] = useState([]);
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
 
   useEffect(() => {
-    if (props.formType === 'edit') {
+    if (props.formType === 'edit' && props.type !== 'translation') {
       getPage();
       getPosts();
     }
@@ -26,6 +30,7 @@ function PageForm(props) {
         setTitle(page.title);
         setLink(page.link);
         setOrder(page.ord);
+        setLanguage(page.language);
       });
   }
 
@@ -42,6 +47,7 @@ function PageForm(props) {
       title,
       link,
       ord: order,
+      language,
     };
 
     $.ajax({
@@ -50,10 +56,14 @@ function PageForm(props) {
       data: newValues,
     }).done(function (res) {
       console.log(res, 'res');
-      if (res.message) {
-        window.location.href =
-          '/admin/pages/edit/' +
-          (props.formType === 'edit' ? parseInt(props.pageId) : res.id);
+      if (props.type !== 'translation') {
+        if (res.message) {
+          window.location.href =
+            '/admin/pages/edit/' +
+            (props.formType === 'edit' ? parseInt(props.pageId) : res.id);
+        }
+      } else {
+        props.createTranslation(res.id);
       }
     });
   }
@@ -72,14 +82,41 @@ function PageForm(props) {
     deleteButtonDisplay = <button onClick={onDelete}>Delete</button>;
   }
 
-  const postsDisplay = posts.map((post, index) => (
-    <PostForm post={post} onSubmitPostForm={getPosts} pageId={props.pageId} />
-  ));
+  let postsDisplay;
+  if (props.type !== 'translation') {
+    postsDisplay = posts.map((post, index) => (
+      <PostForm post={post} onSubmitPostForm={getPosts} pageId={props.pageId} />
+    ));
+  }
 
   let newPostFormDisplay;
-  if (showCreatePostForm === true) {
+  if (showCreatePostForm === true && props.type !== 'translation') {
     newPostFormDisplay = (
       <PostForm onSubmitPostForm={getPosts} pageId={props.pageId} />
+    );
+  }
+
+  let translationFormDisplay;
+  if (
+    props.formType === 'edit' &&
+    order !== '' &&
+    props.type !== 'translation'
+  ) {
+    translationFormDisplay = (
+      <TranslationForm itemId={props.pageId} itemType="page" order={order} />
+    );
+  }
+
+  let addNewPostButtonDisplay;
+  if (props.type !== 'translation') {
+    addNewPostButtonDisplay = (
+      <button
+        onClick={() =>
+          setShowCreatePostForm(showCreatePostForm === false ? true : false)
+        }
+      >
+        Add new post +
+      </button>
     );
   }
 
@@ -100,13 +137,9 @@ function PageForm(props) {
       <button onClick={onSubmit}>Submit</button>
       {deleteButtonDisplay}
       <hr />
-      <button
-        onClick={() =>
-          setShowCreatePostForm(showCreatePostForm === false ? true : false)
-        }
-      >
-        Add new post +
-      </button>
+      {translationFormDisplay}
+      <hr />
+      {addNewPostButtonDisplay}
       {newPostFormDisplay}
       {postsDisplay}
     </main>

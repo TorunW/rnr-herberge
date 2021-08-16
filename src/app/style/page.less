@@ -22,39 +22,28 @@
     U+FEFF, U+FFFD;
 }
 
+html {
+  background: url(bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .page {
   height: 100%;
 }
 
 .post-container {
   position: relative;
-  overflow-x: hidden;
-  .background-img {
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-position-y: top;
-    background-attachment: fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
 
   .post-display {
     background-color: #54482cbd;
-    position: absolute;
-    top: 0;
     margin-left: 15vw;
     margin-right: 15vw;
     max-width: 100%;
     width: 60vw;
-
-    height: 700px;
-    overflow-y: scroll;
     padding: 5vh 5vw;
-    &::-webkit-scrollbar {
-      display: none;
-    }
 
     .post {
       margin-top: 5vh;
@@ -66,18 +55,19 @@
       .content {
         font-family: 'Josefin Sans';
         font-size: 18px;
-        text-align: left;
+
+        .ql-align-center {
+          text-align: center;
+        }
 
         p {
           margin: 0;
+          text-align: left;
 
           img {
             box-shadow: 1px 1px 3px 0px;
             margin-right: 10px;
           }
-        }
-
-        iframe {
         }
       }
     }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Bookings from './bookings';
+import MenuDrinks from './menuDrinks';
 import Messages from './messages';
 import MyMap from './myMap';
 
@@ -39,6 +40,7 @@ function Post(props) {
       </React.Fragment>
     );
   }
+
   return <div className="post">{postTypeDisplay}</div>;
 }
 export default Post;

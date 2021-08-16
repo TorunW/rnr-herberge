@@ -25,6 +25,12 @@ module.exports = function (app, passport) {
 
   app.get('/db/bookings/', bookingsController.getBookings);
 
+  app.get(
+    '/db/getpagetranslation/:id',
+    translationsController.getPageTranslation
+  );
+  app.post('/db/translation/', translationsController.createTranslation);
+
   // Login
   // app.post('/db/signin/', function (req, res, next) {
   //   console.log('inside of the login', req.sessionID);

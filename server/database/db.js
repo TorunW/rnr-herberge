@@ -18,6 +18,7 @@ let db = new sqlite3.Database(DBSOURCE, err => {
                 title text UNIQUE, 
                 link text,
                 ord INTEGER,
+                language text,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 CONSTRAINT title_unique UNIQUE (title)
             )`,
@@ -112,11 +113,10 @@ let db = new sqlite3.Database(DBSOURCE, err => {
     db.run(
       `CREATE TABLE translations (
         translation_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        language text,
-        title text,
-        content text,
-        item_id,
-        CONSTRAINT translation_id_unique UNIQUE (translation_id),
+        de_id text,
+        eng_id text,
+        item_type text,
+        CONSTRAINT translation_id_unique UNIQUE (translation_id)
       )`,
       err => {
         if (err) {

@@ -1,9 +1,10 @@
 var db = require('../database/db');
 
 exports.getPages = (req, res) => {
-  var sql = 'SELECT * FROM pages ORDER BY ord ASC';
+  var sql = `SELECT * FROM pages WHERE language IS NULL ORDER BY ord ASC`;
   var params = [req.params.id];
   db.all(sql, params, (err, row) => {
+    console.log(err);
     if (err) {
       res.status(400).json({ error: err.message });
       return;
@@ -37,9 +38,9 @@ exports.getPageById = (req, res) => {
 };
 
 exports.createPage = (req, res) => {
-  const { title, link, ord } = req.body;
-  var sql = 'INSERT INTO pages (title, link,  ord ) VALUES (?,?,?)';
-  var params = [title, link, ord];
+  const { title, link, ord, language } = req.body;
+  var sql = 'INSERT INTO pages (title, link,  ord, language ) VALUES (?,?,?,?)';
+  var params = [title, link, ord, language];
   db.run(sql, params, function (err, result) {
     if (err) {
       res.json({ error: err.message });
@@ -54,14 +55,15 @@ exports.createPage = (req, res) => {
 };
 
 exports.updatePage = (req, res) => {
-  const { title, link, ord } = req.body;
+  const { title, link, ord, language } = req.body;
   db.run(
     `UPDATE pages SET 
         title = COALESCE(?,title),
         link = COALESCE(?,link),
-        ord = COALESCE(?,ord)
+        ord = COALESCE(?,ord),
+        language = COALESCE(?,language)
         WHERE page_id = ?`,
-    [title, link, ord, req.params.id],
+    [title, link, ord, language, req.params.id],
     function (err, result) {
       console.log(err);
       if (err) {

@@ -50,6 +50,8 @@ function PostForm(props) {
     typeDisplay = <MessageForm />;
   } else if (type === 'map') {
     typeDisplay = <div>This will be a map</div>;
+  } else if (type === 'drinks') {
+    typeDisplay = <TextEditor val={content} onTextEditorUpdate={setContent} />;
   }
 
   return (
@@ -74,6 +76,7 @@ function PostForm(props) {
         <option value="booking">Booking form</option>
         <option value="message">Contact form</option>
         <option value="map">Map</option>
+        <option value="drinks">Getränke</option>
       </select>
       {typeDisplay}
       <button onClick={onSubmit}>Submit</button>

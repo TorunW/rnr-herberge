@@ -14,37 +14,26 @@
   src: url(https://fonts.gstatic.com/s/josefinsans/v17/Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-.page {
-  height: 100%;
-}
-.post-container {
-  position: relative;
-  overflow-x: hidden;
-}
-.post-container .background-img {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-position-y: top;
-  background-attachment: fixed;
+html {
+  background: url(bg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
+.page {
+  height: 100%;
+}
+.post-container {
+  position: relative;
+}
 .post-container .post-display {
   background-color: #54482cbd;
-  position: absolute;
-  top: 0;
   margin-left: 15vw;
   margin-right: 15vw;
   max-width: 100%;
   width: 60vw;
-  height: 700px;
-  overflow-y: scroll;
   padding: 5vh 5vw;
-}
-.post-container .post-display::-webkit-scrollbar {
-  display: none;
 }
 .post-container .post-display .post {
   margin-top: 5vh;
@@ -56,10 +45,13 @@
 .post-container .post-display .post .content {
   font-family: 'Josefin Sans';
   font-size: 18px;
-  text-align: left;
+}
+.post-container .post-display .post .content .ql-align-center {
+  text-align: center;
 }
 .post-container .post-display .post .content p {
   margin: 0;
+  text-align: left;
 }
 .post-container .post-display .post .content p img {
   box-shadow: 1px 1px 3px 0px;
