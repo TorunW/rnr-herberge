@@ -1,5 +1,26 @@
+.drinks-title {
+  height: 70px;
+}
 .drinks-title a {
   border-style: solid;
   font-family: 'Six Caps';
+  letter-spacing: 1px;
   font-size: 30px;
+  float: left;
+  margin-right: 5px;
+  padding: 3px 8px;
+}
+.drinks-title a.active {
+  background-color: #54482cc9;
+}
+.outer-border {
+  border-style: solid;
+  padding: 2px;
+  border-width: 1px;
+}
+.outer-border .drinks-list {
+  font-family: 'josefin sans';
+  font-size: 18px;
+  border-style: solid;
+  background-color: #54482cc9;
 }

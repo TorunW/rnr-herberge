@@ -33,7 +33,7 @@ function Header(props) {
 
   return (
     <div className="header">
-      <img src="RnR Logo schwarz.png" className="header-img" />
+      <img src="RnR Logo.png" className="header-img" />
       <div className="menu-items"> {menuItemsDisplay}</div>
     </div>
   );

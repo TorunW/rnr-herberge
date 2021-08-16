@@ -28,7 +28,7 @@ function PostForm(props) {
       data: newPostValues,
     }).done(function (res) {
       console.log(res, 'res');
-      window.location.href = `/admin/pages/edit/${props.pageId}`;
+      // window.location.href = `/admin/pages/edit/${props.pageId}`;
     });
   }
 
