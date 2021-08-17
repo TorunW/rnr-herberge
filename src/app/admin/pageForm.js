@@ -122,7 +122,7 @@ function PageForm(props) {
 
   return (
     <main id="admin">
-      <div>Hello I'm Page form</div>
+      <div>Pages</div>
       <input
         type="text"
         value={title}
@@ -136,9 +136,7 @@ function PageForm(props) {
       />
       <button onClick={onSubmit}>Submit</button>
       {deleteButtonDisplay}
-      <hr />
       {translationFormDisplay}
-      <hr />
       {addNewPostButtonDisplay}
       {newPostFormDisplay}
       {postsDisplay}

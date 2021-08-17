@@ -2,7 +2,20 @@ var db = require('../database/db');
 
 // get posts
 exports.getPostsByPageId = (req, res) => {
-  var sql = 'SELECT * FROM posts WHERE page_id = ?  ORDER BY ord ASC';
+  var sql =
+    'SELECT * FROM posts WHERE page_id = ? AND language IS NULL  ORDER BY ord ASC';
+  var params = [req.params.id];
+  db.all(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json(row);
+  });
+};
+
+exports.getPostsById = (req, res) => {
+  var sql = 'SELECT * FROM posts WHERE post_id = ?';
   var params = [req.params.id];
   db.all(sql, params, (err, row) => {
     if (err) {
@@ -16,10 +29,10 @@ exports.getPostsByPageId = (req, res) => {
 // create post, here we choose if we want to create an article (in admin we see like a text editor), or if we want a form (for contact or bookings)
 exports.createPost = (req, res) => {
   console.log('create post');
-  const { page_id, title, content, ord, type } = req.body;
+  const { page_id, title, content, ord, type, language } = req.body;
   var sql =
-    'INSERT INTO posts (page_id, title, content, ord, type  ) VALUES (?,?,?,?,?)';
-  var params = [page_id, title, content, ord, type];
+    'INSERT INTO posts (page_id, title, content, ord, type, language  ) VALUES (?,?,?,?,?,?)';
+  var params = [page_id, title, content, ord, type, language];
   console.log(sql);
   console.log(params);
   db.run(sql, params, function (err, result) {
@@ -39,16 +52,17 @@ exports.createPost = (req, res) => {
 
 // edit/update existing posts
 exports.updatePost = (req, res) => {
-  const { page_id, title, content, ord, type } = req.body;
+  const { page_id, title, content, ord, type, language } = req.body;
   db.run(
     `UPDATE posts SET 
       page_id = COALESCE(?,page_id),
         title = COALESCE(?,title),
         content = COALESCE(?,content),
         ord = COALESCE(?,ord),
-        type = COALESCE(?,type)
+        type = COALESCE(?,type),
+        language =COALESCE(?,language)
         WHERE post_id = ?`,
-    [page_id, title, content, ord, type, req.params.id],
+    [page_id, title, content, ord, type, language, req.params.id],
     function (err, result) {
       console.log(err);
       if (err) {

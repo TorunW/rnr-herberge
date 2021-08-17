@@ -45,6 +45,7 @@ let db = new sqlite3.Database(DBSOURCE, err => {
                 content text,
                 type text,
                 ord INTEGER,
+                language text,
                 CONSTRAINT post_id_unique UNIQUE (post_id)
             )`,
       err => {
@@ -54,9 +55,9 @@ let db = new sqlite3.Database(DBSOURCE, err => {
         } else {
           // Table just created, creating some rows
           var insert =
-            'INSERT INTO posts (page_id,title, type, ord) VALUES (?,?,?,?)';
-          db.run(insert, [1, 'I am the article title', 'article', 1]);
-          db.run(insert, [2, 'I am the form', 'form', 2]);
+            'INSERT INTO posts (page_id,title, type, ord, language) VALUES (?,?,?,?,?)';
+          db.run(insert, [1, 'I am the article title', 'article', 1, 'eng']);
+          db.run(insert, [2, 'I am the form', 'form', 2, 'de']);
         }
       }
     );

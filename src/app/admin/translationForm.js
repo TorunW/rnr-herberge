@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import PageForm from './pageForm';
 import $ from 'jquery';
+import PostForm from './postForm';
+import '../style/adminPost.css';
 
 function TranslationForm(props) {
   const [loading, setLoading] = useState(true);
@@ -33,6 +35,7 @@ function TranslationForm(props) {
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res)[0];
+        console.log(translatedItem, 'translated item');
         setTranslatedItem(result);
         setLoading(false);
       });
@@ -57,27 +60,50 @@ function TranslationForm(props) {
   let translationFormDisplay;
   if (loading === false) {
     if (translatedItem === null) {
-      translationFormDisplay = (
-        <PageForm
-          formType="create"
-          type="translation"
-          order={props.order}
-          createTranslation={createTranslation}
-        />
-      );
+      if (props.itemType === 'page') {
+        translationFormDisplay = (
+          <PageForm
+            formType="create"
+            type="translation"
+            order={props.order}
+            createTranslation={createTranslation}
+          />
+        );
+      } else if (props.itemType === 'post') {
+        translationFormDisplay = (
+          <PostForm
+            type="translation"
+            order={props.order}
+            postType={props.postType}
+            createTranslation={createTranslation}
+            pageId={props.pageId}
+          />
+        );
+      }
     } else {
-      translationFormDisplay = (
-        <PageForm
-          formType="edit"
-          type="translation"
-          order={props.order}
-          page={translatedItem}
-        />
-      );
+      if (props.itemType === 'page') {
+        translationFormDisplay = (
+          <PageForm
+            formType="edit"
+            type="translation"
+            order={props.order}
+            page={translatedItem}
+          />
+        );
+      } else if (props.itemType === 'post') {
+        translationFormDisplay = (
+          <PostForm
+            pageId={props.pageId}
+            type="translation"
+            post={translatedItem}
+          />
+        );
+      }
     }
   }
+
   // put the instanse (the translation component) in the page form only if props.formtype is edit
-  return <div>{translationFormDisplay}</div>;
+  return <div className="translation">{translationFormDisplay}</div>;
 }
 
 export default TranslationForm;

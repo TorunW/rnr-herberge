@@ -17,6 +17,7 @@ module.exports = function (app, passport) {
   app.delete('/db/pages/:id', pagesController.deletePage);
 
   app.get('/db/postsbypageid/:id', postsController.getPostsByPageId);
+  app.get('/db/postsbyid/:id', postsController.getPostsById);
   app.post('/db/posts/', postsController.createPost);
   app.put('/db/posts/:id', postsController.updatePost);
   app.delete('/db/posts/:id', postsController.deletePost);
@@ -28,6 +29,10 @@ module.exports = function (app, passport) {
   app.get(
     '/db/getpagetranslation/:id',
     translationsController.getPageTranslation
+  );
+  app.get(
+    '/db/getposttranslation/:id',
+    translationsController.getPostTranslation
   );
   app.post('/db/translation/', translationsController.createTranslation);
 

@@ -1,14 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import $ from 'jquery';
 import BookingForm from './bookingForm';
 import MessageForm from './messageForm';
 import TextEditor from '../partials/textEditor';
+import TranslationForm from './translationForm';
 
 function PostForm(props) {
   const [title, setTitle] = useState(props.post ? props.post.title : '');
-  const [order, setOrder] = useState(props.post ? props.post.ord : '');
-  const [type, setType] = useState(props.post ? props.post.type : '');
+  const [order, setOrder] = useState(
+    props.post ? props.post.ord : props.order ? props.order : ''
+  );
+  const [type, setType] = useState(
+    props.post ? props.post.type : props.postType ? props.postType : ''
+  );
   const [content, setContent] = useState(props.post ? props.post.content : '');
+  const [language, setLanguage] = useState(
+    props.type === 'translation' ? 'eng' : 'de'
+  );
+  const isEditPostMode = props.post ? true : false;
+  console.log(props.type === 'translation' ? props : '', 'post');
 
   function onSubmit() {
     const newPostValues = {
@@ -17,6 +27,7 @@ function PostForm(props) {
       content,
       ord: order,
       type,
+      language,
     };
 
     let ajaxUrl = `/db/posts/` + (props.post ? props.post.post_id : '');
@@ -28,7 +39,9 @@ function PostForm(props) {
       data: newPostValues,
     }).done(function (res) {
       console.log(res, 'res');
-      // window.location.href = `/admin/pages/edit/${props.pageId}`;
+      if (props.type === 'translation') {
+        props.createTranslation(res.id);
+      }
     });
   }
 
@@ -54,33 +67,48 @@ function PostForm(props) {
     typeDisplay = <TextEditor val={content} onTextEditorUpdate={setContent} />;
   }
 
+  let displayTranslationForm;
+  if (isEditPostMode === true && props.type !== 'translation') {
+    displayTranslationForm = (
+      <TranslationForm
+        pageId={props.pageId}
+        itemId={props.post.post_id}
+        itemType="post"
+        order={order}
+        postType={type}
+      />
+    );
+  }
+
   return (
-    <div>
-      <hr />
-      <div>Title</div>
-      <input
-        type="text"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
-      <div>Order</div>
-      <input
-        type="text"
-        value={order}
-        onChange={e => setOrder(e.target.value)}
-      />
-      <div>Type</div>
-      <select value={type} onChange={e => setType(e.target.value)}>
-        <option value="">Choose type</option>
-        <option value="article">Article</option>
-        <option value="booking">Booking form</option>
-        <option value="message">Contact form</option>
-        <option value="map">Map</option>
-        <option value="drinks">Getränke</option>
-      </select>
-      {typeDisplay}
-      <button onClick={onSubmit}>Submit</button>
-      <button onClick={onDelete}>Delete</button>
+    <div className="post-form">
+      <div className="original-language">
+        <div>Title</div>
+        <input
+          type="text"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+        <div>Order</div>
+        <input
+          type="text"
+          value={order}
+          onChange={e => setOrder(e.target.value)}
+        />
+        <div>Type</div>
+        <select value={type} onChange={e => setType(e.target.value)}>
+          <option value="">Choose type</option>
+          <option value="article">Article</option>
+          <option value="booking">Booking form</option>
+          <option value="message">Contact form</option>
+          <option value="map">Map</option>
+          <option value="drinks">Getränke</option>
+        </select>
+        {typeDisplay}
+        <button onClick={onSubmit}>Submit</button>
+        <button onClick={onDelete}>Delete</button>
+      </div>
+      {displayTranslationForm}
     </div>
   );
 }
