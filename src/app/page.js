@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import './style/page.css';
 import Post from './partials/post';
 import MenuDrinks from './partials/menuDrinks';
+import { Context } from './context/context-provider';
 
 function Page(props) {
+  const { appState, appDispatch } = useContext(Context);
+
   const [page, setPage] = useState();
   const [posts, setPosts] = useState();
   const [drinksMenu, setDrinksMenu] = useState([]);
@@ -14,6 +17,7 @@ function Page(props) {
 
   useEffect(() => {
     if (page) {
+      appDispatch({ type: 'SET_PAGEID', val: page.page_id });
       getPosts();
     }
   }, [page]);
@@ -33,9 +37,7 @@ function Page(props) {
       .then(res => {
         const result = JSON.parse(res);
         const filteredArray = result.filter(post => post.type === 'drinks');
-        console.log(filteredArray, 'filer');
         setDrinksMenu(filteredArray);
-        console.log(result, 'resu');
         setPosts(result);
       });
   }

@@ -90,7 +90,7 @@ let db = new sqlite3.Database(DBSOURCE, err => {
                     first_name text, 
                     last_name text,
                     email text,
-                    telefon text, 
+                    telephone text, 
                     room text,
                     guest_count text,
                     arrival text,

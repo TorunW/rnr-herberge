@@ -1,5 +1,5 @@
 .drinks-title {
-  height: 70px;
+  height: 130px;
 }
 .drinks-title a {
   border-style: solid;
@@ -9,9 +9,10 @@
   float: left;
   margin-right: 5px;
   padding: 3px 8px;
+  margin-top: 10px;
 }
 .drinks-title a.active {
-  background-color: #54482cc9;
+  background-color: #e0cba885;
 }
 .outer-border {
   border-style: solid;
@@ -22,5 +23,5 @@
   font-family: 'josefin sans';
   font-size: 18px;
   border-style: solid;
-  background-color: #54482cc9;
+  background-color: #e0cba885;
 }

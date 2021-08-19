@@ -25,6 +25,7 @@ module.exports = function (app, passport) {
   app.get('/db/messages/', messagesController.getMessages);
 
   app.get('/db/bookings/', bookingsController.getBookings);
+  app.post('/db/bookings/', bookingsController.createBooking);
 
   app.get(
     '/db/getpagetranslation/:id',

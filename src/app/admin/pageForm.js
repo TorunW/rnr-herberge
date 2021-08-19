@@ -4,6 +4,10 @@ import PostForm from './postForm';
 import TranslationForm from './translationForm';
 
 function PageForm(props) {
+  let pageId = window.location.pathname.split('/')[4];
+  if (props.page) pageId = props.page.page_id;
+  else if (props.pageId) pageId = props.pageId;
+
   const [title, setTitle] = useState(props.page ? props.page.title : '');
   const [link, setLink] = useState(props.page ? props.page.link : '');
   const [order, setOrder] = useState(props.order ? props.order : '');
@@ -21,8 +25,6 @@ function PageForm(props) {
   }, []);
 
   function getPage() {
-    const pageId = window.location.pathname.split('/')[4];
-
     fetch(`/db/pagesbyid/${pageId}`)
       .then(res => res.text())
       .then(res => {
@@ -35,7 +37,7 @@ function PageForm(props) {
   }
 
   function getPosts() {
-    fetch(`/db/postsbypageid/${props.pageId}`)
+    fetch(`/db/postsbypageid/${pageId}`)
       .then(res => res.text())
       .then(res => {
         setPosts(JSON.parse(res));
@@ -51,7 +53,7 @@ function PageForm(props) {
     };
 
     $.ajax({
-      url: `/db/pages/` + (props.formType === 'edit' ? props.pageId : ''),
+      url: `/db/pages/` + (props.formType === 'edit' ? pageId : ''),
       method: props.formType === 'edit' ? 'PUT' : 'POST',
       data: newValues,
     }).done(function (res) {
@@ -60,9 +62,9 @@ function PageForm(props) {
         if (res.message) {
           window.location.href =
             '/admin/pages/edit/' +
-            (props.formType === 'edit' ? parseInt(props.pageId) : res.id);
+            (props.formType === 'edit' ? parseInt(pageId) : res.id);
         }
-      } else {
+      } else if (props.type === 'translation' && props.formType !== 'edit') {
         props.createTranslation(res.id);
       }
     });
@@ -70,7 +72,7 @@ function PageForm(props) {
 
   function onDelete() {
     $.ajax({
-      url: `/db/pages/${props.pageId}`,
+      url: `/db/pages/${pageId}`,
       method: 'DELETE',
     }).done(function (res) {
       window.location.href = '/admin/';
@@ -85,14 +87,14 @@ function PageForm(props) {
   let postsDisplay;
   if (props.type !== 'translation') {
     postsDisplay = posts.map((post, index) => (
-      <PostForm post={post} onSubmitPostForm={getPosts} pageId={props.pageId} />
+      <PostForm post={post} onSubmitPostForm={getPosts} pageId={pageId} />
     ));
   }
 
   let newPostFormDisplay;
   if (showCreatePostForm === true && props.type !== 'translation') {
     newPostFormDisplay = (
-      <PostForm onSubmitPostForm={getPosts} pageId={props.pageId} />
+      <PostForm onSubmitPostForm={getPosts} pageId={pageId} />
     );
   }
 
@@ -103,7 +105,7 @@ function PageForm(props) {
     props.type !== 'translation'
   ) {
     translationFormDisplay = (
-      <TranslationForm itemId={props.pageId} itemType="page" order={order} />
+      <TranslationForm itemId={pageId} itemType="page" order={order} />
     );
   }
 

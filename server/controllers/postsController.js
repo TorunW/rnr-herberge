@@ -3,7 +3,7 @@ var db = require('../database/db');
 // get posts
 exports.getPostsByPageId = (req, res) => {
   var sql =
-    'SELECT * FROM posts WHERE page_id = ? AND language IS NULL  ORDER BY ord ASC';
+    'SELECT * FROM posts WHERE page_id = ? AND language = "de" ORDER BY ord ASC';
   var params = [req.params.id];
   db.all(sql, params, (err, row) => {
     if (err) {

@@ -39,7 +39,7 @@ function PostForm(props) {
       data: newPostValues,
     }).done(function (res) {
       console.log(res, 'res');
-      if (props.type === 'translation') {
+      if (props.type === 'translation' && isEditPostMode === false) {
         props.createTranslation(res.id);
       }
     });

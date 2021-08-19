@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import $ from 'jquery';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import '../style/bookings.css';
+
 // 2 select 1 for room and then for guest, with the right amount of options, number
 // useeffect that bound to the room state var, set the guest
 // another state var
@@ -11,18 +16,22 @@ function Bookings(props) {
   const [emailError, setEmailError] = useState(false);
   const [telephone, setTelephone] = useState('');
   const [telephoneError, setTelephoneError] = useState(false);
-  const [arrival, setArrival] = useState('');
+  const [room, setRoom] = useState('');
+  const [roomError, setRoomError] = useState(false);
+  const [guest, setGuest] = useState('');
+  const [guestError, setGuestError] = useState(false);
+  const [options, setOptions] = useState([]);
+
   const [arrivalError, setArrivalError] = useState(false);
   const [departure, setDeparture] = useState('');
   const [departureError, setDepartureError] = useState(false);
   const [message, setMessage] = useState('');
-  const [messageError, setMessageError] = useState(false);
-  const [roomError, setRoomError] = useState(false);
-  const [guestError, setGuestError] = useState(false);
+  const [bookingSent, setBookingSent] = useState(false);
 
-  const [room, setRoom] = useState();
-  const [guest, setGuest] = useState();
-  const [options, setOptions] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [arrival, setArrival] = useState('');
+  console.log(arrival, 'arrival');
+  const [endDate, setEndDate] = useState(new Date());
 
   useEffect(() => {
     let newOptions = [];
@@ -41,13 +50,45 @@ function Bookings(props) {
     }
     setOptions(newOptions);
   }, [room]);
-  console.log(guest, 'room');
+
+  function submitForm() {
+    if (formValidation()) {
+      // create an object for the message, with name email msg
+      const newBooking = {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        telephone,
+        room,
+        guest_count: guest,
+        arrival: startDate,
+        departure: endDate,
+        notes: message,
+      };
+
+      $.ajax({
+        url: '/db/bookings/',
+        method: 'POST',
+        data: newBooking,
+      }).done(function (res) {
+        setBookingSent(true);
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setTelephone('');
+        setRoom();
+        setGuest();
+
+        setMessage('');
+      });
+    }
+  }
 
   function formValidation() {
     // validation for each field
     // first name
     let isValidated = true;
-    if (firstName.length < 10) {
+    if (firstName.length < 1) {
       setFirstNameError(true);
       isValidated = false;
     } else {
@@ -96,10 +137,14 @@ function Bookings(props) {
       setGuestError(false);
     }
     // arrival
+    if (startDate === new Date()) {
+      setArrivalError(true);
+      isValidated = false;
+    } else {
+      setArrivalError(false);
+    }
 
     // departure
-
-    // message?
 
     return isValidated;
   }
@@ -137,10 +182,13 @@ function Bookings(props) {
     );
   }
 
+  let arrivalErrorDisplay;
+  if (arrivalError === true) {
+    arrivalErrorDisplay = <p className="error">Please select a date</p>;
+  }
   return (
-    <div>
+    <div className="booking-form">
       <div className="first-name">
-        <div>First name</div>
         <input
           className="first-name-input"
           value={firstName}
@@ -152,18 +200,17 @@ function Bookings(props) {
       </div>
 
       <div className="last-name">
-        <div>Last name</div>
         <input
           className="last-name-input"
           value={lastName}
           onChange={e => setLastName(e.target.value)}
           type="text"
           placeholder="Your last name"
-        ></input>
+        />
+        {nameErrorDisplay}
       </div>
 
       <div className="email">
-        <div>Email</div>
         <input
           className="email-input"
           value={email}
@@ -175,7 +222,6 @@ function Bookings(props) {
       </div>
 
       <div className="telephone-input">
-        <div>Telephone</div>
         <input
           className="telephone-input"
           value={telephone}
@@ -193,7 +239,7 @@ function Bookings(props) {
           value={room}
           onChange={e => setRoom(e.target.value)}
         >
-          <option value="">-</option>
+          <option value="">Select room</option>
           <option value="1">Room 1</option>
           <option value="2">Room 2</option>
           <option value="3">Room 3</option>
@@ -205,24 +251,55 @@ function Bookings(props) {
       </div>
 
       <div className="guest">
-        <div>People staying</div>
         <select
           className="guest-select"
           value={guest}
           onChange={e => setGuest(e.target.value)}
         >
-          <option value="">-</option>
+          <option value="">Persons</option>
           {numberOfGuests}
         </select>
         {guestErrorDisplay}
       </div>
 
-      <div>Arrival</div>
-      <input value="text"></input>
-      <div>Departure</div>
-      <input value="text"></input>
-      <div>Message (optional)</div>
-      <input value="text"></input>
+      <div className="arrival">
+        <div>Arrival</div>
+        <DatePicker
+          dateFormat="dd/MM/yyyy"
+          selected={startDate}
+          onChange={date => setStartDate(date)}
+          minDate={new Date()}
+          withPortal
+        />
+      </div>
+
+      <div className="departure">
+        <div>Departure</div>
+        <DatePicker
+          dateFormat="dd/MM/yyyy"
+          selected={endDate}
+          onChange={date => setEndDate(date)}
+          selectsEnd
+          startDate={startDate}
+          endDate={endDate}
+          minDate={startDate}
+          withPortal
+        />
+      </div>
+
+      <div>Message</div>
+      <input
+        value={message}
+        onChange={e => setMessage(e.target.value)}
+        type="text"
+        placeholder="Write us, if you have any questions"
+      ></input>
+
+      <div className="submit">
+        <a className="btn" onClick={submitForm}>
+          Absenden
+        </a>
+      </div>
     </div>
   );
 }

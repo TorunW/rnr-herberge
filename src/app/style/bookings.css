@@ -1,0 +1,25 @@
+.booking-form {
+  font-family: 'josefin sans';
+}
+.booking-form input {
+  background-color: #e0cba8a8;
+  border-style: solid;
+  border-color: #a2947c;
+  border-width: 1px;
+  margin-bottom: 5px;
+  font-family: 'josefin sans';
+  font-size: 15px;
+  height: 20px;
+  width: 300px;
+}
+.booking-form select {
+  background-color: #e0cba885;
+  font-family: 'josefin sans';
+  border-style: solid;
+  border-color: #a2947c;
+  border-width: 1px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  height: 20px;
+  width: 300px;
+}
