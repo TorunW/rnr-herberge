@@ -23,7 +23,7 @@ function Page(props) {
   }, [page]);
 
   function getPage() {
-    fetch(`/db/pages/${props.path}`)
+    fetch(`/db/page/${props.path}`)
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res)[0];

@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import $ from 'jquery';
 import BookingForm from './bookingForm';
 import MessageForm from './messageForm';
 import TextEditor from '../partials/textEditor';
 import TranslationForm from './translationForm';
+import { Context } from '../context/context-provider';
 
 function PostForm(props) {
+  const { appState, appDispatch } = useContext(Context);
+  console.log(appState.translatedPageId, 'transpageid');
   const [title, setTitle] = useState(props.post ? props.post.title : '');
   const [order, setOrder] = useState(
     props.post ? props.post.ord : props.order ? props.order : ''
@@ -18,11 +21,13 @@ function PostForm(props) {
     props.type === 'translation' ? 'eng' : 'de'
   );
   const isEditPostMode = props.post ? true : false;
-  console.log(props.type === 'translation' ? props : '', 'post');
 
   function onSubmit() {
     const newPostValues = {
-      page_id: props.pageId,
+      page_id:
+        props.type === 'translation'
+          ? appState.translatedPageId
+          : appState.pageId,
       title,
       content,
       ord: order,

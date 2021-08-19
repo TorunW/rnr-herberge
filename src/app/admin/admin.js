@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import PageForm from './pageForm';
 import '../style/adminPost.css';
+import { Context } from '../context/context-provider';
 
 function Admin() {
+  const { appState, appDispatch } = useContext(Context);
   const [menuItems, setMenuItems] = useState([]);
+
   // run pages
   useEffect(() => {
     getMenuItems();
   }, []);
   // fetch the pages
   function getMenuItems() {
-    fetch(`/db/pages/`)
+    fetch(`/db/pages/${appState.language}`)
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res);

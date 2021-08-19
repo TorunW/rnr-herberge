@@ -2,8 +2,7 @@ var db = require('../database/db');
 
 // get posts
 exports.getPostsByPageId = (req, res) => {
-  var sql =
-    'SELECT * FROM posts WHERE page_id = ? AND language = "de" ORDER BY ord ASC';
+  var sql = 'SELECT * FROM posts WHERE page_id = ? ORDER BY ord ASC';
   var params = [req.params.id];
   db.all(sql, params, (err, row) => {
     if (err) {
@@ -60,7 +59,7 @@ exports.updatePost = (req, res) => {
         content = COALESCE(?,content),
         ord = COALESCE(?,ord),
         type = COALESCE(?,type),
-        language =COALESCE(?,language)
+        language = COALESCE(?,language)
         WHERE post_id = ?`,
     [page_id, title, content, ord, type, language, req.params.id],
     function (err, result) {

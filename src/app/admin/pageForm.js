@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import $ from 'jquery';
 import PostForm from './postForm';
 import TranslationForm from './translationForm';
+import { Context } from '../context/context-provider';
 
 function PageForm(props) {
   let pageId = window.location.pathname.split('/')[4];
   if (props.page) pageId = props.page.page_id;
   else if (props.pageId) pageId = props.pageId;
+
+  const { appState, appDispatch } = useContext(Context);
 
   const [title, setTitle] = useState(props.page ? props.page.title : '');
   const [link, setLink] = useState(props.page ? props.page.link : '');
@@ -21,6 +24,11 @@ function PageForm(props) {
     if (props.formType === 'edit' && props.type !== 'translation') {
       getPage();
       getPosts();
+    }
+    if (props.type === 'translation') {
+      appDispatch({ type: 'SET_TRANSLATEDPAGEID', val: pageId });
+    } else {
+      appDispatch({ type: 'SET_PAGEID', val: pageId });
     }
   }, []);
 

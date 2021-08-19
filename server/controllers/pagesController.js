@@ -1,8 +1,8 @@
 var db = require('../database/db');
 
 exports.getPages = (req, res) => {
-  var sql = `SELECT * FROM pages WHERE language = "de" ORDER BY ord ASC`;
-  var params = [req.params.id];
+  var sql = `SELECT * FROM pages WHERE language = ? ORDER BY ord ASC`;
+  var params = [req.params.language];
   db.all(sql, params, (err, row) => {
     console.log(err);
     if (err) {

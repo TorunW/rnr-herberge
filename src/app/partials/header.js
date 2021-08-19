@@ -23,7 +23,7 @@ function Header(props) {
   }, [appState.pageId]);
 
   function getPages() {
-    fetch(`/db/pages/`)
+    fetch(`/db/pages/${appState.language}`)
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res);
@@ -40,6 +40,8 @@ function Header(props) {
       });
   }
 
+  console.log(translatedPage, 'transpagenw');
+
   function getTranslatedPage(translation) {
     fetch(`/db/pagesbyid/${translation.eng_id}`)
       .then(res => res.text())
@@ -49,25 +51,35 @@ function Header(props) {
       });
   }
 
-  function onSetLanguage(language) {
-    appDispatch({ type: 'SET_LANGUAGE', val: language });
-  }
-
   let menuItemsDisplay = 'This will be menu items';
   if (menuItems) {
     menuItemsDisplay = menuItems.map((menuItem, index) => (
-      <a href={menuItem.link} key={index}>
+      <a
+        href={
+          menuItem.link +
+          (menuItem.language !== null ? '?language=' + menuItem.language : '')
+        }
+        key={index}
+      >
         {menuItem.title}
       </a>
     ));
   }
 
-  console.log(translatedPage, 'transpage');
+  let urlSuffix =
+    translatedPage && translatedPage.language
+      ? '?language=' + translatedPage.link
+      : '';
+
   return (
     <div className="header">
       <div className="language-menu">
-        <a href={translatedPage ? translatedPage.link : ''}>ENG</a>
-        <a>DE</a>
+        <a href={translatedPage ? translatedPage.link + urlSuffix : ''}>
+          {appState.language === 'de' ? 'eng' : 'de'}
+        </a>
+        <a href={window.location.href}>
+          {appState.language === 'de' ? 'de' : 'eng'}
+        </a>
       </div>
       <img src="RnR Logo.png" className="header-img" />
       <div className="menu-items"> {menuItemsDisplay}</div>

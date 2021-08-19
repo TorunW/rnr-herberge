@@ -9,9 +9,9 @@ var bookingsController = require('../controllers/bookingsController.js');
 var translationsController = require('../controllers/translationsController.js');
 
 module.exports = function (app, passport) {
-  app.get('/db/pages/', pagesController.getPages);
+  app.get('/db/pages/:language', pagesController.getPages);
   app.post('/db/pages/', pagesController.createPage);
-  app.get('/db/pages/:link', pagesController.getPageByLink);
+  app.get('/db/page/:link', pagesController.getPageByLink);
   app.get('/db/pagesbyid/:id', pagesController.getPageById);
   app.put('/db/pages/:id', pagesController.updatePage);
   app.delete('/db/pages/:id', pagesController.deletePage);
