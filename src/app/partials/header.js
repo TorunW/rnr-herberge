@@ -32,7 +32,11 @@ function Header(props) {
   }
 
   function getPageTranslation() {
-    fetch(`/db/getpagetranslation/${appState.pageId}`)
+    fetch(
+      `/db/getpage${appState.language === 'de' ? 'translation' : 'origin'}/${
+        appState.pageId
+      }`
+    )
       .then(res => res.text())
       .then(res => {
         const translation = JSON.parse(res)[0];
@@ -68,7 +72,7 @@ function Header(props) {
 
   let urlSuffix =
     translatedPage && translatedPage.language
-      ? '?language=' + translatedPage.link
+      ? '?language=' + translatedPage.language
       : '';
 
   return (
@@ -77,7 +81,7 @@ function Header(props) {
         <a href={translatedPage ? translatedPage.link + urlSuffix : ''}>
           {appState.language === 'de' ? 'eng' : 'de'}
         </a>
-        <a href={window.location.href}>
+        <a href={window.location.href + '?language=' + appState.language}>
           {appState.language === 'de' ? 'de' : 'eng'}
         </a>
       </div>

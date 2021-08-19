@@ -26,6 +26,19 @@ exports.getPostTranslation = (req, res) => {
   });
 };
 
+exports.getPageOrigin = (req, res) => {
+  var sql = `SELECT * FROM translations WHERE item_type = 'page' AND eng_id = ?`;
+  var params = [req.params.id];
+  db.all(sql, params, (err, row) => {
+    console.log(err);
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json(row);
+  });
+};
+
 exports.createTranslation = (req, res) => {
   const { de_id, eng_id, item_type } = req.body;
   var sql =

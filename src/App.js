@@ -11,7 +11,7 @@ function App() {
   let templateDisplay = (
     <main>
       <Header />
-      <Page path={path === '' ? 'home' : path} />
+      <Page path={path === '' ? 'Zuhaus' : path} />
       <Footer />
     </main>
   );
