@@ -65,7 +65,7 @@ exports.updatePage = (req, res) => {
         WHERE page_id = ?`,
     [title, link, ord, language, req.params.id],
     function (err, result) {
-      console.log(err);
+      console.log(err, 'not working');
       if (err) {
         res.status(400).json({ error: res.message });
         return;

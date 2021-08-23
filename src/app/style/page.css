@@ -54,6 +54,12 @@ html {
 .post-container .post-display .post .content .ql-align-center {
   text-align: center;
 }
+.post-container .post-display .post .content .ql-align-right {
+  text-align: right;
+}
+.post-container .post-display .post .content .ql-align-justify {
+  text-align: left;
+}
 .post-container .post-display .post .content p {
   margin: 0;
   text-align: left;

@@ -35,7 +35,7 @@ module.exports = function (app, passport) {
     '/db/getposttranslation/:id',
     translationsController.getPostTranslation
   );
-  app.get('/db/getpageorgin/', translationsController.getPageOrigin);
+  app.get('/db/getpageorigin/:id', translationsController.getPageOrigin);
   app.post('/db/translation/', translationsController.createTranslation);
 
   // Login

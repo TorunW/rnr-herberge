@@ -35,7 +35,6 @@ function TranslationForm(props) {
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res)[0];
-        console.log(translatedItem, 'translated item');
         setTranslatedItem(result);
         setLoading(false);
       });

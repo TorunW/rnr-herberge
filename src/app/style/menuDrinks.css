@@ -1,23 +1,34 @@
-.drinks-title {
-  height: 130px;
+.title-container {
+  width: 100%;
+  text-align: center;
 }
-.drinks-title a {
+.title-container .title {
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+}
+.title-container .title .menu-item {
+  width: auto;
+  display: inline;
+}
+.title-container .title .menu-item a {
   border-style: solid;
   font-family: 'Six Caps';
   letter-spacing: 1px;
-  font-size: 30px;
-  float: left;
+  font-size: 22px;
   margin-right: 5px;
   padding: 3px 8px;
-  margin-top: 10px;
+  display: inline-block;
+  margin-top: 2vh;
 }
-.drinks-title a.active {
+.title-container .title .menu-item a.active {
   background-color: #e0cba885;
 }
 .outer-border {
   border-style: solid;
   padding: 2px;
   border-width: 1px;
+  margin-top: 5vh;
 }
 .outer-border .drinks-list {
   font-family: 'josefin sans';

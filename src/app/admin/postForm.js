@@ -8,7 +8,6 @@ import { Context } from '../context/context-provider';
 
 function PostForm(props) {
   const { appState, appDispatch } = useContext(Context);
-  console.log(appState.translatedPageId, 'transpageid');
   const [title, setTitle] = useState(props.post ? props.post.title : '');
   const [order, setOrder] = useState(
     props.post ? props.post.ord : props.order ? props.order : ''
@@ -18,7 +17,7 @@ function PostForm(props) {
   );
   const [content, setContent] = useState(props.post ? props.post.content : '');
   const [language, setLanguage] = useState(
-    props.type === 'translation' ? 'eng' : 'de'
+    props.type === 'translation' ? 'EN' : 'DE'
   );
   const isEditPostMode = props.post ? true : false;
 

@@ -1,21 +1,43 @@
 .header {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 37vw 1fr;
+  height: 150px;
 }
-.header .header-img {
+.header .logo {
+  position: relative;
+}
+.header .logo .header-img {
   margin-left: 5vw;
   max-width: 100%;
   max-height: 150px;
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }
-.header .menu-items {
+.header .menu-right-column {
+  height: 100%;
+  position: relative;
+}
+.header .menu-right-column .language-menu {
+  font-family: 'josefin sans';
+  margin-right: 2vw;
+  text-align: right;
+}
+.header .menu-right-column .language-menu a {
+  text-decoration: none;
+  color: #e0cba8;
+  margin-right: 1vw;
+}
+.header .menu-right-column .menu-items {
   font-family: 'Six Caps';
   letter-spacing: 1px;
   font-size: 40px;
-  margin-top: 90px;
   text-align: left;
+  bottom: 1vh;
+  position: absolute;
 }
-.header .menu-items a {
+.header .menu-right-column .menu-items a {
   margin-left: 2vw;
   text-decoration: none;
-  color: #ccc;
+  color: #e0cba8;
 }

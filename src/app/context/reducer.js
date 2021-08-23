@@ -1,9 +1,8 @@
-console.log(window.location.search.split('language=')[1]);
 export const appInitialState = {
   language:
     window.location.search !== ''
       ? window.location.search.split('language=')[1]
-      : 'de',
+      : 'DE',
   pageId: null,
   translatedPageId: null,
 };

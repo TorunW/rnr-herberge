@@ -15,12 +15,12 @@ let db = new sqlite3.Database(DBSOURCE, err => {
     db.run(
       `CREATE TABLE pages (
                 page_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                title text UNIQUE, 
-                link text,
-                ord INTEGER,
+                title text, 
+                link text UNIQUE,
+                ord INTEGER, 
                 language text,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                CONSTRAINT title_unique UNIQUE (title)
+                CONSTRAINT link_unique UNIQUE (link)
             )`,
       err => {
         if (err) {
@@ -56,8 +56,8 @@ let db = new sqlite3.Database(DBSOURCE, err => {
           // Table just created, creating some rows
           var insert =
             'INSERT INTO posts (page_id,title, type, ord, language) VALUES (?,?,?,?,?)';
-          db.run(insert, [1, 'I am the article title', 'article', 1, 'eng']);
-          db.run(insert, [2, 'I am the form', 'form', 2, 'de']);
+          db.run(insert, [1, 'I am the article title', 'article', 1, 'EN']);
+          db.run(insert, [2, 'I am the form', 'form', 2, 'DE']);
         }
       }
     );

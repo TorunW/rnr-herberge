@@ -15,7 +15,7 @@ function PageForm(props) {
   const [link, setLink] = useState(props.page ? props.page.link : '');
   const [order, setOrder] = useState(props.order ? props.order : '');
   const [language, setLanguage] = useState(
-    props.type === 'translation' ? 'eng' : 'de'
+    props.type === 'translation' ? 'EN' : 'DE'
   );
   const [posts, setPosts] = useState([]);
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
@@ -65,7 +65,7 @@ function PageForm(props) {
       method: props.formType === 'edit' ? 'PUT' : 'POST',
       data: newValues,
     }).done(function (res) {
-      console.log(res, 'res');
+      console.log(res, 'res, pagename');
       if (props.type !== 'translation') {
         if (res.message) {
           window.location.href =

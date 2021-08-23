@@ -21,32 +21,27 @@ function Bookings(props) {
   const [guest, setGuest] = useState('');
   const [guestError, setGuestError] = useState(false);
   const [options, setOptions] = useState([]);
-
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [arrivalError, setArrivalError] = useState(false);
-  const [departure, setDeparture] = useState('');
   const [departureError, setDepartureError] = useState(false);
   const [message, setMessage] = useState('');
   const [bookingSent, setBookingSent] = useState(false);
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [arrival, setArrival] = useState('');
-  console.log(arrival, 'arrival');
-  const [endDate, setEndDate] = useState(new Date());
-
   useEffect(() => {
     let newOptions = [];
     if (room === '1') {
-      newOptions = [1, 2];
-    } else if (room === '2') {
-      newOptions = [1, 2, 3, 4, 5];
-    } else if (room === '3') {
       newOptions = [1, 2, 3];
-    } else if (room === '4') {
-      newOptions = [1, 2];
-    } else if (room === '5') {
+    } else if (room === '3') {
       newOptions = [1, 2, 3, 4, 5];
-    } else if (room === '6') {
+    } else if (room === '4') {
+      newOptions = [1, 2, 3];
+    } else if (room === '5') {
       newOptions = [1, 2];
+    } else if (room === '6') {
+      newOptions = [1, 2, 3, 4, 5];
+    } else if (room === '7') {
+      newOptions = [1, 2, 3];
     }
     setOptions(newOptions);
   }, [room]);
@@ -137,14 +132,12 @@ function Bookings(props) {
       setGuestError(false);
     }
     // arrival
-    if (startDate === new Date()) {
-      setArrivalError(true);
+    if (endDate < startDate) {
+      setDepartureError(true);
       isValidated = false;
     } else {
-      setArrivalError(false);
+      setDepartureError(false);
     }
-
-    // departure
 
     return isValidated;
   }
@@ -157,6 +150,7 @@ function Bookings(props) {
   if (emailError === true) {
     emailErrorDisplay = <p className="error">Please fill in a valid Email</p>;
   }
+
   let telephoneErrorDisplay;
   if (telephoneError === true) {
     telephoneErrorDisplay = (
@@ -182,9 +176,9 @@ function Bookings(props) {
     );
   }
 
-  let arrivalErrorDisplay;
-  if (arrivalError === true) {
-    arrivalErrorDisplay = <p className="error">Please select a date</p>;
+  let departureErrorDisplay;
+  if (departureError === true) {
+    departureErrorDisplay = <p className="error">Please select a valid date</p>;
   }
   return (
     <div className="booking-form">
@@ -233,7 +227,6 @@ function Bookings(props) {
       </div>
 
       <div className="room">
-        <div>Room</div>
         <select
           className="room-select"
           value={room}
@@ -241,11 +234,11 @@ function Bookings(props) {
         >
           <option value="">Select room</option>
           <option value="1">Room 1</option>
-          <option value="2">Room 2</option>
           <option value="3">Room 3</option>
           <option value="4">Room 4</option>
           <option value="5">Room 5</option>
           <option value="6">Room 6</option>
+          <option value="7">Room 7</option>
         </select>
         {roomErrorDisplay}
       </div>
@@ -285,9 +278,9 @@ function Bookings(props) {
           minDate={startDate}
           withPortal
         />
+        {departureErrorDisplay}
       </div>
 
-      <div>Message</div>
       <input
         value={message}
         onChange={e => setMessage(e.target.value)}
@@ -297,7 +290,7 @@ function Bookings(props) {
 
       <div className="submit">
         <a className="btn" onClick={submitForm}>
-          Absenden
+          Submit
         </a>
       </div>
     </div>

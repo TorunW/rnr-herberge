@@ -1,18 +1,30 @@
-.drinks-title {
-  height: 130px;
+.title-container {
+  width: 100%;
+  // display: inline-block;#
+  text-align: center;
 
-  a {
-    border-style: solid;
-    font-family: 'Six Caps';
-    letter-spacing: 1px;
-    font-size: 30px;
-    float: left;
-    margin-right: 5px;
-    padding: 3px 8px;
-    margin-top: 10px;
+  .title {
+    display: table;
+    margin: 0 auto;
+    text-align: center;
 
-    &.active {
-      background-color: #e0cba885;
+    .menu-item {
+      width: auto;
+      display: inline;
+      a {
+        border-style: solid;
+        font-family: 'Six Caps';
+        letter-spacing: 1px;
+        font-size: 22px;
+        margin-right: 5px;
+        padding: 3px 8px;
+        display: inline-block;
+        margin-top: 2vh;
+
+        &.active {
+          background-color: #e0cba885;
+        }
+      }
     }
   }
 }
@@ -21,6 +33,7 @@
   border-style: solid;
   padding: 2px;
   border-width: 1px;
+  margin-top: 5vh;
   .drinks-list {
     font-family: 'josefin sans';
     font-size: 18px;

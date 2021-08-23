@@ -32,22 +32,26 @@ function Header(props) {
   }
 
   function getPageTranslation() {
+    console.log(appState);
     fetch(
-      `/db/getpage${appState.language === 'de' ? 'translation' : 'origin'}/${
+      `/db/getpage${appState.language === 'DE' ? 'translation' : 'origin'}/${
         appState.pageId
       }`
     )
       .then(res => res.text())
       .then(res => {
         const translation = JSON.parse(res)[0];
+        console.log(translation, 'translation');
         getTranslatedPage(translation);
       });
   }
 
-  console.log(translatedPage, 'transpagenw');
-
   function getTranslatedPage(translation) {
-    fetch(`/db/pagesbyid/${translation.eng_id}`)
+    fetch(
+      `/db/pagesbyid/${
+        translation[(appState.language === 'DE' ? 'eng' : 'de') + '_id']
+      }`
+    )
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res)[0];
@@ -57,17 +61,23 @@ function Header(props) {
 
   let menuItemsDisplay = 'This will be menu items';
   if (menuItems) {
-    menuItemsDisplay = menuItems.map((menuItem, index) => (
-      <a
-        href={
-          menuItem.link +
-          (menuItem.language !== null ? '?language=' + menuItem.language : '')
-        }
-        key={index}
-      >
-        {menuItem.title}
-      </a>
-    ));
+    menuItemsDisplay = menuItems.map((menuItem, index) => {
+      if (menuItem.title !== 'home') {
+        return (
+          <a
+            href={
+              menuItem.link +
+              (menuItem.language !== null
+                ? '?language=' + menuItem.language
+                : '')
+            }
+            key={index}
+          >
+            {menuItem.title === 'home' ? '' : menuItem.title}
+          </a>
+        );
+      }
+    });
   }
 
   let urlSuffix =
@@ -75,18 +85,39 @@ function Header(props) {
       ? '?language=' + translatedPage.language
       : '';
 
+  console.log(translatedPage, 'translated page');
+
+  let deLinkHref, enLinkHref;
+  if (translatedPage) {
+    if (appState.language === 'DE') {
+      deLinkHref = window.location.href;
+      enLinkHref = translatedPage.link + '?language=EN';
+    } else {
+      deLinkHref = translatedPage.link + '?language=DE';
+      enLinkHref = window.location.href;
+    }
+  }
+
   return (
     <div className="header">
-      <div className="language-menu">
-        <a href={translatedPage ? translatedPage.link + urlSuffix : ''}>
-          {appState.language === 'de' ? 'eng' : 'de'}
-        </a>
-        <a href={window.location.href + '?language=' + appState.language}>
-          {appState.language === 'de' ? 'de' : 'eng'}
+      <div className="logo">
+        <a
+          href={
+            appState.language === 'DE'
+              ? '/home-de?language=DE'
+              : '/home?language=EN'
+          }
+        >
+          <img src="RnR Logo.png" className="header-img" />
         </a>
       </div>
-      <img src="RnR Logo.png" className="header-img" />
-      <div className="menu-items"> {menuItemsDisplay}</div>
+      <div className="menu-right-column">
+        <div className="language-menu">
+          <a href={deLinkHref}>DE</a>
+          <a href={enLinkHref}>EN</a>
+        </div>
+        <div className="menu-items"> {menuItemsDisplay}</div>
+      </div>
     </div>
   );
 }
