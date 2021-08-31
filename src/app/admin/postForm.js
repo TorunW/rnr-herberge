@@ -20,6 +20,8 @@ function PostForm(props) {
     props.type === 'translation' ? 'EN' : 'DE'
   );
   const isEditPostMode = props.post ? true : false;
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  console.log(updateSuccess, 'update');
 
   function onSubmit() {
     const newPostValues = {
@@ -109,7 +111,9 @@ function PostForm(props) {
           <option value="drinks">Getränke</option>
         </select>
         {typeDisplay}
-        <button onClick={onSubmit}>Submit</button>
+        <button onClick={onSubmit} className="button">
+          Submit
+        </button>
         <button onClick={onDelete}>Delete</button>
       </div>
       {displayTranslationForm}

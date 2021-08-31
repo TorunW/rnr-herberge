@@ -36,56 +36,113 @@ html {
   height: 100%;
 }
 
-.post-container {
-  position: relative;
+@media (min-width: 871px) {
+  .post-container {
+    position: relative;
 
-  .post-display {
-    background-color: #e0cba885;
-    margin-left: 15vw;
-    margin-right: 15vw;
-    max-width: 100%;
-    width: 60vw;
-    padding: 5vh 5vw;
+    .post-display {
+      background-color: #e0cba8a1;
+      margin-left: 15vw;
+      margin-right: 15vw;
+      max-width: 100%;
+      width: 60vw;
+      padding: 2vh 5vw;
 
-    .post {
-      margin-top: 5vh;
-
-      .title {
-        font-family: 'Six Caps';
-        font-size: 40px;
-        margin-bottom: 15px;
-        letter-spacing: 1px;
-      }
-      .content {
-        font-family: 'Josefin Sans';
-        font-size: 18px;
-
-        .ql-align-center {
-          text-align: center;
+      .post {
+        margin-bottom: 5vh;
+        .title {
+          font-family: 'Six Caps';
+          font-size: 40px;
+          margin-bottom: 15px;
+          letter-spacing: 1px;
         }
+        .content {
+          font-family: 'Josefin Sans';
+          font-size: 18px;
 
-        .ql-align-right {
-          text-align: right;
-        }
+          .ql-align-center {
+            text-align: center;
+          }
 
-        .ql-align-justify {
-          text-align: left;
-        }
+          .ql-align-right {
+            text-align: right;
+          }
 
-        p {
-          margin: 0;
-          text-align: left;
+          .ql-align-justify {
+            text-align: left;
+          }
 
-          img {
-            box-shadow: 1px 1px 3px 0px;
-            margin-right: 10px;
+          p {
+            margin: 0;
+            text-align: left;
+
+            img {
+              box-shadow: 1px 1px 3px 0px;
+              max-width: 100%;
+              aspect-ratio: auto / auto;
+            }
           }
         }
       }
     }
   }
+
+  hr {
+    margin: 0 2vw;
+  }
 }
 
-hr {
-  margin: 0 2vw;
+@media (max-width: 870px) {
+  .post-container {
+    position: relative;
+    width: 100%;
+    padding-top: 1vh;
+
+    .post-display {
+      background-color: #e0cba885;
+      margin: 0 5vw;
+      padding: 2vh 4vw;
+
+      .post {
+        padding-bottom: 3vh;
+        .title {
+          font-family: 'Six Caps';
+          font-size: 40px;
+          margin-bottom: 15px;
+          letter-spacing: 1px;
+        }
+        .content {
+          font-family: 'Josefin Sans';
+          font-size: 18px;
+
+          .ql-align-center {
+            text-align: center;
+          }
+
+          .ql-align-right {
+            text-align: right;
+          }
+
+          .ql-align-justify {
+            text-align: left;
+          }
+
+          p {
+            margin: 0;
+            text-align: left;
+
+            img {
+              box-shadow: 1px 1px 3px 0px;
+              max-width: 90%;
+              aspect-ratio: auto / auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  hr {
+    margin: 0 2vw;
+  }
 }

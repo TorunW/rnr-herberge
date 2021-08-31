@@ -27,47 +27,96 @@ html {
 .page {
   height: 100%;
 }
-.post-container {
-  position: relative;
+@media (min-width: 871px) {
+  .post-container {
+    position: relative;
+  }
+  .post-container .post-display {
+    background-color: #e0cba8a1;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    max-width: 100%;
+    width: 60vw;
+    padding: 2vh 5vw;
+  }
+  .post-container .post-display .post {
+    margin-bottom: 5vh;
+  }
+  .post-container .post-display .post .title {
+    font-family: 'Six Caps';
+    font-size: 40px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+  .post-container .post-display .post .content {
+    font-family: 'Josefin Sans';
+    font-size: 18px;
+  }
+  .post-container .post-display .post .content .ql-align-center {
+    text-align: center;
+  }
+  .post-container .post-display .post .content .ql-align-right {
+    text-align: right;
+  }
+  .post-container .post-display .post .content .ql-align-justify {
+    text-align: left;
+  }
+  .post-container .post-display .post .content p {
+    margin: 0;
+    text-align: left;
+  }
+  .post-container .post-display .post .content p img {
+    box-shadow: 1px 1px 3px 0px;
+    max-width: 100%;
+    aspect-ratio: auto / auto;
+  }
+  hr {
+    margin: 0 2vw;
+  }
 }
-.post-container .post-display {
-  background-color: #e0cba885;
-  margin-left: 15vw;
-  margin-right: 15vw;
-  max-width: 100%;
-  width: 60vw;
-  padding: 5vh 5vw;
-}
-.post-container .post-display .post {
-  margin-top: 5vh;
-}
-.post-container .post-display .post .title {
-  font-family: 'Six Caps';
-  font-size: 40px;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-}
-.post-container .post-display .post .content {
-  font-family: 'Josefin Sans';
-  font-size: 18px;
-}
-.post-container .post-display .post .content .ql-align-center {
-  text-align: center;
-}
-.post-container .post-display .post .content .ql-align-right {
-  text-align: right;
-}
-.post-container .post-display .post .content .ql-align-justify {
-  text-align: left;
-}
-.post-container .post-display .post .content p {
-  margin: 0;
-  text-align: left;
-}
-.post-container .post-display .post .content p img {
-  box-shadow: 1px 1px 3px 0px;
-  margin-right: 10px;
-}
-hr {
-  margin: 0 2vw;
+@media (max-width: 870px) {
+  .post-container {
+    position: relative;
+    width: 100%;
+    padding-top: 1vh;
+  }
+  .post-container .post-display {
+    background-color: #e0cba885;
+    margin: 0 5vw;
+    padding: 2vh 4vw;
+  }
+  .post-container .post-display .post {
+    padding-bottom: 3vh;
+  }
+  .post-container .post-display .post .title {
+    font-family: 'Six Caps';
+    font-size: 40px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+  .post-container .post-display .post .content {
+    font-family: 'Josefin Sans';
+    font-size: 18px;
+  }
+  .post-container .post-display .post .content .ql-align-center {
+    text-align: center;
+  }
+  .post-container .post-display .post .content .ql-align-right {
+    text-align: right;
+  }
+  .post-container .post-display .post .content .ql-align-justify {
+    text-align: left;
+  }
+  .post-container .post-display .post .content p {
+    margin: 0;
+    text-align: left;
+  }
+  .post-container .post-display .post .content p img {
+    box-shadow: 1px 1px 3px 0px;
+    max-width: 90%;
+    aspect-ratio: auto / auto;
+  }
+  hr {
+    margin: 0 2vw;
+  }
 }

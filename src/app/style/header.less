@@ -1,47 +1,105 @@
-.header {
-  display: grid;
-  grid-template-columns: 37vw 1fr;
-  height: 150px;
+@media (min-width: 871px) {
+  .header {
+    display: grid;
+    grid-template-columns: 37vw 1fr;
+    height: 150px;
 
-  .logo {
-    position: relative;
-    .header-img {
-      margin-left: 5vw;
+    .logo {
       max-width: 100%;
-      max-height: 150px;
 
-      right: 0;
-      bottom: 0;
-      position: absolute;
+      position: relative;
+      .header-img {
+        width: 350px;
+        position: absolute;
+        right: -4px;
+        bottom: 0;
+        height: 150px;
+      }
+    }
+
+    .menu-right-column {
+      height: 100%;
+      position: relative;
+      .language-menu {
+        font-family: 'josefin sans';
+        background-color: black;
+        width: 70px;
+        float: right;
+        padding: 3px;
+
+        a {
+          text-decoration: none;
+          color: whitesmoke;
+          margin-right: 1vw;
+          .flag {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+
+      .menu-items {
+        font-family: 'Six Caps';
+        letter-spacing: 1px;
+        font-size: calc(40px + 9 * ((100vw - 1024px) / 1536));
+        text-align: left;
+        bottom: 1vh;
+        position: absolute;
+        a {
+          margin-left: 2vw;
+          text-decoration: none;
+          color: whitesmoke;
+        }
+      }
     }
   }
+}
 
-  .menu-right-column {
-    height: 100%;
-    position: relative;
+@media (max-width: 870px) {
+  .header {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
     .language-menu {
+      grid-row: 1;
       font-family: 'josefin sans';
-      margin-right: 2vw;
-      text-align: right;
+      float: right;
+      background-color: black;
+      padding: 5px;
+      width: 55px;
 
       a {
         text-decoration: none;
-        color: #e0cba8;
+        color: whitesmoke;
         margin-right: 1vw;
       }
     }
 
-    .menu-items {
-      font-family: 'Six Caps';
-      letter-spacing: 1px;
-      font-size: 40px;
-      text-align: left;
-      bottom: 1vh;
-      position: absolute;
+    .logo {
+      grid-row: 2;
+
       a {
-        margin-left: 2vw;
-        text-decoration: none;
-        color: #e0cba8;
+        width: 100%;
+        text-align: center;
+        img {
+          max-width: 100%;
+          max-height: 140px;
+        }
+      }
+    }
+    .menu-right-column {
+      grid-row: 3;
+
+      .menu-items {
+        font-size: calc(40px + 9 * ((100vw - 1024px) / 1536));
+        font-family: 'Six Caps';
+        letter-spacing: 1px;
+
+        a {
+          margin-left: 2vw;
+          text-decoration: none;
+          color: whitesmoke;
+        }
       }
     }
   }

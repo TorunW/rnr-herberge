@@ -21,10 +21,9 @@ function Bookings(props) {
   const [guest, setGuest] = useState('');
   const [guestError, setGuestError] = useState(false);
   const [options, setOptions] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [arrivalError, setArrivalError] = useState(false);
-  const [departureError, setDepartureError] = useState(false);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [dateError, setDateError] = useState(false);
   const [message, setMessage] = useState('');
   const [bookingSent, setBookingSent] = useState(false);
 
@@ -71,9 +70,10 @@ function Bookings(props) {
         setLastName('');
         setEmail('');
         setTelephone('');
-        setRoom();
-        setGuest();
-
+        setRoom('');
+        setGuest('');
+        setStartDate(null);
+        setEndDate(null);
         setMessage('');
       });
     }
@@ -131,12 +131,12 @@ function Bookings(props) {
     } else {
       setGuestError(false);
     }
-    // arrival
-    if (endDate < startDate) {
-      setDepartureError(true);
+    // arrival departure
+    if (endDate < startDate || startDate === null) {
+      setDateError(true);
       isValidated = false;
     } else {
-      setDepartureError(false);
+      setDateError(false);
     }
 
     return isValidated;
@@ -176,125 +176,164 @@ function Bookings(props) {
     );
   }
 
-  let departureErrorDisplay;
-  if (departureError === true) {
-    departureErrorDisplay = <p className="error">Please select a valid date</p>;
+  let dateErrorDisplay;
+  if (dateError === true) {
+    dateErrorDisplay = <p className="error">Please select a valid date</p>;
   }
   return (
     <div className="booking-form">
-      <div className="first-name">
-        <input
-          className="first-name-input"
-          value={firstName}
-          onChange={e => setFirstName(e.target.value)}
-          type="text"
-          placeholder="Your first name"
-        />
-        {nameErrorDisplay}
-      </div>
+      <form>
+        <div className="user-box">
+          <input
+            className={
+              'first-name-input' + (firstName.length > 0 ? ' filled' : '')
+            }
+            value={firstName}
+            onChange={e => setFirstName(e.target.value)}
+            type="text"
+          />
+          <label>First name</label>
+          {nameErrorDisplay}
+        </div>
 
-      <div className="last-name">
-        <input
-          className="last-name-input"
-          value={lastName}
-          onChange={e => setLastName(e.target.value)}
-          type="text"
-          placeholder="Your last name"
-        />
-        {nameErrorDisplay}
-      </div>
+        <div className="user-box">
+          <input
+            className={
+              'last-name-input' + (lastName.length > 0 ? ' filled' : '')
+            }
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+            type="text"
+          />
+          <label>Last name</label>
+          {nameErrorDisplay}
+        </div>
 
-      <div className="email">
-        <input
-          className="email-input"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          type="email"
-          placeholder="Email"
-        />
-        {emailErrorDisplay}
-      </div>
+        <div className="user-box">
+          <input
+            className={'email-input' + (email.length > 0 ? ' filled' : '')}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            type="email"
+          />
+          <label>Email</label>
+          {emailErrorDisplay}
+        </div>
 
-      <div className="telephone-input">
-        <input
-          className="telephone-input"
-          value={telephone}
-          onChange={e => setTelephone(e.target.value)}
-          type="tel"
-          placeholder="Telephone number "
-        />
-        {telephoneErrorDisplay}
-      </div>
+        <div className="user-box">
+          <input
+            className={
+              'telephone-input' + (telephone.length > 0 ? ' filled' : '')
+            }
+            value={telephone}
+            onChange={e => setTelephone(e.target.value)}
+            type="tel"
+          />
+          <label>Telephone number</label>
+          {telephoneErrorDisplay}
+        </div>
 
-      <div className="room">
-        <select
-          className="room-select"
-          value={room}
-          onChange={e => setRoom(e.target.value)}
-        >
-          <option value="">Select room</option>
-          <option value="1">Room 1</option>
-          <option value="3">Room 3</option>
-          <option value="4">Room 4</option>
-          <option value="5">Room 5</option>
-          <option value="6">Room 6</option>
-          <option value="7">Room 7</option>
-        </select>
-        {roomErrorDisplay}
-      </div>
+        <div className="user-box">
+          <select
+            className={'room-select' + (room.length > 0 ? ' filled' : '')}
+            value={room}
+            onChange={e => setRoom(e.target.value)}
+          >
+            <option value=""></option>
+            <option value="1">Room 1</option>
+            <option value="3">Room 3</option>
+            <option value="4">Room 4</option>
+            <option value="5">Room 5</option>
+            <option value="6">Room 6</option>
+            <option value="7">Room 7</option>
+          </select>
+          <span className="span-1">
+            <span className="span-2">
+              <span className="span-3">
+                <span className="span-4"></span>
+              </span>
+            </span>
+          </span>
+          <label>Select room</label>
+          {roomErrorDisplay}
+        </div>
 
-      <div className="guest">
-        <select
-          className="guest-select"
-          value={guest}
-          onChange={e => setGuest(e.target.value)}
-        >
-          <option value="">Persons</option>
-          {numberOfGuests}
-        </select>
-        {guestErrorDisplay}
-      </div>
+        <div className={'user-box' + (guest.length > 0 ? ' filled' : '')}>
+          <label>Number of people staying</label>
+          <select
+            className="guest-select"
+            value={guest}
+            onChange={e => setGuest(e.target.value)}
+          >
+            <option value=""></option>
+            {numberOfGuests}
+          </select>
 
-      <div className="arrival">
-        <div>Arrival</div>
-        <DatePicker
-          dateFormat="dd/MM/yyyy"
-          selected={startDate}
-          onChange={date => setStartDate(date)}
-          minDate={new Date()}
-          withPortal
-        />
-      </div>
+          {guestErrorDisplay}
+        </div>
 
-      <div className="departure">
-        <div>Departure</div>
-        <DatePicker
-          dateFormat="dd/MM/yyyy"
-          selected={endDate}
-          onChange={date => setEndDate(date)}
-          selectsEnd
-          startDate={startDate}
-          endDate={endDate}
-          minDate={startDate}
-          withPortal
-        />
-        {departureErrorDisplay}
-      </div>
+        <div className="user-box">
+          <DatePicker
+            dateFormat="dd/MM/yyyy"
+            selected={startDate}
+            onChange={date => setStartDate(date)}
+            minDate={new Date()}
+            withPortal
+          />
+          <label className={'date' + (startDate ? '-filled' : '')}>
+            Arrival
+          </label>
+          {dateErrorDisplay}
+        </div>
 
-      <input
-        value={message}
-        onChange={e => setMessage(e.target.value)}
-        type="text"
-        placeholder="Write us, if you have any questions"
-      ></input>
+        <div className="user-box">
+          <DatePicker
+            className="date-picker"
+            dateFormat="dd/MM/yyyy"
+            selected={endDate}
+            onChange={date => setEndDate(date)}
+            selectsEnd
+            startDate={startDate}
+            endDate={endDate}
+            minDate={startDate}
+            withPortal
+          />
+          <label className={'date' + (endDate ? '-filled' : '')}>
+            Departure
+          </label>
+        </div>
 
-      <div className="submit">
-        <a className="btn" onClick={submitForm}>
-          Submit
-        </a>
-      </div>
+        <div className="user-box">
+          <textarea
+            className={'message-input' + (message.length > 0 ? ' filled' : '')}
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+            type="text"
+          ></textarea>
+          <label>Write us, if you have any questions</label>
+        </div>
+
+        <div className="submit">
+          <a className="submit-btn" onClick={submitForm}>
+            Submit
+          </a>
+        </div>
+      </form>
     </div>
   );
 }
 
+<div class="login-box">
+  <h2>Login</h2>
+  <form>
+    <div class="user-box">
+      <input type="text" name="" required="" />
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="" required="" />
+      <label>Password</label>
+    </div>
+  </form>
+</div>;
 export default Bookings;

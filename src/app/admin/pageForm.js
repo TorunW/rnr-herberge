@@ -65,7 +65,6 @@ function PageForm(props) {
       method: props.formType === 'edit' ? 'PUT' : 'POST',
       data: newValues,
     }).done(function (res) {
-      console.log(res, 'res, pagename');
       if (props.type !== 'translation') {
         if (res.message) {
           window.location.href =
@@ -132,18 +131,30 @@ function PageForm(props) {
 
   return (
     <main id="admin">
-      <div>Pages</div>
-      <input
-        type="text"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
-      <input type="text" value={link} onChange={e => setLink(e.target.value)} />
-      <input
-        type="text"
-        value={order}
-        onChange={e => setOrder(e.target.value)}
-      />
+      <div className="page-input">
+        <input
+          type="text"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+      </div>
+
+      <div className="page-input">
+        <input
+          type="text"
+          value={link}
+          onChange={e => setLink(e.target.value)}
+        />
+      </div>
+
+      <div className="page-input">
+        <input
+          type="text"
+          value={order}
+          onChange={e => setOrder(e.target.value)}
+        />
+      </div>
+
       <button onClick={onSubmit}>Submit</button>
       {deleteButtonDisplay}
       {translationFormDisplay}

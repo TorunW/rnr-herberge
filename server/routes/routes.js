@@ -23,6 +23,7 @@ module.exports = function (app, passport) {
   app.delete('/db/posts/:id', postsController.deletePost);
 
   app.get('/db/messages/', messagesController.getMessages);
+  app.post('/db/message/', messagesController.createMessage);
 
   app.get('/db/bookings/', bookingsController.getBookings);
   app.post('/db/bookings/', bookingsController.createBooking);

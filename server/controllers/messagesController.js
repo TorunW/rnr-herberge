@@ -40,37 +40,3 @@ exports.createMessage = (req, res) => {
     });
   });
 };
-
-exports.updateMessage = (req, res) => {
-  const { name, email, msg, created_at } = req.body;
-  db.run(
-    `UPDATE messages SET 
-          name = COALESCE(?,name),
-          email = COALESCE(?,email),
-          msg = COALESCE(?,msg),
-          created_at = COALESCE(?,created_at),
-          WHERE msg_id = ?`,
-    [name, email, msg, created_at, req.params.id],
-    function (err, result) {
-      if (err) {
-        res.status(400).json({ error: res.message });
-        return;
-      }
-      res.json({ message: 'success' });
-    }
-  );
-};
-
-exports.deleteMessage = (req, res) => {
-  db.run(
-    'DELETE FROM messages WHERE msg_id = ?',
-    req.params.id,
-    function (err, result) {
-      if (err) {
-        res.status(400).json({ error: res.message });
-        return;
-      }
-      res.json({ message: 'deleted', changes: this.changes });
-    }
-  );
-};

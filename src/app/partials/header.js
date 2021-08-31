@@ -11,9 +11,13 @@ function Header(props) {
   const { appState, appDispatch } = useContext(Context);
   const [menuItems, setMenuItems] = useState();
   const [translatedPage, setTranslatedPage] = useState(null);
+  const [smallScreenMenu, setSmallScreenMenu] = useState(
+    window.innerWidth <= 865 ? true : false
+  );
 
   useEffect(() => {
     getPages();
+    window.addEventListener('resize', onWindowResize);
   }, []);
 
   useEffect(() => {
@@ -59,6 +63,10 @@ function Header(props) {
       });
   }
 
+  function onWindowResize() {
+    setSmallScreenMenu(window.innerWidth <= 865 ? true : false);
+  }
+
   let menuItemsDisplay = 'This will be menu items';
   if (menuItems) {
     menuItemsDisplay = menuItems.map((menuItem, index) => {
@@ -85,8 +93,6 @@ function Header(props) {
       ? '?language=' + translatedPage.language
       : '';
 
-  console.log(translatedPage, 'translated page');
-
   let deLinkHref, enLinkHref;
   if (translatedPage) {
     if (appState.language === 'DE') {
@@ -98,27 +104,54 @@ function Header(props) {
     }
   }
 
-  return (
-    <div className="header">
-      <div className="logo">
-        <a
-          href={
-            appState.language === 'DE'
-              ? '/home-de?language=DE'
-              : '/home?language=EN'
-          }
-        >
-          <img src="RnR Logo.png" className="header-img" />
-        </a>
+  let headerDisplay;
+  if (smallScreenMenu === false) {
+    headerDisplay = (
+      <div className="header">
+        <div className="logo">
+          <a
+            href={
+              appState.language === 'DE'
+                ? '/home-de?language=DE'
+                : '/home?language=EN'
+            }
+          >
+            <img src="RnR Logo.png" className="header-img" />
+          </a>
+        </div>
+        <div className="menu-right-column">
+          <div className="language-menu">
+            <a href={deLinkHref}>DE</a>
+            <a href={enLinkHref}>EN</a>
+          </div>
+          <div className="menu-items"> {menuItemsDisplay}</div>
+        </div>
       </div>
-      <div className="menu-right-column">
+    );
+  } else {
+    headerDisplay = (
+      <div className="header">
         <div className="language-menu">
           <a href={deLinkHref}>DE</a>
           <a href={enLinkHref}>EN</a>
         </div>
-        <div className="menu-items"> {menuItemsDisplay}</div>
+        <div className="logo">
+          <a
+            href={
+              appState.language === 'DE'
+                ? '/home-de?language=DE'
+                : '/home?language=EN'
+            }
+          >
+            <img src="RnR Logo.png" className="header-img" />
+          </a>
+        </div>
+        <div className="menu-right-column">
+          <div className="menu-items"> {menuItemsDisplay}</div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <div>{headerDisplay}</div>;
 }
 export default Header;

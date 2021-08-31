@@ -1,27 +1,147 @@
 .booking-form {
-  font-family: 'josefin sans';
-
-  input {
-    background-color: #e0cba8a8;
-    border-style: solid;
-    border-color: #a2947c;
-    border-width: 1px;
-    margin-bottom: 5px;
-    font-family: 'josefin sans';
-    font-size: 15px;
-    height: 20px;
-    width: 300px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  textarea::-webkit-scrollbar {
+    display: none;
+  }
+  h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
   }
 
-  select {
-    background-color: #e0cba885;
+  .user-box {
+    position: relative;
     font-family: 'josefin sans';
-    border-style: solid;
-    border-color: #a2947c;
-    border-width: 1px;
-    margin-bottom: 5px;
-    font-size: 15px;
-    height: 20px;
-    width: 300px;
+
+    .date {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 18px;
+      color: #fff;
+      pointer-events: none;
+      transition: 0.5s;
+    }
+
+    .date-filled {
+      top: -20px;
+      left: 0;
+      color: #b3c4b3;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+
+      textarea::-webkit-scrollbar {
+        display: none;
+      }
+
+      option {
+        color: black;
+      }
+    }
+
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 18px;
+      color: #fff;
+      pointer-events: none;
+      transition: 0.5s;
+    }
+
+    input:focus ~ label,
+    select:focus ~ label,
+    textarea:focus ~ label {
+      top: -20px;
+      left: 0;
+      color: #b3c4b3;
+      font-size: 14px;
+    }
+
+    .filled ~ label {
+      top: -20px;
+      left: 0;
+      color: #b3c4b3;
+      font-size: 14px;
+    }
   }
+}
+
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  border-radius: 0.3rem;
+  background-color: rgb(97, 97, 97) !important;
+  color: #fff;
+
+  &:hover {
+    background-color: rgb(80, 80, 80) !important;
+  }
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range {
+  border-radius: 0.3rem;
+  background-color: rgb(97, 97, 97) !important;
+  color: #fff;
+
+  &:hover {
+    background-color: rgb(80, 80, 80) !important;
+  }
+}
+
+.react-datepicker__day--in-selecting-range {
+  width: 3rem;
+  line-height: 3rem;
+  background-color: rgba(97, 97, 97, 0.63) !important;
+}
+
+.submit-btn {
+  border: 1px solid #fff;
+  background: rgba(20, 20, 20, 0.6);
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    background: rgba(20, 20, 20, 0.8);
+    padding: 10px 80px;
+  }
+}
+
+.error {
+  font-size: 18px;
 }
