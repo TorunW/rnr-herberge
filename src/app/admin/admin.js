@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import PageForm from './pageForm';
-import '../style/adminPost.css';
 import { Context } from '../context/context-provider';
+import '../style/admin.css';
 
 function Admin() {
   const { appState, appDispatch } = useContext(Context);
@@ -36,9 +36,8 @@ function Admin() {
   }
 
   return (
-    <main>
+    <main className="admin-page">
       <div className="page-form">
-        <div>Admin</div>
         <div className="admin-menu">{menuItemsDisplay}</div>
 
         <button href={`/admin/pages/create`}>Add new page +</button>

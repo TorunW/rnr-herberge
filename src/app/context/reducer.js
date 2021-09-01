@@ -5,6 +5,34 @@ export const appInitialState = {
       : 'DE',
   pageId: null,
   translatedPageId: null,
+  formLabels: {
+    EN: {
+      first_name: 'First name',
+      last_name: 'Last name',
+      email: 'Email',
+      telephone: 'Telephone number',
+      room: 'Select room',
+      guest_count: 'Number of people staying',
+      arrival: 'Arrival',
+      departure: 'Departure',
+      notes: 'Write us, if you have any questions',
+      name: 'Your Name',
+      msg: 'Your message',
+    },
+    DE: {
+      first_name: 'Vorname',
+      last_name: 'Name',
+      email: 'Email',
+      telephone: 'Telefon',
+      room: 'Wähle ein Zimmer bitte',
+      guest_count: 'Anzahl von Personen',
+      arrival: 'Ankunft',
+      departure: 'Abreise',
+      notes: 'Schreiben Sie uns falls Sie noch zuzätslige Fragen haben.',
+      name: 'Vorname/Name',
+      msg: 'Deine Nachricht',
+    },
+  },
 };
 
 function AppReducer(state, action) {

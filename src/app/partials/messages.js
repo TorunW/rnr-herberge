@@ -119,7 +119,7 @@ function Messages(props) {
 
         <div className="submit">
           <a className="submit-btn" onClick={submitForm}>
-            Submit
+            Send message
           </a>
         </div>
       </form>

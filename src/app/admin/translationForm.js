@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import PageForm from './pageForm';
 import $ from 'jquery';
 import PostForm from './postForm';
-import '../style/adminPost.css';
+import '../style/admin.css';
 
 function TranslationForm(props) {
   const [loading, setLoading] = useState(true);

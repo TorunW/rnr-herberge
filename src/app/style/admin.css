@@ -1,0 +1,26 @@
+.admin-page {
+  background: #ffecd1;
+}
+.admin-page .page-form .admin-menu a {
+  color: #001524;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: bold;
+}
+.admin-page .page-form #admin {
+  background-color: #ffecd1;
+}
+.admin-page .page-form #admin .post-form {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.admin-page .page-form #admin .post-form .original-language-post-form {
+  border: solid;
+  border-color: #ff7d00;
+  width: 40vw;
+}
+.admin-page .page-form #admin .post-form .translation .post-form {
+  border: solid;
+  border-color: #15616d;
+  width: 40vw;
+}

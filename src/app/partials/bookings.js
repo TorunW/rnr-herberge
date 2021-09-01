@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import $ from 'jquery';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../style/bookings.css';
+import { Context } from '../context/context-provider';
 
 // 2 select 1 for room and then for guest, with the right amount of options, number
 // useeffect that bound to the room state var, set the guest
 // another state var
 function Bookings(props) {
+  const { appState, appDispatch } = useContext(Context);
+
   const [firstName, setFirstName] = useState('');
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastName, setLastName] = useState('');
@@ -26,6 +29,8 @@ function Bookings(props) {
   const [dateError, setDateError] = useState(false);
   const [message, setMessage] = useState('');
   const [bookingSent, setBookingSent] = useState(false);
+
+  console.log(bookingSent, 'booking sent');
 
   useEffect(() => {
     let newOptions = [];
@@ -180,8 +185,22 @@ function Bookings(props) {
   if (dateError === true) {
     dateErrorDisplay = <p className="error">Please select a valid date</p>;
   }
+
+  // let displaySuccessMessage;
+  // if ((bookingSent = true)) {
+  //   displaySuccessMessage = (
+  //     <div>
+  //       <p>Booking sent!</p>
+  //       <p>
+  //         You will recive an email soon with confirmation and payment details
+  //       </p>
+  //     </div>
+  //   );
+  // }
+
   return (
     <div className="booking-form">
+      {/* {displaySuccessMessage} */}
       <form>
         <div className="user-box">
           <input
@@ -192,7 +211,9 @@ function Bookings(props) {
             onChange={e => setFirstName(e.target.value)}
             type="text"
           />
-          <label>First name</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].first_name : ''}
+          </label>
           {nameErrorDisplay}
         </div>
 
@@ -258,7 +279,9 @@ function Bookings(props) {
           {roomErrorDisplay}
         </div>
 
-        <div className={'user-box' + (guest.length > 0 ? ' filled' : '')}>
+        <div
+          className={'user-box' + (numberOfGuests.length > 0 ? ' filled' : '')}
+        >
           <label>Number of people staying</label>
           <select
             className="guest-select"
@@ -315,7 +338,7 @@ function Bookings(props) {
 
         <div className="submit">
           <a className="submit-btn" onClick={submitForm}>
-            Submit
+            Send booking
           </a>
         </div>
       </form>
@@ -323,17 +346,4 @@ function Bookings(props) {
   );
 }
 
-<div class="login-box">
-  <h2>Login</h2>
-  <form>
-    <div class="user-box">
-      <input type="text" name="" required="" />
-      <label>Username</label>
-    </div>
-    <div class="user-box">
-      <input type="password" name="" required="" />
-      <label>Password</label>
-    </div>
-  </form>
-</div>;
 export default Bookings;

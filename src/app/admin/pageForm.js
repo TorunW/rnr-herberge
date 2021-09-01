@@ -3,6 +3,7 @@ import $ from 'jquery';
 import PostForm from './postForm';
 import TranslationForm from './translationForm';
 import { Context } from '../context/context-provider';
+import '../style/admin.css';
 
 function PageForm(props) {
   let pageId = window.location.pathname.split('/')[4];
@@ -131,32 +132,35 @@ function PageForm(props) {
 
   return (
     <main id="admin">
-      <div className="page-input">
-        <input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
+      <div
+        className={
+          props.type === 'translation' ? 'translation-form' : 'original-form'
+        }
+      >
+        <div className="page-input">
+          <input
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="page-input">
+          <input
+            type="text"
+            value={link}
+            onChange={e => setLink(e.target.value)}
+          />
+        </div>
+        <div className="page-input">
+          <input
+            type="text"
+            value={order}
+            onChange={e => setOrder(e.target.value)}
+          />
+        </div>
+        <button onClick={onSubmit}>Submit</button>
+        {deleteButtonDisplay}
       </div>
-
-      <div className="page-input">
-        <input
-          type="text"
-          value={link}
-          onChange={e => setLink(e.target.value)}
-        />
-      </div>
-
-      <div className="page-input">
-        <input
-          type="text"
-          value={order}
-          onChange={e => setOrder(e.target.value)}
-        />
-      </div>
-
-      <button onClick={onSubmit}>Submit</button>
-      {deleteButtonDisplay}
       {translationFormDisplay}
       {addNewPostButtonDisplay}
       {newPostFormDisplay}

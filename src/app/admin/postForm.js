@@ -5,6 +5,7 @@ import MessageForm from './messageForm';
 import TextEditor from '../partials/textEditor';
 import TranslationForm from './translationForm';
 import { Context } from '../context/context-provider';
+import '../style/admin.css';
 
 function PostForm(props) {
   const { appState, appDispatch } = useContext(Context);
@@ -88,7 +89,13 @@ function PostForm(props) {
 
   return (
     <div className="post-form">
-      <div className="original-language">
+      <div
+        className={
+          props.type === 'translation'
+            ? 'translaion-post-form'
+            : 'original-language-post-form'
+        }
+      >
         <div>Title</div>
         <input
           type="text"
