@@ -44,7 +44,7 @@ function Page(props) {
 
   let hasDrinksMenu = false;
 
-  let postDisplay = 'This will be a post';
+  let postDisplay;
   if (posts) {
     postDisplay = posts.map((post, index) => {
       if (post.type === 'drinks' && hasDrinksMenu === false) {

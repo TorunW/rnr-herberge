@@ -1,5 +1,5 @@
 .admin-page {
-  background: #ffecd1;
+  background: #8b8b8b;
 }
 .admin-page .page-form .admin-menu a {
   color: #001524;
@@ -7,20 +7,68 @@
   font-size: 22px;
   font-weight: bold;
 }
-.admin-page .page-form #admin {
-  background-color: #ffecd1;
+.admin-page .page-form .btn-add-page {
+  border: solid;
+  border-width: 3px;
 }
-.admin-page .page-form #admin .post-form {
+.admin-page .page-form #admin {
+  background-color: #8b8b8b;
   display: grid;
   grid-template-columns: 50% 50%;
+  grid-template-rows: auto 10vh 1fr;
+}
+.admin-page .page-form #admin .original-form {
+  grid-column: 1;
+  grid-row: 1;
+}
+.admin-page .page-form #admin .original-form .page-input input {
+  border: solid;
+  border-width: 3px;
+}
+.admin-page .page-form #admin .original-form .btn {
+  border: solid;
+  border-width: 3px;
+}
+.admin-page .page-form #admin .translation-form {
+  grid-column: 2;
+  grid-row: 1;
+}
+.admin-page .page-form #admin .translation-form .translation #admin .translation-form .page-input input {
+  border: solid;
+  border-width: 3px;
+}
+.admin-page .page-form #admin .translation-form .translation #admin .translation-form .btn {
+  border: solid;
+  border-width: 3px;
+}
+.admin-page .page-form #admin .btn {
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border: solid;
+  border-width: 3px;
+}
+.admin-page .page-form #admin .post-form {
+  grid-row: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .admin-page .page-form #admin .post-form .original-language-post-form {
   border: solid;
   border-color: #ff7d00;
-  width: 40vw;
+  width: 45vw;
+  grid-column: 1;
 }
-.admin-page .page-form #admin .post-form .translation .post-form {
+.admin-page .page-form #admin .post-form .english-form .translation {
+  width: 45vw;
+}
+.admin-page .page-form #admin .post-form .english-form .translation .post-form {
   border: solid;
   border-color: #15616d;
-  width: 40vw;
+}
+.admin-page .page-form #admin .post-form .english-form .translation .post-form .translation-post-form {
+  display: grid;
+  grid-template-columns: 1;
 }

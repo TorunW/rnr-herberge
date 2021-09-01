@@ -1,5 +1,6 @@
 const { TouchZoomRotateHandler } = require('mapbox-gl');
 var db = require('../database/db');
+const nodemailer = require('nodemailer');
 
 exports.getBookings = (req, res) => {
   var sql = 'SELECT * FROM bookings';
@@ -49,11 +50,11 @@ exports.createBooking = (req, res) => {
       data: result,
       id: this.lastID,
     });
-    sendBooking();
+    sendBooking(req, res);
   });
 };
 
-function sendBooking() {
+function sendBooking(req, res) {
   const output = `
   <p>You have a new booking request/ Ihr habt eine neue Buchungsanfrage</p>
   <hr/>

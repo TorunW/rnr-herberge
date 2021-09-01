@@ -1,13 +1,4 @@
 function MessageForm(props) {
-  return (
-    <div>
-      <div>Your name</div>
-      <input value="text"></input>
-      <div>Email</div>
-      <input value="text"></input>
-      <div>Your message</div>
-      <input value="text"></input>
-    </div>
-  );
+  return <div>Thirs will be a contact form</div>;
 }
 export default MessageForm;

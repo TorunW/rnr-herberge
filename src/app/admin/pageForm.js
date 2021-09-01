@@ -89,7 +89,11 @@ function PageForm(props) {
 
   let deleteButtonDisplay;
   if (props.formType === 'edit') {
-    deleteButtonDisplay = <button onClick={onDelete}>Delete</button>;
+    deleteButtonDisplay = (
+      <a className="btn" onClick={onDelete}>
+        Delete
+      </a>
+    );
   }
 
   let postsDisplay;
@@ -120,13 +124,14 @@ function PageForm(props) {
   let addNewPostButtonDisplay;
   if (props.type !== 'translation') {
     addNewPostButtonDisplay = (
-      <button
+      <a
+        className="btn"
         onClick={() =>
           setShowCreatePostForm(showCreatePostForm === false ? true : false)
         }
       >
         Add new post +
-      </button>
+      </a>
     );
   }
 
@@ -158,7 +163,9 @@ function PageForm(props) {
             onChange={e => setOrder(e.target.value)}
           />
         </div>
-        <button onClick={onSubmit}>Submit</button>
+        <a className="btn" onClick={onSubmit}>
+          Submit
+        </a>
         {deleteButtonDisplay}
       </div>
       {translationFormDisplay}

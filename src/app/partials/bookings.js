@@ -146,27 +146,6 @@ function Bookings(props) {
 
     return isValidated;
   }
-  // error displays
-  let nameErrorDisplay;
-  if (firstNameError === true || lastNameError === true) {
-    nameErrorDisplay = <p className="error">Fill in your name, please.</p>;
-  }
-  let emailErrorDisplay;
-  if (emailError === true) {
-    emailErrorDisplay = <p className="error">Please fill in a valid Email</p>;
-  }
-
-  let telephoneErrorDisplay;
-  if (telephoneError === true) {
-    telephoneErrorDisplay = (
-      <p className="error">Please fill in a valid telephone number</p>
-    );
-  }
-
-  let roomErrorDisplay;
-  if (roomError === true) {
-    roomErrorDisplay = <p className="error">Please choose a room</p>;
-  }
 
   let numberOfGuests = options.map((op, i) => (
     <option value={op.options} key={i}>
@@ -174,16 +153,58 @@ function Bookings(props) {
     </option>
   ));
 
+  // error displays
+  let nameErrorDisplay;
+  if (firstNameError === true || lastNameError === true) {
+    nameErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].name_error : ''}
+      </p>
+    );
+  }
+  let emailErrorDisplay;
+  if (emailError === true) {
+    emailErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].email_error : ''}
+      </p>
+    );
+  }
+
+  let telephoneErrorDisplay;
+  if (telephoneError === true) {
+    telephoneErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].telephone_error : ''}
+      </p>
+    );
+  }
+
+  let roomErrorDisplay;
+  if (roomError === true) {
+    roomErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].room_error : ''}
+      </p>
+    );
+  }
+
   let guestErrorDisplay;
   if (guestError === true) {
     guestErrorDisplay = (
-      <p className="error">Please choose how many persons are staying</p>
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].guest_error : ''}
+      </p>
     );
   }
 
   let dateErrorDisplay;
   if (dateError === true) {
-    dateErrorDisplay = <p className="error">Please select a valid date</p>;
+    dateErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].date_error : ''}
+      </p>
+    );
   }
 
   // let displaySuccessMessage;
@@ -226,7 +247,9 @@ function Bookings(props) {
             onChange={e => setLastName(e.target.value)}
             type="text"
           />
-          <label>Last name</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].last_name : ''}
+          </label>
           {nameErrorDisplay}
         </div>
 
@@ -237,7 +260,9 @@ function Bookings(props) {
             onChange={e => setEmail(e.target.value)}
             type="email"
           />
-          <label>Email</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].email : ''}
+          </label>
           {emailErrorDisplay}
         </div>
 
@@ -250,7 +275,9 @@ function Bookings(props) {
             onChange={e => setTelephone(e.target.value)}
             type="tel"
           />
-          <label>Telephone number</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].telephone : ''}
+          </label>
           {telephoneErrorDisplay}
         </div>
 
@@ -275,23 +302,24 @@ function Bookings(props) {
               </span>
             </span>
           </span>
-          <label>Select room</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].room : ''}
+          </label>
           {roomErrorDisplay}
         </div>
 
-        <div
-          className={'user-box' + (numberOfGuests.length > 0 ? ' filled' : '')}
-        >
-          <label>Number of people staying</label>
+        <div className="user-box">
           <select
-            className="guest-select"
+            className={'guest-select' + (guest.length > 0 ? ' filled' : '')}
             value={guest}
             onChange={e => setGuest(e.target.value)}
           >
             <option value=""></option>
             {numberOfGuests}
           </select>
-
+          <label>
+            {appState ? appState.formLabels[appState.language].guest_count : ''}
+          </label>
           {guestErrorDisplay}
         </div>
 
@@ -304,7 +332,7 @@ function Bookings(props) {
             withPortal
           />
           <label className={'date' + (startDate ? '-filled' : '')}>
-            Arrival
+            {appState ? appState.formLabels[appState.language].arrival : ''}
           </label>
           {dateErrorDisplay}
         </div>
@@ -322,7 +350,7 @@ function Bookings(props) {
             withPortal
           />
           <label className={'date' + (endDate ? '-filled' : '')}>
-            Departure
+            {appState ? appState.formLabels[appState.language].departure : ''}
           </label>
         </div>
 
@@ -333,12 +361,16 @@ function Bookings(props) {
             onChange={e => setMessage(e.target.value)}
             type="text"
           ></textarea>
-          <label>Write us, if you have any questions</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].notes : ''}
+          </label>
         </div>
 
         <div className="submit">
           <a className="submit-btn" onClick={submitForm}>
-            Send booking
+            {appState
+              ? appState.formSubmit[appState.language].submit_booking
+              : ''}{' '}
           </a>
         </div>
       </form>

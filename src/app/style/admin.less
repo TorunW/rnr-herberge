@@ -1,5 +1,5 @@
 .admin-page {
-  background: #ffecd1;
+  background: #8b8b8b;
   .page-form {
     .admin-menu {
       a {
@@ -10,50 +10,86 @@
       }
     }
 
-    button {
+    .btn-add-page {
+      border: solid;
+      border-width: 3px;
     }
 
     #admin {
-      background-color: #ffecd1;
+      background-color: #8b8b8b;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: auto 10vh 1fr;
       .original-form {
+        grid-column: 1;
+        grid-row: 1;
         .page-input {
           input {
+            border: solid;
+            border-width: 3px;
           }
         }
-        button {
+        .btn {
+          border: solid;
+          border-width: 3px;
         }
       }
 
-      .translation {
-        #admin {
-          .translation-form {
-            .page-input {
-              input {
+      .translation-form {
+        grid-column: 2;
+        grid-row: 1;
+        .translation {
+          #admin {
+            .translation-form {
+              .page-input {
+                input {
+                  border: solid;
+                  border-width: 3px;
+                }
+              }
+              .btn {
+                border: solid;
+                border-width: 3px;
               }
             }
-            button {
-            }
           }
         }
       }
 
-      button {
+      .btn {
+        grid-row: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        border: solid;
+        border-width: 3px;
       }
+
       .post-form {
+        grid-row: 3;
+        grid-column-start: 1;
+        grid-column-end: 3;
+
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 1fr 1fr;
         .original-language-post-form {
           border: solid;
           border-color: #ff7d00;
-          width: 40vw;
+          width: 45vw;
+          grid-column: 1;
         }
 
-        .translation {
-          .post-form {
-            border: solid;
-            border-color: #15616d;
-            width: 40vw;
-            .translation-post-form {
+        .english-form {
+          .translation {
+            width: 45vw;
+
+            .post-form {
+              border: solid;
+              border-color: #15616d;
+
+              .translation-post-form {
+                display: grid;
+                grid-template-columns: 1;
+              }
             }
           }
         }

@@ -7,7 +7,6 @@ var path = require('path');
 var app = express();
 var fileUpload = require('express-fileupload');
 var cors = require('cors');
-const nodemailer = require('nodemailer');
 
 // Body Parser
 var bodyParser = require('body-parser');

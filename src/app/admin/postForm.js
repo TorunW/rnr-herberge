@@ -118,12 +118,14 @@ function PostForm(props) {
           <option value="drinks">Getränke</option>
         </select>
         {typeDisplay}
-        <button onClick={onSubmit} className="button">
+        <a onClick={onSubmit} className="btn">
           Submit
-        </button>
-        <button onClick={onDelete}>Delete</button>
+        </a>
+        <a className="btn" onClick={onDelete}>
+          Delete
+        </a>
       </div>
-      {displayTranslationForm}
+      <div className="english-form"> {displayTranslationForm}</div>
     </div>
   );
 }

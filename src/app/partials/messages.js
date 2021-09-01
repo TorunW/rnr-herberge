@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import $ from 'jquery';
+import { Context } from '../context/context-provider';
 
 function Messages(props) {
+  const { appState, appDispatch } = useContext(Context);
+
   // state var for the fields and error messages
   const [fullName, setFullName] = useState('');
   const [fullNameError, setFullNameError] = useState();
@@ -91,7 +94,9 @@ function Messages(props) {
             onChange={e => setFullName(e.target.value)}
             type="text"
           />
-          <label>Your name</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].full_name : ''}
+          </label>
           {fullNameErrorDisplay}
         </div>
 
@@ -102,7 +107,9 @@ function Messages(props) {
             onChange={e => setEmail(e.target.value)}
             type="email"
           />
-          <label>Email</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].email : ''}
+          </label>
           {emailErrorDisplay}
         </div>
 
@@ -113,13 +120,17 @@ function Messages(props) {
             onChange={e => setMessage(e.target.value)}
             type="text"
           ></textarea>
-          <label>Write us, if you have any questions or feedback</label>
+          <label>
+            {appState ? appState.formLabels[appState.language].msg : ''}
+          </label>
           {messageErrorDisplay}
         </div>
 
         <div className="submit">
           <a className="submit-btn" onClick={submitForm}>
-            Send message
+            {appState
+              ? appState.formSubmit[appState.language].submit_message
+              : ''}
           </a>
         </div>
       </form>

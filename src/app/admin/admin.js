@@ -40,7 +40,9 @@ function Admin() {
       <div className="page-form">
         <div className="admin-menu">{menuItemsDisplay}</div>
 
-        <button href={`/admin/pages/create`}>Add new page +</button>
+        <a className="btn-add-page" href={`/admin/pages/create`}>
+          Add new page +
+        </a>
         {pageFormDisplay}
       </div>
     </main>
