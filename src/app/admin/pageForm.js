@@ -91,7 +91,7 @@ function PageForm(props) {
   if (props.formType === 'edit') {
     deleteButtonDisplay = (
       <a className="btn" onClick={onDelete}>
-        Delete
+        Delete page
       </a>
     );
   }
@@ -125,12 +125,12 @@ function PageForm(props) {
   if (props.type !== 'translation') {
     addNewPostButtonDisplay = (
       <a
-        className="btn"
+        className="btn-new-post"
         onClick={() =>
           setShowCreatePostForm(showCreatePostForm === false ? true : false)
         }
       >
-        Add new post +
+        Add new post
       </a>
     );
   }
@@ -143,6 +143,7 @@ function PageForm(props) {
         }
       >
         <div className="page-input">
+          <div>Page title:</div>
           <input
             type="text"
             value={title}
@@ -150,6 +151,7 @@ function PageForm(props) {
           />
         </div>
         <div className="page-input">
+          <div>Link name:</div>
           <input
             type="text"
             value={link}
@@ -157,6 +159,7 @@ function PageForm(props) {
           />
         </div>
         <div className="page-input">
+          <div>Page order:</div>
           <input
             type="text"
             value={order}
@@ -164,7 +167,7 @@ function PageForm(props) {
           />
         </div>
         <a className="btn" onClick={onSubmit}>
-          Submit
+          {showCreatePostForm === false ? 'Add page' : 'Update page'}
         </a>
         {deleteButtonDisplay}
       </div>

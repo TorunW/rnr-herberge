@@ -32,24 +32,6 @@ function Bookings(props) {
 
   console.log(bookingSent, 'booking sent');
 
-  useEffect(() => {
-    let newOptions = [];
-    if (room === '1') {
-      newOptions = [1, 2, 3];
-    } else if (room === '3') {
-      newOptions = [1, 2, 3, 4, 5];
-    } else if (room === '4') {
-      newOptions = [1, 2, 3];
-    } else if (room === '5') {
-      newOptions = [1, 2];
-    } else if (room === '6') {
-      newOptions = [1, 2, 3, 4, 5];
-    } else if (room === '7') {
-      newOptions = [1, 2, 3];
-    }
-    setOptions(newOptions);
-  }, [room]);
-
   function submitForm() {
     if (formValidation()) {
       // create an object for the message, with name email msg
@@ -207,21 +189,21 @@ function Bookings(props) {
     );
   }
 
-  // let displaySuccessMessage;
-  // if ((bookingSent = true)) {
-  //   displaySuccessMessage = (
-  //     <div>
-  //       <p>Booking sent!</p>
-  //       <p>
-  //         You will recive an email soon with confirmation and payment details
-  //       </p>
-  //     </div>
-  //   );
-  // }
+  let displaySuccessMessage;
+  if (bookingSent === true) {
+    displaySuccessMessage = (
+      <div>
+        <p>Booking sent!</p>
+        <p>
+          You will recive an email soon with confirmation and payment details
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="booking-form">
-      {/* {displaySuccessMessage} */}
+      {displaySuccessMessage}
       <form>
         <div className="user-box">
           <input
@@ -377,5 +359,27 @@ function Bookings(props) {
     </div>
   );
 }
+
+// function RoomSelectFormField() {
+//   let room = props.room;
+
+//   useEffect(() => {
+//     let newOptions = [];
+//     if (room === '1') {
+//       newOptions = [1, 2, 3];
+//     } else if (room === '3') {
+//       newOptions = [1, 2, 3, 4, 5];
+//     } else if (room === '4') {
+//       newOptions = [1, 2, 3];
+//     } else if (room === '5') {
+//       newOptions = [1, 2];
+//     } else if (room === '6') {
+//       newOptions = [1, 2, 3, 4, 5];
+//     } else if (room === '7') {
+//       newOptions = [1, 2, 3];
+//     }
+//     setOptions(newOptions);
+//   }, [room]);
+// }
 
 export default Bookings;

@@ -1,5 +1,5 @@
 function BookingForm(props) {
-  return <div>This will be a form for bookings</div>;
+  return <div className="form-display">This will be a form for bookings</div>;
 }
 
 export default BookingForm;

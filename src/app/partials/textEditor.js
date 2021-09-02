@@ -59,6 +59,7 @@ function TextEditor(props) {
         quillObj
           .getEditor()
           .insertEmbed(range.index, 'image', '/' + res.data.path);
+        console.log(res.data.path, 'jdjsjs');
       })
       .catch(err => console.log(err));
   };

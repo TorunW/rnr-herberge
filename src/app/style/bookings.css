@@ -8,6 +8,10 @@
 .booking-form textarea::-webkit-scrollbar {
   display: none;
 }
+.booking-form p {
+  font-family: 'josefin sans';
+  font-size: 20px;
+}
 .booking-form h2 {
   margin: 0 0 30px;
   padding: 0;

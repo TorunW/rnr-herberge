@@ -1,74 +1,357 @@
-.admin-page {
-  background: #8b8b8b;
+html,
+body,
+#root,
+.App {
+  height: 100%;
 }
-.admin-page .page-form .admin-menu a {
-  color: #001524;
+html .admin-page,
+body .admin-page,
+#root .admin-page,
+.App .admin-page {
+  background: #134a46;
+  height: 100%;
+}
+html .admin-page .page-form,
+body .admin-page .page-form,
+#root .admin-page .page-form,
+.App .admin-page .page-form {
+  font-family: 'josefin sans';
+}
+html .admin-page .page-form .admin-menu,
+body .admin-page .page-form .admin-menu,
+#root .admin-page .page-form .admin-menu,
+.App .admin-page .page-form .admin-menu {
+  height: 10vh;
+  padding-top: 2vh;
+}
+html .admin-page .page-form .admin-menu a,
+body .admin-page .page-form .admin-menu a,
+#root .admin-page .page-form .admin-menu a,
+.App .admin-page .page-form .admin-menu a {
+  color: #efefef;
+  text-shadow: #134a46;
   text-decoration: none;
   font-size: 22px;
   font-weight: bold;
+  text-transform: uppercase;
+  margin: 3vh 2vw;
+  height: 30px;
 }
-.admin-page .page-form .btn-add-page {
+html .admin-page .page-form .admin-menu a:hover,
+body .admin-page .page-form .admin-menu a:hover,
+#root .admin-page .page-form .admin-menu a:hover,
+.App .admin-page .page-form .admin-menu a:hover {
+  color: #7ab893;
+}
+html .admin-page .page-form .btn-add-page,
+body .admin-page .page-form .btn-add-page,
+#root .admin-page .page-form .btn-add-page,
+.App .admin-page .page-form .btn-add-page {
   border: solid;
   border-width: 3px;
+  padding: 1vh 1vw;
+  border-radius: 10px;
+  background-color: #7ab893;
+  border-color: #032429;
+  color: black;
+  text-decoration: none;
+  box-shadow: 3px 3px 5px black;
 }
-.admin-page .page-form #admin {
-  background-color: #8b8b8b;
+html .admin-page .page-form .btn-add-page:hover,
+body .admin-page .page-form .btn-add-page:hover,
+#root .admin-page .page-form .btn-add-page:hover,
+.App .admin-page .page-form .btn-add-page:hover {
+  background-color: #377d6a;
+}
+html .admin-page .page-form #admin,
+body .admin-page .page-form #admin,
+#root .admin-page .page-form #admin,
+.App .admin-page .page-form #admin {
+  background-color: #134a46;
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: auto 10vh 1fr;
+  grid-template-rows: 36vh 10vh 1fr;
+  padding: 3vh 5vw 3vh 2vw;
 }
-.admin-page .page-form #admin .original-form {
+html .admin-page .page-form #admin .original-form,
+body .admin-page .page-form #admin .original-form,
+#root .admin-page .page-form #admin .original-form,
+.App .admin-page .page-form #admin .original-form {
   grid-column: 1;
   grid-row: 1;
+  background-color: #032429;
+  width: 30vw;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 6px 5px 5px black;
 }
-.admin-page .page-form #admin .original-form .page-input input {
+html .admin-page .page-form #admin .original-form .page-input,
+body .admin-page .page-form #admin .original-form .page-input,
+#root .admin-page .page-form #admin .original-form .page-input,
+.App .admin-page .page-form #admin .original-form .page-input {
+  margin: 2vh 0 3vh;
+}
+html .admin-page .page-form #admin .original-form .page-input div,
+body .admin-page .page-form #admin .original-form .page-input div,
+#root .admin-page .page-form #admin .original-form .page-input div,
+.App .admin-page .page-form #admin .original-form .page-input div {
+  color: #efefef;
+}
+html .admin-page .page-form #admin .original-form .page-input input,
+body .admin-page .page-form #admin .original-form .page-input input,
+#root .admin-page .page-form #admin .original-form .page-input input,
+.App .admin-page .page-form #admin .original-form .page-input input {
   border: solid;
   border-width: 3px;
+  background-color: #b2e3af;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'josefin sans';
+  font-size: 16px;
+  height: 3vh;
 }
-.admin-page .page-form #admin .original-form .btn {
+html .admin-page .page-form #admin .original-form .btn,
+body .admin-page .page-form #admin .original-form .btn,
+#root .admin-page .page-form #admin .original-form .btn,
+.App .admin-page .page-form #admin .original-form .btn {
   border: solid;
   border-width: 3px;
+  margin: 0 1vw;
+  padding: 1vh 1vw;
+  background-color: #7ab893;
+  border-radius: 10px;
 }
-.admin-page .page-form #admin .translation-form {
+html .admin-page .page-form #admin .original-form .btn:hover,
+body .admin-page .page-form #admin .original-form .btn:hover,
+#root .admin-page .page-form #admin .original-form .btn:hover,
+.App .admin-page .page-form #admin .original-form .btn:hover {
+  background-color: #377d6a;
+}
+html .admin-page .page-form #admin .translation,
+body .admin-page .page-form #admin .translation,
+#root .admin-page .page-form #admin .translation,
+.App .admin-page .page-form #admin .translation {
   grid-column: 2;
   grid-row: 1;
 }
-.admin-page .page-form #admin .translation-form .translation #admin .translation-form .page-input input {
+html .admin-page .page-form #admin .translation #admin,
+body .admin-page .page-form #admin .translation #admin,
+#root .admin-page .page-form #admin .translation #admin,
+.App .admin-page .page-form #admin .translation #admin {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 36vh;
+  margin: 0;
+}
+html .admin-page .page-form #admin .translation #admin .translation-form,
+body .admin-page .page-form #admin .translation #admin .translation-form,
+#root .admin-page .page-form #admin .translation #admin .translation-form,
+.App .admin-page .page-form #admin .translation #admin .translation-form {
+  background-color: #032429;
+  width: 30vw;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 6px 5px 5px black;
+}
+html .admin-page .page-form #admin .translation #admin .translation-form .page-input,
+body .admin-page .page-form #admin .translation #admin .translation-form .page-input,
+#root .admin-page .page-form #admin .translation #admin .translation-form .page-input,
+.App .admin-page .page-form #admin .translation #admin .translation-form .page-input {
+  margin: 2vh 0;
+}
+html .admin-page .page-form #admin .translation #admin .translation-form .page-input div,
+body .admin-page .page-form #admin .translation #admin .translation-form .page-input div,
+#root .admin-page .page-form #admin .translation #admin .translation-form .page-input div,
+.App .admin-page .page-form #admin .translation #admin .translation-form .page-input div {
+  color: #efefef;
+}
+html .admin-page .page-form #admin .translation #admin .translation-form .page-input input,
+body .admin-page .page-form #admin .translation #admin .translation-form .page-input input,
+#root .admin-page .page-form #admin .translation #admin .translation-form .page-input input,
+.App .admin-page .page-form #admin .translation #admin .translation-form .page-input input {
   border: solid;
   border-width: 3px;
+  background-color: #b2e3af;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'josefin sans';
+  font-size: 16px;
+  height: 3vh;
+  margin: 0 0 1vh;
 }
-.admin-page .page-form #admin .translation-form .translation #admin .translation-form .btn {
+html .admin-page .page-form #admin .btn,
+body .admin-page .page-form #admin .btn,
+#root .admin-page .page-form #admin .btn,
+.App .admin-page .page-form #admin .btn {
   border: solid;
   border-width: 3px;
+  margin: 0 1vw;
+  padding: 1vh 1vw;
+  background-color: #7ab893;
+  border-radius: 10px;
 }
-.admin-page .page-form #admin .btn {
-  grid-row: 2;
+html .admin-page .page-form #admin .btn:hover,
+body .admin-page .page-form #admin .btn:hover,
+#root .admin-page .page-form #admin .btn:hover,
+.App .admin-page .page-form #admin .btn:hover {
+  background-color: #377d6a;
+}
+html .admin-page .btn-new-post,
+body .admin-page .btn-new-post,
+#root .admin-page .btn-new-post,
+.App .admin-page .btn-new-post {
+  display: grid;
+  grid-template-columns: 1fr;
   grid-column-start: 1;
   grid-column-end: 3;
   border: solid;
   border-width: 3px;
+  margin: 3vh auto;
+  padding: 1vh 1vw;
+  border-radius: 10px;
+  height: 2vh;
+  background-color: #7ab893;
+  box-shadow: 3px 3px 5px black;
 }
-.admin-page .page-form #admin .post-form {
-  grid-row: 3;
+html .admin-page .btn-new-post:hover,
+body .admin-page .btn-new-post:hover,
+#root .admin-page .btn-new-post:hover,
+.App .admin-page .btn-new-post:hover {
+  background-color: #377d6a;
+}
+html .admin-page .form,
+body .admin-page .form,
+#root .admin-page .form,
+.App .admin-page .form {
   grid-column-start: 1;
   grid-column-end: 3;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 50%;
+  margin: 0 2vw;
+  height: 100%;
+  width: 100%;
 }
-.admin-page .page-form #admin .post-form .original-language-post-form {
-  border: solid;
-  border-color: #ff7d00;
-  width: 45vw;
+html .admin-page .form .post-form,
+body .admin-page .form .post-form,
+#root .admin-page .form .post-form,
+.App .admin-page .form .post-form {
   grid-column: 1;
+  background-color: #032429;
+  border-color: #032429;
+  border-radius: 10px;
+  color: #efefef;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  margin-right: 3vw;
+  box-shadow: 6px 5px 5px black;
+  margin-bottom: 3vh;
+  height: 100%;
 }
-.admin-page .page-form #admin .post-form .english-form .translation {
-  width: 45vw;
+html .admin-page .form .post-form div,
+body .admin-page .form .post-form div,
+#root .admin-page .form .post-form div,
+.App .admin-page .form .post-form div {
+  color: #efefef;
+  margin: 0.5vh 0;
 }
-.admin-page .page-form #admin .post-form .english-form .translation .post-form {
+html .admin-page .form .post-form input,
+body .admin-page .form .post-form input,
+#root .admin-page .form .post-form input,
+.App .admin-page .form .post-form input,
+html .admin-page .form .post-form select,
+body .admin-page .form .post-form select,
+#root .admin-page .form .post-form select,
+.App .admin-page .form .post-form select {
   border: solid;
-  border-color: #15616d;
+  border-width: 3px;
+  background-color: #b2e3af;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'josefin sans';
+  font-size: 16px;
+  height: 3vh;
 }
-.admin-page .page-form #admin .post-form .english-form .translation .post-form .translation-post-form {
+html .admin-page .form .post-form .form-display,
+body .admin-page .form .post-form .form-display,
+#root .admin-page .form .post-form .form-display,
+.App .admin-page .form .post-form .form-display {
+  padding: 2vh;
+}
+html .admin-page .form .post-form .quill,
+body .admin-page .form .post-form .quill,
+#root .admin-page .form .post-form .quill,
+.App .admin-page .form .post-form .quill {
+  margin: 2vh 0;
+  background-color: whitesmoke;
+  height: 100%;
+}
+html .admin-page .form .post-form .quill .ql-editor,
+body .admin-page .form .post-form .quill .ql-editor,
+#root .admin-page .form .post-form .quill .ql-editor,
+.App .admin-page .form .post-form .quill .ql-editor {
+  color: black;
+}
+html .admin-page .form .post-form .btn,
+body .admin-page .form .post-form .btn,
+#root .admin-page .form .post-form .btn,
+.App .admin-page .form .post-form .btn {
+  color: black;
+}
+html .admin-page .form .translation .form,
+body .admin-page .form .translation .form,
+#root .admin-page .form .translation .form,
+.App .admin-page .form .translation .form {
+  grid-column: 1;
   display: grid;
-  grid-template-columns: 1;
+  grid-template-columns: 1fr;
+}
+html .admin-page .form .translation .form .post-form,
+body .admin-page .form .translation .form .post-form,
+#root .admin-page .form .translation .form .post-form,
+.App .admin-page .form .translation .form .post-form {
+  background-color: #032429;
+  border-color: #032429;
+  border-radius: 10px;
+  color: #efefef;
+}
+html .admin-page .form .translation .form .post-form div,
+body .admin-page .form .translation .form .post-form div,
+#root .admin-page .form .translation .form .post-form div,
+.App .admin-page .form .translation .form .post-form div {
+  color: #efefef;
+}
+html .admin-page .form .translation .form .post-form input,
+body .admin-page .form .translation .form .post-form input,
+#root .admin-page .form .translation .form .post-form input,
+.App .admin-page .form .translation .form .post-form input,
+html .admin-page .form .translation .form .post-form select,
+body .admin-page .form .translation .form .post-form select,
+#root .admin-page .form .translation .form .post-form select,
+.App .admin-page .form .translation .form .post-form select {
+  border: solid;
+  border-width: 3px;
+  background-color: #b2e3af;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'josefin sans';
+  font-size: 16px;
+  height: 3vh;
+}
+html .admin-page .form .translation .form .post-form .quill,
+body .admin-page .form .translation .form .post-form .quill,
+#root .admin-page .form .translation .form .post-form .quill,
+.App .admin-page .form .translation .form .post-form .quill {
+  background-color: whitesmoke;
+}
+html .admin-page .form .translation .form .post-form .quill .ql-editor,
+body .admin-page .form .translation .form .post-form .quill .ql-editor,
+#root .admin-page .form .translation .form .post-form .quill .ql-editor,
+.App .admin-page .form .translation .form .post-form .quill .ql-editor {
+  color: black;
+}
+html .admin-page .form .translation .form .post-form .btn,
+body .admin-page .form .translation .form .post-form .btn,
+#root .admin-page .form .translation .form .post-form .btn,
+.App .admin-page .form .translation .form .post-form .btn {
+  color: black;
 }

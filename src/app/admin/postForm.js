@@ -88,44 +88,47 @@ function PostForm(props) {
   }
 
   return (
-    <div className="post-form">
-      <div
-        className={
-          props.type === 'translation'
-            ? 'translaion-post-form'
-            : 'original-language-post-form'
-        }
-      >
-        <div>Title</div>
-        <input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <div>Order</div>
-        <input
-          type="text"
-          value={order}
-          onChange={e => setOrder(e.target.value)}
-        />
-        <div>Type</div>
-        <select value={type} onChange={e => setType(e.target.value)}>
-          <option value="">Choose type</option>
-          <option value="article">Article</option>
-          <option value="booking">Booking form</option>
-          <option value="message">Contact form</option>
-          <option value="map">Map</option>
-          <option value="drinks">Getränke</option>
-        </select>
-        {typeDisplay}
-        <a onClick={onSubmit} className="btn">
-          Submit
-        </a>
-        <a className="btn" onClick={onDelete}>
-          Delete
-        </a>
+    <div className="form">
+      <div className="post-form">
+        <div
+          className={
+            props.type === 'translation'
+              ? 'translaion-post-form'
+              : 'original-language-post-form'
+          }
+        >
+          <div>Title</div>
+          <input
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+          <div>Order</div>
+          <input
+            type="text"
+            value={order}
+            onChange={e => setOrder(e.target.value)}
+          />
+          <div>Type</div>
+          <select value={type} onChange={e => setType(e.target.value)}>
+            <option value="">Choose type</option>
+            <option value="article">Article</option>
+            <option value="booking">Booking form</option>
+            <option value="message">Contact form</option>
+            <option value="map">Map</option>
+            <option value="drinks">Getränke</option>
+          </select>
+          {typeDisplay}
+          <a onClick={onSubmit} className="btn">
+            {isEditPostMode === true ? 'Update post' : 'Add post'}
+          </a>
+          <a className="btn" onClick={onDelete}>
+            Delete
+          </a>
+        </div>
       </div>
-      <div className="english-form"> {displayTranslationForm}</div>
+
+      {displayTranslationForm}
     </div>
   );
 }
