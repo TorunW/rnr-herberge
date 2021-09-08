@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import $ from 'jquery';
 import BookingForm from './bookingForm';
 import MessageForm from './messageForm';
@@ -24,6 +24,10 @@ function PostForm(props) {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   console.log(updateSuccess, 'update');
 
+  setTimeout(() => {
+    setUpdateSuccess(false);
+  }, 3000);
+
   function onSubmit() {
     const newPostValues = {
       page_id:
@@ -46,8 +50,13 @@ function PostForm(props) {
       data: newPostValues,
     }).done(function (res) {
       console.log(res, 'res');
+      setUpdateSuccess(true);
       if (props.type === 'translation' && isEditPostMode === false) {
         props.createTranslation(res.id);
+      } else {
+        if (isEditPostMode === false) {
+          window.location.href = `/admin/pages/edit/${props.pageId}`;
+        }
       }
     });
   }
@@ -87,6 +96,27 @@ function PostForm(props) {
     );
   }
 
+  let submitButtonDisplay;
+  if (updateSuccess === false) {
+    submitButtonDisplay = (
+      <a onClick={onSubmit} className="btn">
+        {isEditPostMode === true ? 'Update post' : 'Add post'}
+      </a>
+    );
+  } else if (updateSuccess === true) {
+    submitButtonDisplay = (
+      <a onClick={onSubmit} className="btn">
+        {isEditPostMode === true ? 'Updated' : 'Post added'}
+      </a>
+    );
+  }
+  <a
+    onClick={onSubmit}
+    className={'btn' + updateSuccess === true ? '-updated' : ''}
+  >
+    {isEditPostMode === true ? 'Update post' : 'Add post'}
+  </a>;
+
   return (
     <div className="form">
       <div className="post-form">
@@ -97,31 +127,36 @@ function PostForm(props) {
               : 'original-language-post-form'
           }
         >
-          <div>Title</div>
-          <input
-            type="text"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
-          <div>Order</div>
-          <input
-            type="text"
-            value={order}
-            onChange={e => setOrder(e.target.value)}
-          />
-          <div>Type</div>
-          <select value={type} onChange={e => setType(e.target.value)}>
-            <option value="">Choose type</option>
-            <option value="article">Article</option>
-            <option value="booking">Booking form</option>
-            <option value="message">Contact form</option>
-            <option value="map">Map</option>
-            <option value="drinks">Getränke</option>
-          </select>
+          <div className="post-form-input">
+            <div>Title</div>
+            <input
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="post-form-input">
+            <div>Order</div>
+            <input
+              type="text"
+              value={order}
+              onChange={e => setOrder(e.target.value)}
+            />
+          </div>
+          <div className="post-form-input">
+            <div>Type</div>
+            <select value={type} onChange={e => setType(e.target.value)}>
+              <option value="">Choose type</option>
+              <option value="article">Article</option>
+              <option value="booking">Booking form</option>
+              <option value="message">Contact form</option>
+              <option value="map">Map</option>
+              <option value="drinks">Getränke</option>
+            </select>
+          </div>
+
           {typeDisplay}
-          <a onClick={onSubmit} className="btn">
-            {isEditPostMode === true ? 'Update post' : 'Add post'}
-          </a>
+          {submitButtonDisplay}
           <a className="btn" onClick={onDelete}>
             Delete
           </a>

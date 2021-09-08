@@ -6,6 +6,7 @@ import '../style/admin.css';
 function Admin() {
   const { appState, appDispatch } = useContext(Context);
   const [menuItems, setMenuItems] = useState([]);
+  const [sidebarClassName, setSidebarClassName] = useState('hidden');
 
   // run pages
   useEffect(() => {
@@ -35,16 +36,45 @@ function Admin() {
     pageFormDisplay = <PageForm formType={formType} pageId={pageId} />;
   }
 
+  let sidebarToggleIconDisplay;
+  if (sidebarClassName === 'hidden') {
+    sidebarToggleIconDisplay = (
+      <div className="sidebar-icon">
+        <img src="https://img.icons8.com/material-outlined/38/ffffff/menu--v1.png" />
+      </div>
+    );
+  } else {
+    sidebarToggleIconDisplay = (
+      <div>
+        <img src="https://img.icons8.com/ios-filled/32/ffffff/x.png" />
+      </div>
+    );
+  }
+
   return (
     <main className="admin-page">
       <div className="page-form">
-        <div className="admin-menu">{menuItemsDisplay}</div>
+        <main id="admin">{pageFormDisplay}</main>
+      </div>
+      <aside id="sidebar" className={sidebarClassName}>
+        <a
+          className="sidebar-toggle"
+          onClick={() =>
+            sidebarClassName === ''
+              ? setSidebarClassName('hidden')
+              : setSidebarClassName('')
+          }
+        >
+          {sidebarToggleIconDisplay}
+        </a>
+        <div className="sidebar-items">
+          <div className="admin-menu">{menuItemsDisplay}</div>
+        </div>
 
         <a className="btn-add-page" href={`/admin/pages/create`}>
           Add new page
         </a>
-        {pageFormDisplay}
-      </div>
+      </aside>
     </main>
   );
 }

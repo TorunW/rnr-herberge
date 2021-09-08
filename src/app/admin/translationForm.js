@@ -53,6 +53,7 @@ function TranslationForm(props) {
       data: newTranslationValue,
     }).done(function (res) {
       console.log(res);
+      window.location.href = `/admin/pages/edit/${props.pageId}`;
     });
   }
 

@@ -41,6 +41,7 @@ export const appInitialState = {
       room_error: 'Please choose a room.',
       guest_error: 'Please choose how many persons are staying.',
       date_error: 'Please select a valid date.',
+      message_error: `Message can't be empty.`,
     },
     DE: {
       name_error: 'Fügen sie ihre name ein.',
@@ -49,12 +50,29 @@ export const appInitialState = {
       room_error: 'Bitte wählen sie eine Zimmer.',
       guest_error: 'Bitte geben sie die Zahl der Gäste ein.',
       date_error: 'Bitte geben sie eine Datum ein.',
+      message_error: 'Nachricht darf nicht leer sein.',
     },
   },
   formSubmit: {
-    EN: { submit_booking: 'Book the room', submit_message: 'Send message' },
-    DE: { submit_booking: 'Zimmer buchen', submit_message: 'Absenden' },
+    EN: {
+      submit_booking: 'Book the room',
+      submit_message: 'Send message',
+      success_booking:
+        'Booking sent! You will recive an email soon with confirmation and payment details',
+      success_message: 'Thank you for your message!',
+    },
+    DE: {
+      submit_booking: 'Zimmer buchen',
+      submit_message: 'Absenden',
+      success_booking:
+        'Buchung durchgeführt! Sie bekommen bald einem Email mit eine Bestätigung und weitere Details zum Zahlung des Zimmer',
+      success_message: 'Danke für deine Nachricht!',
+    },
   },
+
+  availableRooms: [1, 3, 4, 5, 6, 7],
+  unavailableRooms: {},
+  isFormSubmitted: false,
 };
 
 function AppReducer(state, action) {
@@ -67,6 +85,28 @@ function AppReducer(state, action) {
     }
     case 'SET_TRANSLATEDPAGEID': {
       return { ...state, translatedPageId: action.val };
+    }
+    case 'SET_UNAVAILABLEROOMS': {
+      let newUnavailableRooms = {};
+      if (state.unavailableRooms[action.previousSelectedRoom] !== undefined) {
+        for (var i in state.unavailableRooms) {
+          if (i !== action.previousSelectedRoom) {
+            newUnavailableRooms[i] = state.unavailableRooms[i];
+          }
+        }
+      } else newUnavailableRooms = state.unavailableRooms;
+
+      newUnavailableRooms[action.val] = null;
+
+      return { ...state, unavailableRooms: newUnavailableRooms };
+    }
+    case 'SET_GUESTS_IN_ROOM': {
+      let newUnavailableRooms = state.unavailableRooms;
+      newUnavailableRooms[action.room] = action.guests;
+      return { ...state, unavailableRooms: newUnavailableRooms };
+    }
+    case 'SET_FORM_SUBMITTED': {
+      return { ...state, isFormSubmitted: action.val };
     }
     default: {
       return state;

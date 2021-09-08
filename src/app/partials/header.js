@@ -36,7 +36,6 @@ function Header(props) {
   }
 
   function getPageTranslation() {
-    console.log(appState);
     fetch(
       `/db/getpage${appState.language === 'DE' ? 'translation' : 'origin'}/${
         appState.pageId
@@ -45,7 +44,6 @@ function Header(props) {
       .then(res => res.text())
       .then(res => {
         const translation = JSON.parse(res)[0];
-        console.log(translation, 'translation');
         getTranslatedPage(translation);
       });
   }
@@ -67,7 +65,7 @@ function Header(props) {
     setSmallScreenMenu(window.innerWidth <= 865 ? true : false);
   }
 
-  let menuItemsDisplay = 'This will be menu items';
+  let menuItemsDisplay;
   if (menuItems) {
     menuItemsDisplay = menuItems.map((menuItem, index) => {
       if (menuItem.title !== 'home') {
@@ -121,8 +119,46 @@ function Header(props) {
         </div>
         <div className="menu-right-column">
           <div className="language-menu">
-            <a href={deLinkHref}>DE</a>
-            <a href={enLinkHref}>EN</a>
+            <a href={deLinkHref}>
+              <svg
+                className="flag-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                id="flag-icon-css-de"
+                viewBox="0 0 512 512"
+              >
+                <path fill="#ffce00" d="M0 341.3h512V512H0z" />
+                <path d="M0 0h512v170.7H0z" />
+                <path fill="#d00" d="M0 170.7h512v170.6H0z" />
+              </svg>
+            </a>
+
+            <a href={enLinkHref}>
+              {' '}
+              <svg
+                className="flag-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                id="flag-icon-css-gb"
+                viewBox="0 0 512 512"
+              >
+                <path fill="#012169" d="M0 0h512v512H0z" />
+                <path
+                  fill="#FFF"
+                  d="M512 0v64L322 256l190 187v69h-67L254 324 68 512H0v-68l186-187L0 74V0h62l192 188L440 0z"
+                />
+                <path
+                  fill="#C8102E"
+                  d="M184 324l11 34L42 512H0v-3l184-185zm124-12l54 8 150 147v45L308 312zM512 0L320 196l-4-44L466 0h46zM0 1l193 189-59-8L0 49V1z"
+                />
+                <path
+                  fill="#FFF"
+                  d="M176 0v512h160V0H176zM0 176v160h512V176H0z"
+                />
+                <path
+                  fill="#C8102E"
+                  d="M0 208v96h512v-96H0zM208 0v512h96V0h-96z"
+                />
+              </svg>
+            </a>
           </div>
           <div className="menu-items"> {menuItemsDisplay}</div>
         </div>

@@ -36,6 +36,7 @@ function Messages(props) {
       });
     }
   }
+
   // form validation
   function formValidation() {
     let isValidated = true;
@@ -69,17 +70,44 @@ function Messages(props) {
   // error messages display
   let fullNameErrorDisplay;
   if (fullNameError === true) {
-    fullNameErrorDisplay = <p className="error">Fill in your name, please.</p>;
+    fullNameErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].name_error : ''}
+      </p>
+    );
   }
 
   let emailErrorDisplay;
   if (emailError === true) {
-    emailErrorDisplay = <p className="error">Please fill in a valid email</p>;
+    emailErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].name_error : ''}
+      </p>
+    );
   }
 
   let messageErrorDisplay;
   if (messageError === true) {
-    messageErrorDisplay = <p className="error">Message can't be empty</p>;
+    messageErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].message_error : ''}
+      </p>
+    );
+  }
+
+  let displaySuccessMessage;
+  if (sentMessage === true) {
+    console.log('ksdmnvdsk');
+
+    displaySuccessMessage = (
+      <div>
+        <p>
+          {appState
+            ? appState.formSubmit[appState.language].success_message
+            : ''}
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -133,6 +161,7 @@ function Messages(props) {
               : ''}
           </a>
         </div>
+        {displaySuccessMessage}
       </form>
     </div>
   );

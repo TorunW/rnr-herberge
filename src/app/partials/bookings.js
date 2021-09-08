@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+  cloneElement,
+} from 'react';
 import $ from 'jquery';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,6 +16,8 @@ import { Context } from '../context/context-provider';
 // another state var
 function Bookings(props) {
   const { appState, appDispatch } = useContext(Context);
+
+  const previousUnavailableRooms = usePrevious(appState.unavailableRooms);
 
   const [firstName, setFirstName] = useState('');
   const [firstNameError, setFirstNameError] = useState(false);
@@ -30,7 +38,23 @@ function Bookings(props) {
   const [message, setMessage] = useState('');
   const [bookingSent, setBookingSent] = useState(false);
 
-  console.log(bookingSent, 'booking sent');
+  useEffect(() => {
+    addRoomsToBooking();
+  }, [appState]);
+
+  function addRoomsToBooking() {
+    let newRoomArray = [];
+    let newGuestArray = [];
+
+    for (var i in appState.unavailableRooms) {
+      newRoomArray.push(i);
+      newGuestArray.push(appState.unavailableRooms[i]);
+      console.log(newGuestArray, 'newguest', newRoomArray, 'newroom');
+    }
+
+    setRoom(JSON.stringify(newRoomArray));
+    setGuest(JSON.stringify(newGuestArray));
+  }
 
   function submitForm() {
     if (formValidation()) {
@@ -62,6 +86,7 @@ function Bookings(props) {
         setStartDate(null);
         setEndDate(null);
         setMessage('');
+        appDispatch({ type: 'SET_FORM_SUBMITTED', val: true });
       });
     }
   }
@@ -105,14 +130,14 @@ function Bookings(props) {
       setTelephoneError(false);
     }
     //  room
-    if (room === '') {
+    if (room.length === 0 || room.indexOf('null') > -1) {
       setRoomError(true);
       isValidated = false;
     } else {
       setRoomError(false);
     }
     // guest
-    if (guest === '') {
+    if (guest.length === 0 || guest.indexOf('null') > -1) {
       setGuestError(true);
       isValidated = false;
     } else {
@@ -128,12 +153,6 @@ function Bookings(props) {
 
     return isValidated;
   }
-
-  let numberOfGuests = options.map((op, i) => (
-    <option value={op.options} key={i}>
-      {op}
-    </option>
-  ));
 
   // error displays
   let nameErrorDisplay;
@@ -162,24 +181,6 @@ function Bookings(props) {
     );
   }
 
-  let roomErrorDisplay;
-  if (roomError === true) {
-    roomErrorDisplay = (
-      <p className="error">
-        {appState ? appState.formErrors[appState.language].room_error : ''}
-      </p>
-    );
-  }
-
-  let guestErrorDisplay;
-  if (guestError === true) {
-    guestErrorDisplay = (
-      <p className="error">
-        {appState ? appState.formErrors[appState.language].guest_error : ''}
-      </p>
-    );
-  }
-
   let dateErrorDisplay;
   if (dateError === true) {
     dateErrorDisplay = (
@@ -193,9 +194,10 @@ function Bookings(props) {
   if (bookingSent === true) {
     displaySuccessMessage = (
       <div>
-        <p>Booking sent!</p>
         <p>
-          You will recive an email soon with confirmation and payment details
+          {appState
+            ? appState.formLabels[appState.language].success_booking
+            : ''}
         </p>
       </div>
     );
@@ -203,7 +205,6 @@ function Bookings(props) {
 
   return (
     <div className="booking-form">
-      {displaySuccessMessage}
       <form>
         <div className="user-box">
           <input
@@ -262,48 +263,16 @@ function Bookings(props) {
           </label>
           {telephoneErrorDisplay}
         </div>
-
-        <div className="user-box">
-          <select
-            className={'room-select' + (room.length > 0 ? ' filled' : '')}
-            value={room}
-            onChange={e => setRoom(e.target.value)}
-          >
-            <option value=""></option>
-            <option value="1">Room 1</option>
-            <option value="3">Room 3</option>
-            <option value="4">Room 4</option>
-            <option value="5">Room 5</option>
-            <option value="6">Room 6</option>
-            <option value="7">Room 7</option>
-          </select>
-          <span className="span-1">
-            <span className="span-2">
-              <span className="span-3">
-                <span className="span-4"></span>
-              </span>
-            </span>
-          </span>
-          <label>
-            {appState ? appState.formLabels[appState.language].room : ''}
-          </label>
-          {roomErrorDisplay}
-        </div>
-
-        <div className="user-box">
-          <select
-            className={'guest-select' + (guest.length > 0 ? ' filled' : '')}
-            value={guest}
-            onChange={e => setGuest(e.target.value)}
-          >
-            <option value=""></option>
-            {numberOfGuests}
-          </select>
-          <label>
-            {appState ? appState.formLabels[appState.language].guest_count : ''}
-          </label>
-          {guestErrorDisplay}
-        </div>
+        <SelectRoomFieldList
+          room={room}
+          setRoom={setRoom}
+          roomError={roomError}
+          guest={guest}
+          setGuest={setGuest}
+          guestError={guestError}
+          setOptions={setOptions}
+          options={options}
+        />
 
         <div className="user-box">
           <DatePicker
@@ -352,34 +321,224 @@ function Bookings(props) {
           <a className="submit-btn" onClick={submitForm}>
             {appState
               ? appState.formSubmit[appState.language].submit_booking
-              : ''}{' '}
+              : ''}
           </a>
         </div>
+        {displaySuccessMessage}
       </form>
     </div>
   );
 }
 
-// function RoomSelectFormField() {
-//   let room = props.room;
+function SelectRoomFieldList(props) {
+  const { appState, appDispatch } = useContext(Context);
+  const [showAddRoomButton, setAddShowRoomButton] = useState(false);
+  const [roomSelectArray, setRoomSelectArray] = useState([0]);
 
-//   useEffect(() => {
-//     let newOptions = [];
-//     if (room === '1') {
-//       newOptions = [1, 2, 3];
-//     } else if (room === '3') {
-//       newOptions = [1, 2, 3, 4, 5];
-//     } else if (room === '4') {
-//       newOptions = [1, 2, 3];
-//     } else if (room === '5') {
-//       newOptions = [1, 2];
-//     } else if (room === '6') {
-//       newOptions = [1, 2, 3, 4, 5];
-//     } else if (room === '7') {
-//       newOptions = [1, 2, 3];
-//     }
-//     setOptions(newOptions);
-//   }, [room]);
-// }
+  useEffect(() => {
+    let newShowAddRoomButtonValue;
+    for (var i in appState.unavailableRooms) {
+      if (appState.unavailableRooms[i] === null) {
+        newShowAddRoomButtonValue = false;
+      } else {
+        newShowAddRoomButtonValue = true;
+      }
+    }
+    setAddShowRoomButton(newShowAddRoomButtonValue);
+    if (appState.isFormSubmitted === true) {
+      setRoomSelectArray([0]);
+    }
+  }, [appState]);
+
+  function onSetRoom(val, previousSelectedRoom) {
+    appDispatch({
+      type: 'SET_UNAVAILABLEROOMS',
+      val,
+      previousSelectedRoom,
+    });
+  }
+
+  function onSetGuest(guests, room) {
+    appDispatch({
+      type: 'SET_GUESTS_IN_ROOM',
+      guests,
+      room,
+    });
+  }
+
+  function onAddRoomClick() {
+    if (roomSelectArray.length < 6) {
+      const newRoomSelectArray = [...roomSelectArray];
+      newRoomSelectArray.push(roomSelectArray.length);
+      setRoomSelectArray(newRoomSelectArray);
+    }
+  }
+
+  let roomSelectArrayDisplay = roomSelectArray.map((rs, i) => (
+    <RoomSelectFormField {...props} setRoom={onSetRoom} setGuest={onSetGuest} />
+  ));
+
+  let displayAddRoomButton;
+  if (showAddRoomButton === true && roomSelectArray.length < 6) {
+    displayAddRoomButton = <a onClick={onAddRoomClick}>Add another room</a>;
+  }
+
+  return (
+    <div id="select-room-list">
+      {roomSelectArrayDisplay}
+      {displayAddRoomButton}
+    </div>
+  );
+}
+
+function RoomSelectFormField(props) {
+  const { appState, appDispatch } = useContext(Context);
+  const [selectedRoom, setSelectedRoom] = useState('');
+  const [selectedGuest, setSelectedGuest] = useState('');
+  const [options, setOptions] = useState([]);
+  const previousSelectedRoom = usePrevious(selectedRoom);
+
+  const setRoom = props.setRoom;
+  const roomError = props.roomError;
+  const setGuest = props.setGuest;
+  const guestError = props.guestError;
+
+  useEffect(() => {
+    let newOptions = [];
+    if (selectedRoom === '1') {
+      newOptions = [1, 2, 3];
+    } else if (selectedRoom === '3') {
+      newOptions = [1, 2, 3, 4, 5];
+    } else if (selectedRoom === '4') {
+      newOptions = [1, 2, 3];
+    } else if (selectedRoom === '5') {
+      newOptions = [1, 2];
+    } else if (selectedRoom === '6') {
+      newOptions = [1, 2, 3, 4, 5];
+    } else if (selectedRoom === '7') {
+      newOptions = [1, 2, 3];
+    }
+    setOptions(newOptions);
+
+    if (selectedRoom !== previousSelectedRoom) setSelectedGuest('');
+  }, [selectedRoom]);
+
+  useEffect(() => {
+    if (appState.isFormSubmitted === true) {
+      setSelectedRoom('');
+      setSelectedGuest('');
+    }
+  }, [appState]);
+
+  function onSetSelectedRoom(val) {
+    setRoom(val, previousSelectedRoom);
+    setSelectedRoom(val);
+  }
+
+  function onSetSelectedGuest(val) {
+    setGuest(val, selectedRoom);
+    setSelectedGuest(val);
+  }
+
+  let numberOfGuests = options.map((op, i) => (
+    <option value={op.options} key={i}>
+      {op}
+    </option>
+  ));
+
+  let roomList = appState.availableRooms.map((rl, i) => {
+    let isShown = true;
+    if (appState.unavailableRooms[rl] !== undefined) {
+      isShown = false;
+
+      if (parseInt(selectedRoom) === rl) {
+        isShown = true;
+      }
+    }
+    if (isShown) {
+      return (
+        <option value={rl} key={i}>
+          {rl}
+        </option>
+      );
+    }
+  });
+
+  let roomErrorDisplay;
+  if (roomError === true) {
+    roomErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].room_error : ''}
+      </p>
+    );
+  }
+
+  let guestErrorDisplay;
+  if (guestError === true) {
+    guestErrorDisplay = (
+      <p className="error">
+        {appState ? appState.formErrors[appState.language].guest_error : ''}
+      </p>
+    );
+  }
+
+  return (
+    <div>
+      <div className="user-box">
+        <select
+          className={'room-select' + (selectedRoom !== '' ? ' filled' : '')}
+          value={selectedRoom}
+          onChange={e => onSetSelectedRoom(e.target.value)}
+        >
+          <option value=""></option>
+          {roomList}
+        </select>
+        <span className="span-1">
+          <span className="span-2">
+            <span className="span-3">
+              <span className="span-4"></span>
+            </span>
+          </span>
+        </span>
+        <label>
+          {appState ? appState.formLabels[appState.language].room : ''}
+        </label>
+        {roomErrorDisplay}
+      </div>
+
+      <div className="user-box">
+        <select
+          className={
+            'guest-select' + (selectedGuest.length > 0 ? ' filled' : '')
+          }
+          value={selectedGuest}
+          onChange={e => onSetSelectedGuest(e.target.value)}
+        >
+          <option value=""></option>
+          {numberOfGuests}
+        </select>
+        <label>
+          {appState ? appState.formLabels[appState.language].guest_count : ''}
+        </label>
+        {guestErrorDisplay}
+      </div>
+    </div>
+  );
+}
+
+// Hook use Previous
+const usePrevious = value => {
+  // The ref object is a generic container whose current property is mutable ...
+  // ... and can hold any value, similar to an instance property on a class
+  const ref = useRef();
+  // Store current value in ref
+
+  useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
+};
 
 export default Bookings;

@@ -21,19 +21,14 @@
   }
   .header .menu-right-column .language-menu {
     font-family: 'josefin sans';
-    background-color: black;
-    width: 70px;
     float: right;
-    padding: 3px;
+    padding: 4px;
   }
-  .header .menu-right-column .language-menu a {
-    text-decoration: none;
-    color: whitesmoke;
-    margin-right: 1vw;
-  }
-  .header .menu-right-column .language-menu a .flag {
+  .header .menu-right-column .language-menu a .flag-icon {
     width: 20px;
     height: 20px;
+    margin-left: 5px;
+    cursor: pointer;
   }
   .header .menu-right-column .menu-items {
     font-family: 'Six Caps';
@@ -65,7 +60,6 @@
   .header .language-menu a {
     text-decoration: none;
     color: whitesmoke;
-    margin-right: 1vw;
   }
   .header .logo {
     grid-row: 2;

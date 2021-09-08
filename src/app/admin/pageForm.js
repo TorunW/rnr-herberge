@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import $ from 'jquery';
 import PostForm from './postForm';
 import TranslationForm from './translationForm';
@@ -20,6 +20,7 @@ function PageForm(props) {
   );
   const [posts, setPosts] = useState([]);
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
+  const [updatePageSuccess, setUpdatePageSuccess] = useState(false);
 
   useEffect(() => {
     if (props.formType === 'edit' && props.type !== 'translation') {
@@ -32,6 +33,10 @@ function PageForm(props) {
       appDispatch({ type: 'SET_PAGEID', val: pageId });
     }
   }, []);
+
+  setTimeout(() => {
+    setUpdatePageSuccess(false);
+  }, 3000);
 
   function getPage() {
     fetch(`/db/pagesbyid/${pageId}`)
@@ -75,6 +80,7 @@ function PageForm(props) {
       } else if (props.type === 'translation' && props.formType !== 'edit') {
         props.createTranslation(res.id);
       }
+      setUpdatePageSuccess(true);
     });
   }
 
@@ -135,47 +141,62 @@ function PageForm(props) {
     );
   }
 
+  let pageSubmitButtonDisplay;
+  if (updatePageSuccess === true) {
+    pageSubmitButtonDisplay = (
+      <a className="btn" onClick={onSubmit}>
+        {props.formType === 'edit' ? 'Updated' : 'Page added'}
+      </a>
+    );
+  } else if (updatePageSuccess === false) {
+    pageSubmitButtonDisplay = (
+      <a className="btn" onClick={onSubmit}>
+        {props.formType === 'edit' ? 'Update page' : 'Add page'}
+      </a>
+    );
+  }
+
   return (
-    <main id="admin">
-      <div
-        className={
-          props.type === 'translation' ? 'translation-form' : 'original-form'
-        }
-      >
-        <div className="page-input">
-          <div>Page title:</div>
-          <input
-            type="text"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
+    <React.Fragment>
+      <div className="page-form-grid">
+        <div
+          className={
+            props.type === 'translation' ? 'translation-form' : 'original-form'
+          }
+        >
+          <div className="page-input">
+            <div>Page title:</div>
+            <input
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="page-input">
+            <div>Link name:</div>
+            <input
+              type="text"
+              value={link}
+              onChange={e => setLink(e.target.value)}
+            />
+          </div>
+          <div className="page-input">
+            <div>Page order:</div>
+            <input
+              type="text"
+              value={order}
+              onChange={e => setOrder(e.target.value)}
+            />
+          </div>
+          {pageSubmitButtonDisplay}
+          {deleteButtonDisplay}
         </div>
-        <div className="page-input">
-          <div>Link name:</div>
-          <input
-            type="text"
-            value={link}
-            onChange={e => setLink(e.target.value)}
-          />
-        </div>
-        <div className="page-input">
-          <div>Page order:</div>
-          <input
-            type="text"
-            value={order}
-            onChange={e => setOrder(e.target.value)}
-          />
-        </div>
-        <a className="btn" onClick={onSubmit}>
-          {showCreatePostForm === false ? 'Add page' : 'Update page'}
-        </a>
-        {deleteButtonDisplay}
+        {translationFormDisplay}
       </div>
-      {translationFormDisplay}
       {addNewPostButtonDisplay}
       {newPostFormDisplay}
       {postsDisplay}
-    </main>
+    </React.Fragment>
   );
 }
 export default PageForm;

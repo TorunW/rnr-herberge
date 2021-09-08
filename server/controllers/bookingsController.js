@@ -1,4 +1,3 @@
-const { TouchZoomRotateHandler } = require('mapbox-gl');
 var db = require('../database/db');
 const nodemailer = require('nodemailer');
 
@@ -75,12 +74,14 @@ function sendBooking(req, res) {
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    host: 'smpt-mail.outlook.com',
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    host: 'smtp.ionos.de',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    logger: true,
+    debug: true,
     auth: {
-      user: 'torun.wikstroem@outlook.com', // generated ethereal user
-      pass: '_hwG8Cs_!)8LS,H', // generated ethereal password
+      user: 'buchung@rnrherberge.de ', // generated ethereal user
+      pass: '???3fragezeichen', // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false,
@@ -89,10 +90,10 @@ function sendBooking(req, res) {
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: '"Nodemailer Contact" <torun.wikstroem@outlook.com>', // sender address
+    from: `"${req.body.first_name} ${req.body.last_name}" <${req.body.email}>`, // sender address
     to: 'torun.wikstrom@gmail.com', // list of receivers
     subject: 'Booking Request- Buchungs Anfrage', // Subject line
-    text: 'Hello world?', // plain text body
+    text: 'New booking request - Neue Zimmerbuchung', // plain text body
     html: output, // html body
   };
 

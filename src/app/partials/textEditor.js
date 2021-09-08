@@ -117,7 +117,7 @@ function TextEditor(props) {
     );
   }
 
-  return <div>{textareDisplay}</div>;
+  return <div className="text-editor">{textareDisplay}</div>;
 }
 
 export default TextEditor;
