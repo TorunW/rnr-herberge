@@ -32,6 +32,9 @@
   pointer-events: none;
   transition: 0.5s;
 }
+.booking-form .user-box .react-datepicker__input-container input {
+  cursor: pointer;
+}
 .booking-form .user-box .date-filled {
   top: -20px;
   left: 0;
@@ -61,6 +64,9 @@
 .booking-form .user-box select option,
 .booking-form .user-box textarea option {
   color: black;
+}
+.booking-form .user-box select {
+  cursor: pointer;
 }
 .booking-form .user-box label {
   position: absolute;
@@ -146,6 +152,20 @@
   transition: 0.4s;
 }
 .submit-btn:hover {
+  background: rgba(20, 20, 20, 0.8);
+  padding: 10px 80px;
+}
+.add-btn {
+  border: 1px solid #fff;
+  background: rgba(20, 20, 20, 0.6);
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.add-btn:hover {
   background: rgba(20, 20, 20, 0.8);
   padding: 10px 80px;
 }

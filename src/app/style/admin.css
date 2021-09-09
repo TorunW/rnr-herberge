@@ -12,6 +12,7 @@ body .admin-page,
   height: auto;
   min-height: 100%;
   padding-bottom: 15px;
+  font-family: 'josefin sans';
 }
 html .admin-page #sidebar,
 body .admin-page #sidebar,
@@ -23,6 +24,7 @@ body .admin-page #sidebar,
   position: fixed;
   top: 0;
   left: 0;
+  padding-top: 2vh;
 }
 html .admin-page #sidebar.hidden,
 body .admin-page #sidebar.hidden,
@@ -37,12 +39,26 @@ body .admin-page #sidebar .sidebar-toggle,
   position: absolute;
   left: 100%;
   background-color: black;
-  width: 150px;
+  width: 140px;
   top: 0;
   font-size: 20px;
   font-weight: bold;
   color: #efefef;
   height: 35px;
+  cursor: pointer;
+}
+html .admin-page #sidebar .sidebar-toggle .sidebar-icon img,
+body .admin-page #sidebar .sidebar-toggle .sidebar-icon img,
+#root .admin-page #sidebar .sidebar-toggle .sidebar-icon img,
+.App .admin-page #sidebar .sidebar-toggle .sidebar-icon img {
+  float: left;
+}
+html .admin-page #sidebar .sidebar-toggle .sidebar-icon div,
+body .admin-page #sidebar .sidebar-toggle .sidebar-icon div,
+#root .admin-page #sidebar .sidebar-toggle .sidebar-icon div,
+.App .admin-page #sidebar .sidebar-toggle .sidebar-icon div {
+  padding-top: 5px;
+  font-size: 24px;
 }
 html .admin-page #sidebar .sidebar-items,
 body .admin-page #sidebar .sidebar-items,
@@ -62,6 +78,7 @@ body .admin-page #sidebar .sidebar-items .admin-menu a,
   float: left;
   margin: 1vh 1px;
   width: 100%;
+  cursor: pointer;
 }
 html .admin-page #sidebar .sidebar-items .admin-menu a:hover,
 body .admin-page #sidebar .sidebar-items .admin-menu a:hover,
@@ -69,10 +86,10 @@ body .admin-page #sidebar .sidebar-items .admin-menu a:hover,
 .App .admin-page #sidebar .sidebar-items .admin-menu a:hover {
   color: #7ab893;
 }
-html .admin-page .btn-add-page,
-body .admin-page .btn-add-page,
-#root .admin-page .btn-add-page,
-.App .admin-page .btn-add-page {
+html .admin-page #sidebar .add-page,
+body .admin-page #sidebar .add-page,
+#root .admin-page #sidebar .add-page,
+.App .admin-page #sidebar .add-page {
   border: solid;
   border-width: 3px;
   padding: 1vh 1vw;
@@ -84,15 +101,15 @@ body .admin-page .btn-add-page,
   box-shadow: 3px 3px 5px black;
   width: 170px;
   position: absolute;
-  bottom: 5px;
   left: 25px;
   text-transform: uppercase;
   font-weight: bold;
+  bottom: 50px;
 }
-html .admin-page .btn-add-page:hover,
-body .admin-page .btn-add-page:hover,
-#root .admin-page .btn-add-page:hover,
-.App .admin-page .btn-add-page:hover {
+html .admin-page #sidebar .add-page:hover,
+body .admin-page #sidebar .add-page:hover,
+#root .admin-page #sidebar .add-page:hover,
+.App .admin-page #sidebar .add-page:hover {
   background-color: #377d6a;
 }
 html .admin-page .page-form-grid,
@@ -101,13 +118,236 @@ body .admin-page .page-form-grid,
 .App .admin-page .page-form-grid {
   background-color: #134a46;
   display: grid;
-  padding: 3vh 0px;
+  width: 100%;
+  padding: 7vh 0 0;
 }
 html .admin-page .page-form,
 body .admin-page .page-form,
 #root .admin-page .page-form,
 .App .admin-page .page-form {
   font-family: 'josefin sans';
+}
+html .admin-page .page-form .change-password-modal,
+body .admin-page .page-form .change-password-modal,
+#root .admin-page .page-form .change-password-modal,
+.App .admin-page .page-form .change-password-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  border: 1px solid black;
+  color: whitesmoke;
+}
+html .admin-page .page-form .change-password-modal span,
+body .admin-page .page-form .change-password-modal span,
+#root .admin-page .page-form .change-password-modal span,
+.App .admin-page .page-form .change-password-modal span,
+html .admin-page .page-form .change-password-modal a,
+body .admin-page .page-form .change-password-modal a,
+#root .admin-page .page-form .change-password-modal a,
+.App .admin-page .page-form .change-password-modal a {
+  margin-right: 5px;
+}
+html .admin-page .page-form .modal-overlay,
+body .admin-page .page-form .modal-overlay,
+#root .admin-page .page-form .modal-overlay,
+.App .admin-page .page-form .modal-overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.45);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+html .admin-page .page-form .modal-window,
+body .admin-page .page-form .modal-window,
+#root .admin-page .page-form .modal-window,
+.App .admin-page .page-form .modal-window {
+  width: 400px;
+  height: 372px;
+  top: calc(50% - (372px / 2));
+  left: calc(50% - (400px / 2));
+  position: fixed;
+  z-index: 10;
+  background-color: #032429;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+html .admin-page .page-form .modal-window .modal-header,
+body .admin-page .page-form .modal-window .modal-header,
+#root .admin-page .page-form .modal-window .modal-header,
+.App .admin-page .page-form .modal-window .modal-header,
+html .admin-page .page-form .modal-window .modal-body,
+body .admin-page .page-form .modal-window .modal-body,
+#root .admin-page .page-form .modal-window .modal-body,
+.App .admin-page .page-form .modal-window .modal-body,
+html .admin-page .page-form .modal-window .modal-footer,
+body .admin-page .page-form .modal-window .modal-footer,
+#root .admin-page .page-form .modal-window .modal-footer,
+.App .admin-page .page-form .modal-window .modal-footer {
+  padding: 15px;
+}
+html .admin-page .page-form .modal-window .modal-header .close-btn,
+body .admin-page .page-form .modal-window .modal-header .close-btn,
+#root .admin-page .page-form .modal-window .modal-header .close-btn,
+.App .admin-page .page-form .modal-window .modal-header .close-btn,
+html .admin-page .page-form .modal-window .modal-body .close-btn,
+body .admin-page .page-form .modal-window .modal-body .close-btn,
+#root .admin-page .page-form .modal-window .modal-body .close-btn,
+.App .admin-page .page-form .modal-window .modal-body .close-btn,
+html .admin-page .page-form .modal-window .modal-footer .close-btn,
+body .admin-page .page-form .modal-window .modal-footer .close-btn,
+#root .admin-page .page-form .modal-window .modal-footer .close-btn,
+.App .admin-page .page-form .modal-window .modal-footer .close-btn,
+html .admin-page .page-form .modal-window .modal-header .update-btn,
+body .admin-page .page-form .modal-window .modal-header .update-btn,
+#root .admin-page .page-form .modal-window .modal-header .update-btn,
+.App .admin-page .page-form .modal-window .modal-header .update-btn,
+html .admin-page .page-form .modal-window .modal-body .update-btn,
+body .admin-page .page-form .modal-window .modal-body .update-btn,
+#root .admin-page .page-form .modal-window .modal-body .update-btn,
+.App .admin-page .page-form .modal-window .modal-body .update-btn,
+html .admin-page .page-form .modal-window .modal-footer .update-btn,
+body .admin-page .page-form .modal-window .modal-footer .update-btn,
+#root .admin-page .page-form .modal-window .modal-footer .update-btn,
+.App .admin-page .page-form .modal-window .modal-footer .update-btn {
+  border: solid;
+  border-width: 3px;
+  padding: 1vh 1vw;
+  border-radius: 10px;
+  background-color: #7ab893;
+  border-color: #032429;
+  color: black;
+  text-decoration: none;
+  box-shadow: 3px 3px 5px black;
+  position: absolute;
+  text-transform: uppercase;
+  font-weight: bold;
+  bottom: 15px;
+}
+html .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+body .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+#root .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+.App .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+html .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+body .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+#root .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+.App .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+html .admin-page .page-form .modal-window .modal-footer .close-btn:hover,
+body .admin-page .page-form .modal-window .modal-footer .close-btn:hover,
+#root .admin-page .page-form .modal-window .modal-footer .close-btn:hover,
+.App .admin-page .page-form .modal-window .modal-footer .close-btn:hover,
+html .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+body .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+#root .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+.App .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+html .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+body .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+#root .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+.App .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+html .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
+body .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
+#root .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
+.App .admin-page .page-form .modal-window .modal-footer .update-btn:hover {
+  background-color: #377d6a;
+}
+html .admin-page .page-form .modal-window .modal-header .close-btn,
+body .admin-page .page-form .modal-window .modal-header .close-btn,
+#root .admin-page .page-form .modal-window .modal-header .close-btn,
+.App .admin-page .page-form .modal-window .modal-header .close-btn,
+html .admin-page .page-form .modal-window .modal-body .close-btn,
+body .admin-page .page-form .modal-window .modal-body .close-btn,
+#root .admin-page .page-form .modal-window .modal-body .close-btn,
+.App .admin-page .page-form .modal-window .modal-body .close-btn,
+html .admin-page .page-form .modal-window .modal-footer .close-btn,
+body .admin-page .page-form .modal-window .modal-footer .close-btn,
+#root .admin-page .page-form .modal-window .modal-footer .close-btn,
+.App .admin-page .page-form .modal-window .modal-footer .close-btn {
+  right: 10px;
+}
+html .admin-page .page-form .modal-window .modal-header .update-btn,
+body .admin-page .page-form .modal-window .modal-header .update-btn,
+#root .admin-page .page-form .modal-window .modal-header .update-btn,
+.App .admin-page .page-form .modal-window .modal-header .update-btn,
+html .admin-page .page-form .modal-window .modal-body .update-btn,
+body .admin-page .page-form .modal-window .modal-body .update-btn,
+#root .admin-page .page-form .modal-window .modal-body .update-btn,
+.App .admin-page .page-form .modal-window .modal-body .update-btn,
+html .admin-page .page-form .modal-window .modal-footer .update-btn,
+body .admin-page .page-form .modal-window .modal-footer .update-btn,
+#root .admin-page .page-form .modal-window .modal-footer .update-btn,
+.App .admin-page .page-form .modal-window .modal-footer .update-btn {
+  left: 15px;
+}
+html .admin-page .page-form .modal-window .modal-header,
+body .admin-page .page-form .modal-window .modal-header,
+#root .admin-page .page-form .modal-window .modal-header,
+.App .admin-page .page-form .modal-window .modal-header {
+  border-bottom: 1px solid #ccc;
+  font-size: 40px;
+}
+html .admin-page .page-form .modal-window .modal-body,
+body .admin-page .page-form .modal-window .modal-body,
+#root .admin-page .page-form .modal-window .modal-body,
+.App .admin-page .page-form .modal-window .modal-body {
+  height: 180px;
+  border-bottom: 1px solid #ccc;
+  font-size: 20px;
+  padding-top: 40px;
+}
+html .admin-page .page-form .modal-window .modal-body .password-input,
+body .admin-page .page-form .modal-window .modal-body .password-input,
+#root .admin-page .page-form .modal-window .modal-body .password-input,
+.App .admin-page .page-form .modal-window .modal-body .password-input {
+  margin-bottom: 20px;
+}
+html .admin-page .page-form .modal-window .modal-body .password-input input,
+body .admin-page .page-form .modal-window .modal-body .password-input input,
+#root .admin-page .page-form .modal-window .modal-body .password-input input,
+.App .admin-page .page-form .modal-window .modal-body .password-input input {
+  margin-top: 10px;
+}
+html .admin-page .page-form hr,
+body .admin-page .page-form hr,
+#root .admin-page .page-form hr,
+.App .admin-page .page-form hr {
+  margin-bottom: 4vh;
+}
+html .admin-page .page-form .password,
+body .admin-page .page-form .password,
+#root .admin-page .page-form .password,
+.App .admin-page .page-form .password,
+html .admin-page .page-form .logout,
+body .admin-page .page-form .logout,
+#root .admin-page .page-form .logout,
+.App .admin-page .page-form .logout {
+  border: solid;
+  border-width: 3px;
+  padding: 1vh 1vw;
+  border-radius: 10px;
+  background-color: #7ab893;
+  border-color: #032429;
+  color: black;
+  text-decoration: none;
+  box-shadow: 3px 3px 5px black;
+  width: 170px;
+  text-transform: uppercase;
+  font-weight: bold;
+  float: right;
+  margin-right: 2vw;
+  margin-top: 1vh;
+}
+html .admin-page .page-form .password:hover,
+body .admin-page .page-form .password:hover,
+#root .admin-page .page-form .password:hover,
+.App .admin-page .page-form .password:hover,
+html .admin-page .page-form .logout:hover,
+body .admin-page .page-form .logout:hover,
+#root .admin-page .page-form .logout:hover,
+.App .admin-page .page-form .logout:hover {
+  background-color: #377d6a;
 }
 html .admin-page .page-form .original-form,
 body .admin-page .page-form .original-form,
@@ -265,6 +505,7 @@ body .admin-page .btn-new-post,
   box-shadow: 3px 3px 5px black;
   width: 170px;
   font-size: 18px;
+  cursor: pointer;
 }
 html .admin-page .btn-new-post:hover,
 body .admin-page .btn-new-post:hover,
@@ -331,6 +572,12 @@ body .admin-page .form .post-form .post-form-input select,
   height: 4vh;
   width: 300px;
 }
+html .admin-page .form .post-form .post-form-input select,
+body .admin-page .form .post-form .post-form-input select,
+#root .admin-page .form .post-form .post-form-input select,
+.App .admin-page .form .post-form .post-form-input select {
+  cursor: pointer;
+}
 html .admin-page .form .post-form .form-display,
 body .admin-page .form .post-form .form-display,
 #root .admin-page .form .post-form .form-display,
@@ -362,7 +609,7 @@ html .admin-page .form .post-form .text-editor .quill .ql-container,
 body .admin-page .form .post-form .text-editor .quill .ql-container,
 #root .admin-page .form .post-form .text-editor .quill .ql-container,
 .App .admin-page .form .post-form .text-editor .quill .ql-container {
-  border: none;
+  height: 445px;
 }
 html .admin-page .form .post-form .text-editor .quill .ql-container .ql-editor,
 body .admin-page .form .post-form .text-editor .quill .ql-container .ql-editor,

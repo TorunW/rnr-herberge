@@ -10,6 +10,7 @@
 .title-container .title .menu-item {
   width: auto;
   display: inline;
+  cursor: pointer;
 }
 .title-container .title .menu-item a {
   border-style: solid;

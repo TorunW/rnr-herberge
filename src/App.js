@@ -5,6 +5,7 @@ import Header from '../src/app/partials/header';
 import Footer from './app/partials/footer';
 import Admin from './app/admin/admin';
 import './app/style/page.css';
+import UserSignin from './app/partials/singin';
 
 function App() {
   const path = window.location.pathname.split('/')[1];
@@ -19,7 +20,9 @@ function App() {
   if (path === 'admin') {
     templateDisplay = <Admin />;
   }
-
+  if (path === 'signin') {
+    templateDisplay = <UserSignin />;
+  }
   <img src="bg.jpg" className="background-img" />;
   return <div className="App">{templateDisplay}</div>;
 }

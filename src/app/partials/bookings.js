@@ -263,16 +263,6 @@ function Bookings(props) {
           </label>
           {telephoneErrorDisplay}
         </div>
-        <SelectRoomFieldList
-          room={room}
-          setRoom={setRoom}
-          roomError={roomError}
-          guest={guest}
-          setGuest={setGuest}
-          guestError={guestError}
-          setOptions={setOptions}
-          options={options}
-        />
 
         <div className="user-box">
           <DatePicker
@@ -304,6 +294,17 @@ function Bookings(props) {
             {appState ? appState.formLabels[appState.language].departure : ''}
           </label>
         </div>
+
+        <SelectRoomFieldList
+          room={room}
+          setRoom={setRoom}
+          roomError={roomError}
+          guest={guest}
+          setGuest={setGuest}
+          guestError={guestError}
+          setOptions={setOptions}
+          options={options}
+        />
 
         <div className="user-box">
           <textarea
@@ -380,7 +381,11 @@ function SelectRoomFieldList(props) {
 
   let displayAddRoomButton;
   if (showAddRoomButton === true && roomSelectArray.length < 6) {
-    displayAddRoomButton = <a onClick={onAddRoomClick}>Add another room</a>;
+    displayAddRoomButton = (
+      <a className="add-btn" onClick={onAddRoomClick}>
+        {appState.formSubmit[appState.language].add_room}
+      </a>
+    );
   }
 
   return (

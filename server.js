@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 app.use(
   session({ secret: 'keyboard cat', resave: false, saveUninitialized: true })
 ); // session secret
-// app.use(passport.initialize());
-// app.use(passport.session()); // persistent login sessions
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 // cors
 app.use(cors());
@@ -31,7 +31,7 @@ app.use(express.static(__dirname + '/uploads'));
 app.use(fileUpload());
 
 // models
-// var models = require("./server/models/");
+var models = require('./server/models/');
 
 // routes
 var routes = require('./server/routes/routes.js')(app, passport);
@@ -49,17 +49,17 @@ app.get(['/*', '/admin*'], (req, res, next) => {
 });
 
 // load passport strategies
-// require("./server/config/passport/passport.js")(passport, models.user);
+require('./server/config/passport/passport.js')(passport, models.user);
 
-// // sync Database
-// models.sequelize
-//   .sync()
-//   .then(function () {
-//     console.log("Nice! Database looks fine");
-//   })
-//   .catch(function (err) {
-//     console.log(err, "Something went wrong with the Database Update!");
-//   });
+// sync Database
+models.sequelize
+  .sync()
+  .then(function () {
+    console.log('Nice! Database looks fine');
+  })
+  .catch(function (err) {
+    console.log(err, 'Something went wrong with the Database Update!');
+  });
 
 app.post('/upload', function (req, res) {
   console.log(req);
@@ -110,4 +110,10 @@ var HTTP_PORT = 80;
 app.listen(HTTP_PORT, () => {
   console.log();
   console.log('Server running on port %PORT%'.replace('%PORT%', HTTP_PORT));
+});
+
+// Logout
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
 });

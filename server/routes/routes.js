@@ -40,47 +40,54 @@ module.exports = function (app, passport) {
   app.post('/db/translation/', translationsController.createTranslation);
 
   // Login
-  // app.post('/db/signin/', function (req, res, next) {
-  //   console.log('inside of the login', req.sessionID);
-  //   // passport.authenticate with local parameter will call function that configured in passport.use(new strategyCalss)
-  //   passport.authenticate('local-signin', function (err, user, info) {
-  //     console.log('Inside passport.authenticate() callback');
-  //     console.log(
-  //       `req.session.passport: ${JSON.stringify(req.session.passport)}`
-  //     );
-  //     console.log(`req.user: ${JSON.stringify(req.user)}`);
-  //     if (err) {
-  //       return next(err);
-  //     }
-  //     if (!user) {
-  //       return res.redirect('/signin');
-  //     }
-  //     //req.login calls passport.serialize user
-  //     req.login(user, function (err) {
-  //       console.log('Inside req.login() callback');
-  //       console.log(
-  //         `req.session.passport: ${JSON.stringify(req.session.passport)}`
-  //       );
-  //       console.log(`req.user: ${JSON.stringify(req.user)}`);
-  //       if (err) {
-  //         return next(err);
-  //       }
-  //       return res.redirect('/admin/');
-  //     });
-  //   })(req, res, next);
-  // });
+  app.post('/db/signin/', function (req, res, next) {
+    console.log('inside of the login', req.sessionID);
+    // passport.authenticate with local parameter will call function that configured in passport.use(new strategyCalss)
+    passport.authenticate('local-signin', function (err, user, info) {
+      console.log('Inside passport.authenticate() callback');
+      console.log(
+        `req.session.passport: ${JSON.stringify(req.session.passport)}`
+      );
+      console.log(`req.user: ${JSON.stringify(req.user)}`);
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.redirect('/signin');
+      }
+      //req.login calls passport.serialize user
+      req.login(user, function (err) {
+        console.log('Inside req.login() callback');
+        console.log(
+          `req.session.passport: ${JSON.stringify(req.session.passport)}`
+        );
+        console.log(`req.user: ${JSON.stringify(req.user)}`);
+        if (err) {
+          return next(err);
+        }
+        return res.redirect('/admin/');
+      });
+    })(req, res, next);
+  });
 
-  // function isLoggedIn(req, res, next) {
-  //   if (req.isAuthenticated()){
-  //       return next();
-  //   } else {
-  //       res.redirect('/signin');
-  //   }
-  // }
+  // Logout
+  app.get('/db/signout/', function (req, res, next) {
+    console.log('hello im sign out');
+    req.logout();
+    res.redirect('/');
+  });
 
-  // // Get Admin
-  // app.get("/admin/",isLoggedIn, (req, res) => {
-  //   console.log('why not res send file?"?!"?§!"?§!?§!?!?§!');
-  //   res.sendFile(path.join(__dirname, '../../build', 'index.html'));
-  // });
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      res.redirect('/signin');
+    }
+  }
+
+  // Get Admin
+  app.get('/admin/', isLoggedIn, (req, res) => {
+    console.log('why not res send file?"?!"?§!"?§!?§!?!?§!');
+    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
+  });
 };

@@ -34,6 +34,11 @@
       transition: 0.5s;
     }
 
+    .react-datepicker__input-container {
+      input {
+        cursor: pointer;
+      }
+    }
     .date-filled {
       top: -20px;
       left: 0;
@@ -62,6 +67,10 @@
       option {
         color: black;
       }
+    }
+
+    select {
+      cursor: pointer;
     }
 
     label {
@@ -134,6 +143,21 @@
 }
 
 .submit-btn {
+  border: 1px solid #fff;
+  background: rgba(20, 20, 20, 0.6);
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover {
+    background: rgba(20, 20, 20, 0.8);
+    padding: 10px 80px;
+  }
+}
+
+.add-btn {
   border: 1px solid #fff;
   background: rgba(20, 20, 20, 0.6);
   font-size: 18px;

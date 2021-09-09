@@ -44,7 +44,7 @@ function PageForm(props) {
       .then(res => {
         const page = JSON.parse(res)[0];
         setTitle(page.title);
-        setLink(page.link);
+        setLink(page.title);
         setOrder(page.ord);
         setLanguage(page.language);
       });
@@ -130,14 +130,17 @@ function PageForm(props) {
   let addNewPostButtonDisplay;
   if (props.type !== 'translation') {
     addNewPostButtonDisplay = (
-      <a
-        className="btn-new-post"
-        onClick={() =>
-          setShowCreatePostForm(showCreatePostForm === false ? true : false)
-        }
-      >
-        Add new post
-      </a>
+      <React.Fragment>
+        <hr />
+        <a
+          className="btn-new-post"
+          onClick={() =>
+            setShowCreatePostForm(showCreatePostForm === false ? true : false)
+          }
+        >
+          Add new post
+        </a>
+      </React.Fragment>
     );
   }
 
@@ -176,7 +179,7 @@ function PageForm(props) {
             <div>Link name:</div>
             <input
               type="text"
-              value={link}
+              value={title.replace(/\s+/g, '-').toLowerCase()}
               onChange={e => setLink(e.target.value)}
             />
           </div>
