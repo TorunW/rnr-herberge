@@ -48,12 +48,12 @@ exports.createUser = function (req, res) {
     return;
   }
   var data = {
-    name: req.body.name,
+    username: req.body.username,
     email: req.body.email,
     password: md5(req.body.password),
   };
-  var sql = 'INSERT INTO user (name, email, password) VALUES (?,?,?)';
-  var params = [data.name, data.email, data.password];
+  var sql = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
+  var params = [data.username, data.email, data.password];
   db.run(sql, params, function (err, result) {
     if (err) {
       res.status(400).json({ error: err.message });

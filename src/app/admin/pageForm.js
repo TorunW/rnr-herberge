@@ -80,6 +80,7 @@ function PageForm(props) {
       } else if (props.type === 'translation' && props.formType !== 'edit') {
         props.createTranslation(res.id);
       }
+      console.log(res, 'result');
       setUpdatePageSuccess(true);
     });
   }
