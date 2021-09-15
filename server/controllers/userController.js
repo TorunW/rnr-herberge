@@ -73,7 +73,6 @@ exports.updateUser = function (req, res) {
     email: req.body.email,
     password: req.body.password ? md5(req.body.password) : null,
   };
-  console.log(data, 'data');
   db.run(
     `UPDATE users set 
            username = COALESCE(?,username), 
@@ -82,7 +81,12 @@ exports.updateUser = function (req, res) {
            WHERE id = ?`,
     [data.username, data.email, data.password, req.params.id],
     function (err, result) {
+<<<<<<< HEAD
       console.log(err)
+=======
+      console.log('hhhhhhhh');
+      console.log(err, 'err', result, 'result');
+>>>>>>> 6f310d15c4a3ff1cb5d32df9219ba3fc5bbbdf5a
       if (err) {
         res.status(400).json({ error: res.message });
         return;
@@ -92,20 +96,6 @@ exports.updateUser = function (req, res) {
         data: data,
         changes: this.changes,
       });
-    }
-  );
-};
-
-exports.deleteUser = function (req, res) {
-  db.run(
-    'DELETE FROM user WHERE id = ?',
-    req.params.id,
-    function (err, result) {
-      if (err) {
-        res.status(400).json({ error: res.message });
-        return;
-      }
-      res.json({ message: 'deleted', changes: this.changes });
     }
   );
 };

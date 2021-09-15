@@ -1,20 +1,20 @@
 .login-page {
   background-color: #032429;
-  width: 45vw;
+  width: 500px;
   margin: 25px auto;
   border-radius: 10px;
   box-shadow: 6px 5px 5px black;
-  height: 260px;
+  height: 210px;
   padding-top: 1vh;
 }
 .login-page .user-input {
-  margin: 4vh 3vw;
+  margin: 4vh 0 4vh 4vw;
 }
 .login-page .user-input label {
   color: #efefef;
   float: left;
   font-size: 20px;
-  width: 80px;
+  width: 70px;
 }
 .login-page .user-input input {
   border: solid;
@@ -23,8 +23,8 @@
   border-radius: 10px;
   font-family: 'josefin sans';
   font-size: 18px;
-  height: 3vh;
-  width: 230px;
+  height: 4vh;
+  width: 210px;
   padding-left: 1vw;
 }
 .login-page .login-btn {
@@ -34,9 +34,9 @@
   background-color: #7ab893;
   border-radius: 10px;
   float: right;
-  margin-right: 6px;
   font-size: 18px;
-  margin-top: 15px;
+  cursor: pointer;
+  margin-right: 15px;
 }
 .login-page .login-btn:hover {
   background-color: #377d6a;
