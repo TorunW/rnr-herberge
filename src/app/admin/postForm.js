@@ -8,6 +8,20 @@ import { Context } from '../context/context-provider';
 import '../style/admin.css';
 import Modal from 'react-modal';
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root');
+
 function PostForm(props) {
   const { appState, appDispatch } = useContext(Context);
   const [title, setTitle] = useState(props.post ? props.post.title : '');
