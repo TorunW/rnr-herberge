@@ -252,6 +252,7 @@ body .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
 #root .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
 .App .admin-page .page-form .modal-window .modal-footer .update-btn:hover {
   background-color: #377d6a;
+  cursor: pointer;
 }
 html .admin-page .page-form .modal-window .modal-header .close-btn,
 body .admin-page .page-form .modal-window .modal-header .close-btn,
@@ -267,6 +268,20 @@ body .admin-page .page-form .modal-window .modal-footer .close-btn,
 .App .admin-page .page-form .modal-window .modal-footer .close-btn {
   right: 10px;
 }
+html .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+body .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+#root .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+.App .admin-page .page-form .modal-window .modal-header .close-btn:hover,
+html .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+body .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+#root .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+.App .admin-page .page-form .modal-window .modal-body .close-btn:hover,
+html .admin-page .page-form .modal-window .modal-footer .close-btn:hover,
+body .admin-page .page-form .modal-window .modal-footer .close-btn:hover,
+#root .admin-page .page-form .modal-window .modal-footer .close-btn:hover,
+.App .admin-page .page-form .modal-window .modal-footer .close-btn:hover {
+  cursor: pointer;
+}
 html .admin-page .page-form .modal-window .modal-header .update-btn,
 body .admin-page .page-form .modal-window .modal-header .update-btn,
 #root .admin-page .page-form .modal-window .modal-header .update-btn,
@@ -280,6 +295,20 @@ body .admin-page .page-form .modal-window .modal-footer .update-btn,
 #root .admin-page .page-form .modal-window .modal-footer .update-btn,
 .App .admin-page .page-form .modal-window .modal-footer .update-btn {
   left: 15px;
+}
+html .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+body .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+#root .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+.App .admin-page .page-form .modal-window .modal-header .update-btn:hover,
+html .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+body .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+#root .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+.App .admin-page .page-form .modal-window .modal-body .update-btn:hover,
+html .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
+body .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
+#root .admin-page .page-form .modal-window .modal-footer .update-btn:hover,
+.App .admin-page .page-form .modal-window .modal-footer .update-btn:hover {
+  cursor: pointer;
 }
 html .admin-page .page-form .modal-window .modal-header,
 body .admin-page .page-form .modal-window .modal-header,
@@ -332,12 +361,13 @@ body .admin-page .page-form .logout,
   color: black;
   text-decoration: none;
   box-shadow: 3px 3px 5px black;
-  width: 170px;
   text-transform: uppercase;
   font-weight: bold;
   float: right;
   margin-right: 2vw;
   margin-top: 1vh;
+  cursor: pointer;
+  width: auto;
 }
 html .admin-page .page-form .password:hover,
 body .admin-page .page-form .password:hover,
@@ -409,6 +439,7 @@ body .admin-page .page-form .original-form .btn:hover,
 #root .admin-page .page-form .original-form .btn:hover,
 .App .admin-page .page-form .original-form .btn:hover {
   background-color: #377d6a;
+  cursor: pointer;
 }
 html .admin-page .page-form .translation,
 body .admin-page .page-form .translation,
@@ -624,6 +655,12 @@ body .admin-page .form .post-form .btn,
 #root .admin-page .form .post-form .btn,
 .App .admin-page .form .post-form .btn {
   color: black;
+}
+html .admin-page .form .post-form .btn:hover,
+body .admin-page .form .post-form .btn:hover,
+#root .admin-page .form .post-form .btn:hover,
+.App .admin-page .form .post-form .btn:hover {
+  cursor: pointer;
 }
 html .admin-page .form .translation .form,
 body .admin-page .form .translation .form,

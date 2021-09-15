@@ -7,6 +7,7 @@ var postsController = require('../controllers/postsController.js');
 var messagesController = require('../controllers/messagesController.js');
 var bookingsController = require('../controllers/bookingsController.js');
 var translationsController = require('../controllers/translationsController.js');
+var userController = require('../controllers/userController.js');
 
 module.exports = function (app, passport) {
   app.get('/db/pages/:language', pagesController.getPages);
@@ -38,6 +39,9 @@ module.exports = function (app, passport) {
   );
   app.get('/db/getpageorigin/:id', translationsController.getPageOrigin);
   app.post('/db/translation/', translationsController.createTranslation);
+
+  app.get('/db/user/', userController.getUser);
+  app.post('/db/user/:id', userController.updateUser);
 
   // Login
   app.post('/db/signin/', function (req, res, next) {

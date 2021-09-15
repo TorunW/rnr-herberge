@@ -23,14 +23,6 @@ function Admin(props) {
     getUser();
   }, []);
 
-  function getUser() {
-    fetch('/db/user/')
-      .then(res => res.text())
-      .then(res => {
-        console.log(JSON.parse(res));
-        setUser(JSON.parse(res));
-      });
-  }
   // fetch the pages
   function getMenuItems() {
     fetch(`/db/pages/${appState.language}`)
@@ -38,6 +30,15 @@ function Admin(props) {
       .then(res => {
         const result = JSON.parse(res);
         setMenuItems(result);
+      });
+  }
+
+  function getUser() {
+    fetch('/db/user/')
+      .then(res => res.text())
+      .then(res => {
+        console.log(JSON.parse(res));
+        setUser(JSON.parse(res));
       });
   }
 
@@ -180,7 +181,7 @@ function ChangePasswordForm(props) {
   let passwordsErrorDisplay = '';
   if (!isMatch && newPassword !== '' && newPasswordRepeat !== '') {
     passwordsErrorDisplay = (
-      <p style={{ color: 'red' }}>Passwörter sind nicht gleich</p>
+      <p style={{ color: 'red' }}>Passwords doesn't match</p>
     );
   }
 
