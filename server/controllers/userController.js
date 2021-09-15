@@ -73,7 +73,6 @@ exports.updateUser = function (req, res) {
     email: req.body.email,
     password: req.body.password ? md5(req.body.password) : null,
   };
-  console.log(data, 'data');
   db.run(
     `UPDATE user set 
            name = COALESCE(?,name), 
@@ -82,6 +81,8 @@ exports.updateUser = function (req, res) {
            WHERE id = ?`,
     [data.name, data.email, data.password, req.params.id],
     function (err, result) {
+      console.log('hhhhhhhh');
+      console.log(err, 'err', result, 'result');
       if (err) {
         res.status(400).json({ error: res.message });
         return;

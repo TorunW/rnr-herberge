@@ -6,6 +6,7 @@ import TextEditor from '../partials/textEditor';
 import TranslationForm from './translationForm';
 import { Context } from '../context/context-provider';
 import '../style/admin.css';
+import Modal from 'react-modal';
 
 function PostForm(props) {
   const { appState, appDispatch } = useContext(Context);
@@ -22,11 +23,24 @@ function PostForm(props) {
   );
   const isEditPostMode = props.post ? true : false;
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  console.log(updateSuccess, 'update');
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   setTimeout(() => {
     setUpdateSuccess(false);
   }, 3000);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   function onSubmit() {
     const newPostValues = {
@@ -67,6 +81,7 @@ function PostForm(props) {
       method: 'DELETE',
     }).done(function (res) {
       window.location.href = `/admin/pages/edit/${props.pageId}`;
+      closeModal();
     });
   }
 
