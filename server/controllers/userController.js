@@ -69,19 +69,20 @@ exports.createUser = function (req, res) {
 
 exports.updateUser = function (req, res) {
   var data = {
-    name: req.body.name,
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password ? md5(req.body.password) : null,
   };
   console.log(data, 'data');
   db.run(
-    `UPDATE user set 
-           name = COALESCE(?,name), 
+    `UPDATE users set 
+           username = COALESCE(?,username), 
            email = COALESCE(?,email), 
            password = COALESCE(?,password) 
            WHERE id = ?`,
-    [data.name, data.email, data.password, req.params.id],
+    [data.username, data.email, data.password, req.params.id],
     function (err, result) {
+      console.log(err)
       if (err) {
         res.status(400).json({ error: res.message });
         return;
