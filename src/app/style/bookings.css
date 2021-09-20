@@ -1,9 +1,12 @@
 .booking-form {
-  padding: 40px;
+  padding: 20px 20px 60px;
   background: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
+}
+.booking-form form {
+  position: relative;
 }
 .booking-form textarea::-webkit-scrollbar {
   display: none;
@@ -64,6 +67,9 @@
 .booking-form .user-box select option,
 .booking-form .user-box textarea option {
   color: black;
+}
+.booking-form .user-box .select-room-list {
+  margin-bottom: 32px;
 }
 .booking-form .user-box select {
   cursor: pointer;
@@ -141,33 +147,70 @@
   line-height: 3rem;
   background-color: rgba(97, 97, 97, 0.63) !important;
 }
-.submit-btn {
+.btn-wrapper {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.btn-wrapper .submit-btn {
   border: 1px solid #fff;
   background: rgba(20, 20, 20, 0.6);
   font-size: 18px;
   color: white;
-  margin-top: 20px;
-  padding: 10px 50px;
+  padding: 5px 50px 9px;
   cursor: pointer;
   transition: 0.4s;
+  height: 20px;
+  top: 30px;
 }
-.submit-btn:hover {
+.btn-wrapper .submit-btn:hover {
   background: rgba(20, 20, 20, 0.8);
-  padding: 10px 80px;
+  padding: 5px 80px 9px;
 }
-.add-btn {
+.field-box {
+  margin-bottom: 22px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px 30px 10px;
+}
+.new-room-field-container {
+  position: relative;
+}
+.new-room-field-container #select-room-list .new-room-field {
+  margin-bottom: 22px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px 30px 10px;
+}
+.new-room-field-container #select-room-list .new-room-field:last-of-type {
+  padding: 30px 30px 40px;
+}
+.new-room-field-container .btn-wrapper {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  bottom: 10px;
+}
+.new-room-field-container .btn-wrapper .add-btn {
   border: 1px solid #fff;
   background: rgba(20, 20, 20, 0.6);
   font-size: 18px;
   color: white;
-  margin-top: 20px;
-  padding: 10px 50px;
+  padding: 5px 50px 9px;
   cursor: pointer;
   transition: 0.4s;
+  height: 20px;
+  top: 30px;
 }
-.add-btn:hover {
+.new-room-field-container .btn-wrapper .add-btn:hover {
   background: rgba(20, 20, 20, 0.8);
-  padding: 10px 80px;
+  padding: 5px 80px 9px;
 }
 .error {
   font-size: 18px;

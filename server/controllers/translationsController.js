@@ -56,3 +56,17 @@ exports.createTranslation = (req, res) => {
     });
   });
 };
+
+exports.deleteTranslation = (req, res) => {
+  db.run(
+    `DELETE FROM translations WHERE translation_id = ?`,
+    req.params.id,
+    function (err, result) {
+      if (err) {
+        res.status(400).json({ error: res.message });
+        return;
+      }
+      res.json({ message: 'deleted', changes: this.changes });
+    }
+  );
+};

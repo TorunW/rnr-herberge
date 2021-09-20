@@ -25,6 +25,7 @@
         float: right;
         padding: 4px;
         a {
+          text-decoration: none;
           .flag-icon {
             width: 20px;
             height: 20px;
@@ -57,17 +58,19 @@
     grid-template-rows: auto 1fr auto;
 
     .language-menu {
-      grid-row: 1;
       font-family: 'josefin sans';
       float: right;
-      background-color: black;
-      padding: 5px;
-      width: 55px;
-
+      padding: 4px;
       a {
         text-decoration: none;
-        color: whitesmoke;
-        // margin-right: 1vw;
+
+        .flag-icon {
+          width: 30px;
+          height: 20px;
+          margin-left: 5px;
+          cursor: pointer;
+          float: right;
+        }
       }
     }
 

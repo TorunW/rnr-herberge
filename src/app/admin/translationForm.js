@@ -18,11 +18,13 @@ function TranslationForm(props) {
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res)[0];
-        console.log(result);
         // if we get a result, we get the translated item, otherwise we set loading to false
         if (result) {
           // get translated item
           getTranslatedItem(result.eng_id);
+          if (props.setTranslation) {
+            props.setTranslation(result);
+          }
         } else {
           setLoading(false);
         }
@@ -52,8 +54,7 @@ function TranslationForm(props) {
       method: 'POST',
       data: newTranslationValue,
     }).done(function (res) {
-      console.log(res);
-      window.location.href = `/admin/pages/edit/${props.pageId}`;
+      window.location.reload();
     });
   }
 
@@ -67,6 +68,7 @@ function TranslationForm(props) {
             type="translation"
             order={props.order}
             createTranslation={createTranslation}
+            setTranslation={props.setTranslation}
           />
         );
       } else if (props.itemType === 'post') {
@@ -77,6 +79,7 @@ function TranslationForm(props) {
             postType={props.postType}
             createTranslation={createTranslation}
             pageId={props.pageId}
+            setTranslation={props.setTranslation}
           />
         );
       }
@@ -88,6 +91,7 @@ function TranslationForm(props) {
             type="translation"
             order={props.order}
             page={translatedItem}
+            setTranslation={props.setTranslation}
           />
         );
       } else if (props.itemType === 'post') {
@@ -96,6 +100,7 @@ function TranslationForm(props) {
             pageId={props.pageId}
             type="translation"
             post={translatedItem}
+            setTranslation={props.setTranslation}
           />
         );
       }

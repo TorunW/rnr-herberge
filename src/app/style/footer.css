@@ -1,0 +1,32 @@
+@media (min-width: 871px) {
+  .Footer {
+    float: left;
+    margin-left: 16vw;
+    position: relative;
+  }
+  .Footer .abg-footer {
+    font-family: 'Six caps';
+    text-decoration: none;
+    color: blanchedalmond;
+    font-size: 32px;
+    top: 7px;
+    position: absolute;
+    width: 110px;
+  }
+}
+@media (max-width: 870px) {
+  .Footer {
+    float: left;
+    margin-left: 6vw;
+    position: relative;
+  }
+  .Footer .abg-footer {
+    font-family: 'Six caps';
+    text-decoration: none;
+    color: blanchedalmond;
+    font-size: 32px;
+    top: 7px;
+    position: absolute;
+    width: 110px;
+  }
+}

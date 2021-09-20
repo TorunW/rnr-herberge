@@ -97,8 +97,6 @@ function Messages(props) {
 
   let displaySuccessMessage;
   if (sentMessage === true) {
-    console.log('ksdmnvdsk');
-
     displaySuccessMessage = (
       <div>
         <p>
@@ -155,11 +153,13 @@ function Messages(props) {
         </div>
 
         <div className="submit">
-          <a className="submit-btn" onClick={submitForm}>
-            {appState
-              ? appState.formSubmit[appState.language].submit_message
-              : ''}
-          </a>
+          <div className="btn-wrapper">
+            <a className="submit-btn" onClick={submitForm}>
+              {appState
+                ? appState.formSubmit[appState.language].submit_message
+                : ''}
+            </a>
+          </div>
         </div>
         {displaySuccessMessage}
       </form>

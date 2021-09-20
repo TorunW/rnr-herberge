@@ -39,6 +39,7 @@ module.exports = function (app, passport) {
   );
   app.get('/db/getpageorigin/:id', translationsController.getPageOrigin);
   app.post('/db/translation/', translationsController.createTranslation);
+  app.delete('/db/translation/:id', translationsController.deleteTranslation);
 
   app.get('/db/user/', userController.getUser);
   app.post('/db/user/:id', userController.updateUser);

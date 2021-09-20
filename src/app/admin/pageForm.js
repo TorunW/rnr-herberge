@@ -21,6 +21,9 @@ function PageForm(props) {
   const [posts, setPosts] = useState([]);
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
   const [updatePageSuccess, setUpdatePageSuccess] = useState(false);
+  const [translation, setTranslation] = useState(null);
+  console.log(translation, 'translateion');
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
 
   useEffect(() => {
     if (props.formType === 'edit' && props.type !== 'translation') {
@@ -44,7 +47,7 @@ function PageForm(props) {
       .then(res => {
         const page = JSON.parse(res)[0];
         setTitle(page.title);
-        setLink(page.title);
+        setLink(page.link);
         setOrder(page.ord);
         setLanguage(page.language);
       });
@@ -80,26 +83,55 @@ function PageForm(props) {
       } else if (props.type === 'translation' && props.formType !== 'edit') {
         props.createTranslation(res.id);
       }
-      console.log(res, 'result');
       setUpdatePageSuccess(true);
     });
   }
 
   function onDelete() {
     $.ajax({
-      url: `/db/pages/${pageId}`,
+      url: `/db/pages/${props.pageId}`,
       method: 'DELETE',
     }).done(function (res) {
-      window.location.href = '/admin/';
+      $.ajax({
+        url: `/db/translation/${translation.translation_id}`,
+        method: 'DELETE',
+      }).done(function (res) {
+        $.ajax({
+          url: `/db/pages/${translation.eng_id}`,
+          method: 'DELETE',
+        }).done(function (res) {
+          window.location.href = '/admin';
+        });
+      });
     });
   }
 
-  let deleteButtonDisplay;
-  if (props.formType === 'edit') {
-    deleteButtonDisplay = (
-      <a className="btn" onClick={onDelete}>
-        Delete page
-      </a>
+  function onSetTitle(value) {
+    setTitle(value);
+    setLink(value.replace(/\s+/g, '-').toLowerCase());
+  }
+
+  function onSetTranslation(val) {
+    setTranslation(val);
+  }
+
+  let deleteButtonConfirmationDisplay;
+  if (showDeleteButton === true) {
+    deleteButtonConfirmationDisplay = (
+      <div className="delete-modal">
+        <DeleteConfirmation
+          close={() =>
+            setShowDeleteButton(showDeleteButton === true ? false : true)
+          }
+          onDelete={onDelete}
+        />
+        <div
+          onClick={() =>
+            setShowDeleteButton(showDeleteButton === true ? false : true)
+          }
+          className="modal-overlay"
+        ></div>
+      </div>
     );
   }
 
@@ -124,17 +156,22 @@ function PageForm(props) {
     props.type !== 'translation'
   ) {
     translationFormDisplay = (
-      <TranslationForm itemId={pageId} itemType="page" order={order} />
+      <TranslationForm
+        itemId={pageId}
+        itemType="page"
+        order={order}
+        setTranslation={onSetTranslation}
+      />
     );
   }
 
   let addNewPostButtonDisplay;
-  if (props.type !== 'translation') {
+  if (props.type !== 'translation' && props.formType === 'edit') {
     addNewPostButtonDisplay = (
       <React.Fragment>
         <hr />
         <a
-          className="btn-new-post"
+          className="new-post btn"
           onClick={() =>
             setShowCreatePostForm(showCreatePostForm === false ? true : false)
           }
@@ -148,13 +185,13 @@ function PageForm(props) {
   let pageSubmitButtonDisplay;
   if (updatePageSuccess === true) {
     pageSubmitButtonDisplay = (
-      <a className="btn" onClick={onSubmit}>
+      <a className="update-page btn" onClick={onSubmit}>
         {props.formType === 'edit' ? 'Updated' : 'Page added'}
       </a>
     );
   } else if (updatePageSuccess === false) {
     pageSubmitButtonDisplay = (
-      <a className="btn" onClick={onSubmit}>
+      <a className="update-page btn" onClick={onSubmit}>
         {props.formType === 'edit' ? 'Update page' : 'Add page'}
       </a>
     );
@@ -173,14 +210,14 @@ function PageForm(props) {
             <input
               type="text"
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={e => onSetTitle(e.target.value)}
             />
           </div>
           <div className="page-input">
             <div>Link name:</div>
             <input
               type="text"
-              value={title.replace(/\s+/g, '-').toLowerCase()}
+              value={link}
               onChange={e => setLink(e.target.value)}
             />
           </div>
@@ -193,14 +230,54 @@ function PageForm(props) {
             />
           </div>
           {pageSubmitButtonDisplay}
-          {deleteButtonDisplay}
+          {props.formType === 'edit' && props.type !== 'translation' ? (
+            <a
+              className="delete-page btn"
+              onClick={() =>
+                setShowDeleteButton(showDeleteButton === true ? false : true)
+              }
+            >
+              Delete page
+            </a>
+          ) : (
+            ''
+          )}
+          {deleteButtonConfirmationDisplay}
         </div>
         {translationFormDisplay}
       </div>
+
       {addNewPostButtonDisplay}
       {newPostFormDisplay}
       {postsDisplay}
     </React.Fragment>
   );
 }
+
+function DeleteConfirmation(props) {
+  function onDelete() {
+    props.onDelete();
+  }
+
+  return (
+    <div
+      className="
+    modal-window"
+    >
+      <div className="modal-body">
+        <div>Are you sure you want to delete?</div>
+      </div>
+      <div className="modal-footer">
+        <a className="delete btn" onClick={onDelete}>
+          Delete
+        </a>
+
+        <a className="close-delete-modal btn" onClick={props.close}>
+          No
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default PageForm;

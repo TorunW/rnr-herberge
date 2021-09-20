@@ -8,7 +8,7 @@
   padding-top: 1vh;
 }
 .login-page .user-input {
-  margin: 4vh 0 4vh 4vw;
+  margin: 4vh 0 4vh 40px;
 }
 .login-page .user-input label {
   color: #efefef;

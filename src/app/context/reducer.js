@@ -12,7 +12,7 @@ export const appInitialState = {
       email: 'Email',
       telephone: 'Phone number',
       room: 'Select room',
-      guest_count: 'People',
+      guest_count: 'Add guests',
       arrival: 'Arrival',
       departure: 'Departure',
       notes: 'Write us, if you have any further questions',
@@ -24,8 +24,8 @@ export const appInitialState = {
       last_name: 'Name',
       email: 'Email',
       telephone: 'Telefonnummer',
-      room: 'Zimmer',
-      guest_count: 'Personen',
+      room: 'Zimmer wählen',
+      guest_count: 'Gäste',
       arrival: 'Ankunft',
       departure: 'Abreise',
       notes: 'Schreiben sie uns wenn sie weitere Fragen haben.',
@@ -60,7 +60,7 @@ export const appInitialState = {
       success_booking:
         'Booking sent! You will recive an email soon with confirmation and payment details',
       success_message: 'Thank you for your message!',
-      add_room: 'Book another room',
+      add_room: 'Add another room',
     },
     DE: {
       submit_booking: 'Zimmer buchen',
@@ -68,7 +68,7 @@ export const appInitialState = {
       success_booking:
         'Buchung durchgeführt! Sie bekommen bald einem Email mit eine Bestätigung und weitere Details zum Zahlung des Zimmer',
       success_message: 'Danke für deine Nachricht!',
-      add_room: 'Weitere Zimmer buchen',
+      add_room: 'Weitere Zimmer hinzfügen',
     },
   },
 

@@ -1,5 +1,6 @@
 var db = require('../database/db');
 const nodemailer = require('nodemailer');
+var smtp = require('../config/smtp');
 
 exports.getBookings = (req, res) => {
   var sql = 'SELECT * FROM bookings';
@@ -73,20 +74,7 @@ function sendBooking(req, res) {
 `;
 
   // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: 'smtp.ionos.de',
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    logger: true,
-    debug: true,
-    auth: {
-      user: 'buchung@rnrherberge.de ', // generated ethereal user
-      pass: '???3fragezeichen', // generated ethereal password
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
+  let transporter = nodemailer.createTransport(smtp.getSmtpBooking());
 
   // setup email data with unicode symbols
   let mailOptions = {

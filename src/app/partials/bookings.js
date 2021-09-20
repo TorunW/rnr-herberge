@@ -206,93 +206,99 @@ function Bookings(props) {
   return (
     <div className="booking-form">
       <form>
-        <div className="user-box">
-          <input
-            className={
-              'first-name-input' + (firstName.length > 0 ? ' filled' : '')
-            }
-            value={firstName}
-            onChange={e => setFirstName(e.target.value)}
-            type="text"
-          />
-          <label>
-            {appState ? appState.formLabels[appState.language].first_name : ''}
-          </label>
-          {nameErrorDisplay}
+        <div className="field-box">
+          <div className="user-box">
+            <input
+              className={
+                'first-name-input' + (firstName.length > 0 ? ' filled' : '')
+              }
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
+              type="text"
+            />
+            <label>
+              {appState
+                ? appState.formLabels[appState.language].first_name
+                : ''}
+            </label>
+            {nameErrorDisplay}
+          </div>
+
+          <div className="user-box">
+            <input
+              className={
+                'last-name-input' + (lastName.length > 0 ? ' filled' : '')
+              }
+              value={lastName}
+              onChange={e => setLastName(e.target.value)}
+              type="text"
+            />
+            <label>
+              {appState ? appState.formLabels[appState.language].last_name : ''}
+            </label>
+            {nameErrorDisplay}
+          </div>
+
+          <div className="user-box">
+            <input
+              className={'email-input' + (email.length > 0 ? ' filled' : '')}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              type="email"
+            />
+            <label>
+              {appState ? appState.formLabels[appState.language].email : ''}
+            </label>
+            {emailErrorDisplay}
+          </div>
+
+          <div className="user-box">
+            <input
+              className={
+                'telephone-input' + (telephone.length > 0 ? ' filled' : '')
+              }
+              value={telephone}
+              onChange={e => setTelephone(e.target.value)}
+              type="tel"
+            />
+            <label>
+              {appState ? appState.formLabels[appState.language].telephone : ''}
+            </label>
+            {telephoneErrorDisplay}
+          </div>
         </div>
 
-        <div className="user-box">
-          <input
-            className={
-              'last-name-input' + (lastName.length > 0 ? ' filled' : '')
-            }
-            value={lastName}
-            onChange={e => setLastName(e.target.value)}
-            type="text"
-          />
-          <label>
-            {appState ? appState.formLabels[appState.language].last_name : ''}
-          </label>
-          {nameErrorDisplay}
-        </div>
+        <div className="field-box">
+          <div className="user-box">
+            <DatePicker
+              dateFormat="dd/MM/yyyy"
+              selected={startDate}
+              onChange={date => setStartDate(date)}
+              minDate={new Date()}
+              withPortal
+            />
+            <label className={'date' + (startDate ? '-filled' : '')}>
+              {appState ? appState.formLabels[appState.language].arrival : ''}
+            </label>
+            {dateErrorDisplay}
+          </div>
 
-        <div className="user-box">
-          <input
-            className={'email-input' + (email.length > 0 ? ' filled' : '')}
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            type="email"
-          />
-          <label>
-            {appState ? appState.formLabels[appState.language].email : ''}
-          </label>
-          {emailErrorDisplay}
-        </div>
-
-        <div className="user-box">
-          <input
-            className={
-              'telephone-input' + (telephone.length > 0 ? ' filled' : '')
-            }
-            value={telephone}
-            onChange={e => setTelephone(e.target.value)}
-            type="tel"
-          />
-          <label>
-            {appState ? appState.formLabels[appState.language].telephone : ''}
-          </label>
-          {telephoneErrorDisplay}
-        </div>
-
-        <div className="user-box">
-          <DatePicker
-            dateFormat="dd/MM/yyyy"
-            selected={startDate}
-            onChange={date => setStartDate(date)}
-            minDate={new Date()}
-            withPortal
-          />
-          <label className={'date' + (startDate ? '-filled' : '')}>
-            {appState ? appState.formLabels[appState.language].arrival : ''}
-          </label>
-          {dateErrorDisplay}
-        </div>
-
-        <div className="user-box">
-          <DatePicker
-            className="date-picker"
-            dateFormat="dd/MM/yyyy"
-            selected={endDate}
-            onChange={date => setEndDate(date)}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-            withPortal
-          />
-          <label className={'date' + (endDate ? '-filled' : '')}>
-            {appState ? appState.formLabels[appState.language].departure : ''}
-          </label>
+          <div className="user-box">
+            <DatePicker
+              className="date-picker"
+              dateFormat="dd/MM/yyyy"
+              selected={endDate}
+              onChange={date => setEndDate(date)}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+              withPortal
+            />
+            <label className={'date' + (endDate ? '-filled' : '')}>
+              {appState ? appState.formLabels[appState.language].departure : ''}
+            </label>
+          </div>
         </div>
 
         <SelectRoomFieldList
@@ -306,19 +312,19 @@ function Bookings(props) {
           options={options}
         />
 
-        <div className="user-box">
+        <div className="user-box message">
           <textarea
             className={'message-input' + (message.length > 0 ? ' filled' : '')}
             value={message}
             onChange={e => setMessage(e.target.value)}
             type="text"
           ></textarea>
-          <label>
+          <label className="message-label">
             {appState ? appState.formLabels[appState.language].notes : ''}
           </label>
         </div>
 
-        <div className="submit">
+        <div className="btn-wrapper">
           <a className="submit-btn" onClick={submitForm}>
             {appState
               ? appState.formSubmit[appState.language].submit_booking
@@ -375,22 +381,24 @@ function SelectRoomFieldList(props) {
     }
   }
 
+  let displayAddRoomButton;
+  if (showAddRoomButton === true && roomSelectArray.length < 6) {
+    displayAddRoomButton = (
+      <div className="btn-wrapper">
+        <a className="add-btn" onClick={onAddRoomClick}>
+          {appState.formSubmit[appState.language].add_room}
+        </a>
+      </div>
+    );
+  }
+
   let roomSelectArrayDisplay = roomSelectArray.map((rs, i) => (
     <RoomSelectFormField {...props} setRoom={onSetRoom} setGuest={onSetGuest} />
   ));
 
-  let displayAddRoomButton;
-  if (showAddRoomButton === true && roomSelectArray.length < 6) {
-    displayAddRoomButton = (
-      <a className="add-btn" onClick={onAddRoomClick}>
-        {appState.formSubmit[appState.language].add_room}
-      </a>
-    );
-  }
-
   return (
-    <div id="select-room-list">
-      {roomSelectArrayDisplay}
+    <div className="new-room-field-container">
+      <div id="select-room-list">{roomSelectArrayDisplay}</div>
       {displayAddRoomButton}
     </div>
   );
@@ -488,7 +496,7 @@ function RoomSelectFormField(props) {
   }
 
   return (
-    <div>
+    <div className="new-room-field">
       <div className="user-box">
         <select
           className={'room-select' + (selectedRoom !== '' ? ' filled' : '')}

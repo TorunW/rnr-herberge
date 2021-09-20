@@ -34,6 +34,13 @@ html {
   height: 100%;
 }
 
+.App {
+  transition: all 0.5s ease;
+  &.loading {
+    opacity: 0;
+  }
+}
+
 @media (min-width: 871px) {
   .post-container {
     position: relative;

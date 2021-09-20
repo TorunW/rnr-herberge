@@ -22,6 +22,8 @@ function PostForm(props) {
   );
   const isEditPostMode = props.post ? true : false;
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [translation, setTranslation] = useState(null);
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
 
   setTimeout(() => {
     setUpdateSuccess(false);
@@ -61,12 +63,48 @@ function PostForm(props) {
   }
 
   function onDelete() {
+    console.log(props.postId);
+    console.log(props.post);
     $.ajax({
       url: `/db/posts/${props.post.post_id}`,
       method: 'DELETE',
     }).done(function (res) {
-      window.location.href = `/admin/pages/edit/${props.pageId}`;
+      $.ajax({
+        url: `/db/translation/${translation.translation_id}`,
+        method: 'DELETE',
+      }).done(function (res) {
+        $.ajax({
+          url: `/db/posts/${translation.eng_id}`,
+          method: 'DELETE',
+        }).done(function (res) {
+          window.location.href = `/admin/pages/edit/${props.pageId}`;
+        });
+      });
     });
+  }
+
+  function onSetTranslation(val) {
+    setTranslation(val);
+  }
+
+  let deleteButtonConfirmationDisplay;
+  if (showDeleteButton === true) {
+    deleteButtonConfirmationDisplay = (
+      <div className="delete-modal">
+        <DeleteConfirmation
+          close={() =>
+            setShowDeleteButton(showDeleteButton === true ? false : true)
+          }
+          onDelete={onDelete}
+        />
+        <div
+          onClick={() =>
+            setShowDeleteButton(showDeleteButton === true ? false : true)
+          }
+          className="modal-overlay"
+        ></div>
+      </div>
+    );
   }
 
   let typeDisplay;
@@ -91,6 +129,7 @@ function PostForm(props) {
         itemType="post"
         order={order}
         postType={type}
+        setTranslation={onSetTranslation}
       />
     );
   }
@@ -98,20 +137,20 @@ function PostForm(props) {
   let submitButtonDisplay;
   if (updateSuccess === false) {
     submitButtonDisplay = (
-      <a onClick={onSubmit} className="btn">
+      <a onClick={onSubmit} className="update-post btn">
         {isEditPostMode === true ? 'Update post' : 'Add post'}
       </a>
     );
   } else if (updateSuccess === true) {
     submitButtonDisplay = (
-      <a onClick={onSubmit} className="btn">
+      <a onClick={onSubmit} className="update-post btn">
         {isEditPostMode === true ? 'Updated' : 'Post added'}
       </a>
     );
   }
   <a
     onClick={onSubmit}
-    className={'btn' + updateSuccess === true ? '-updated' : ''}
+    className={'update-post btn' + updateSuccess === true ? ' updated' : ''}
   >
     {isEditPostMode === true ? 'Update post' : 'Add post'}
   </a>;
@@ -153,16 +192,47 @@ function PostForm(props) {
               <option value="drinks">Getränke</option>
             </select>
           </div>
-
           {typeDisplay}
           {submitButtonDisplay}
-          <a className="btn" onClick={onDelete}>
-            Delete
-          </a>
+          {props.type !== 'translation' ? (
+            <a
+              className="delete-post btn"
+              onClick={() =>
+                setShowDeleteButton(showDeleteButton === true ? false : true)
+              }
+            >
+              Delete
+            </a>
+          ) : (
+            ''
+          )}
+          {deleteButtonConfirmationDisplay}
         </div>
       </div>
-
       {displayTranslationForm}
+    </div>
+  );
+}
+
+function DeleteConfirmation(props) {
+  function onDelete() {
+    props.onDelete();
+  }
+
+  return (
+    <div className="modal-window">
+      <div className="modal-body">
+        <div>Are you sure you want to delete?</div>
+      </div>
+      <div className="modal-footer">
+        <a className="delete btn" onClick={onDelete}>
+          Delete
+        </a>
+
+        <a className="close-delete-modal btn" onClick={props.close}>
+          No
+        </a>
+      </div>
     </div>
   );
 }

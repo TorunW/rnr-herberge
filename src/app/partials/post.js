@@ -41,6 +41,10 @@ function Post(props) {
     );
   }
 
-  return <div className="post">{postTypeDisplay}</div>;
+  return (
+    <div className="post" id={`post-${post.post_id}`}>
+      {postTypeDisplay}
+    </div>
+  );
 }
 export default Post;

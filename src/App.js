@@ -6,8 +6,19 @@ import Footer from './app/partials/footer';
 import Admin from './app/admin/admin';
 import './app/style/page.css';
 import UserSignin from './app/partials/singin';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+  }, []);
+
+  console.log(loading);
+
   const path = window.location.pathname.split('/')[1];
   let templateDisplay = (
     <main>
@@ -24,7 +35,11 @@ function App() {
     templateDisplay = <UserSignin />;
   }
   <img src="bg.jpg" className="background-img" />;
-  return <div className="App">{templateDisplay}</div>;
+  return (
+    <div className={'App' + (loading === false ? ' loading' : '')}>
+      {templateDisplay}
+    </div>
+  );
 }
 
 function AppWrapper() {
