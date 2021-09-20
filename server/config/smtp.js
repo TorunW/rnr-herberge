@@ -7,7 +7,7 @@ exports.getSmtp = () => {
     debug: true,
     auth: {
       user: 'info@rnrherberge.de ', // generated ethereal user
-      pass: '???3fragezeichen', // generated ethereal password
+      pass: '????4fragezeichen', // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false,
