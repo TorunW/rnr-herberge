@@ -63,7 +63,7 @@ function sendMessage(req, res) {
   // setup email data with unicode symbols
   let mailOptions = {
     from: `"${req.body.name}" <${req.body.email}>`, // sender address
-    to: 'torun.wikstrom@gmail.com', // list of receivers
+    to: 'info@rnrherberge.de', // list of receivers
     subject: 'Message - Nachricht', // Subject line
     text: 'New message - Neue nachricht', // plain text body
     html: output, // html body
