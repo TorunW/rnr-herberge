@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import $ from 'jquery';
 import { Context } from '../context/context-provider';
 
@@ -13,6 +13,15 @@ function Messages(props) {
   const [message, setMessage] = useState('');
   const [messageError, setMessageError] = useState();
   const [sentMessage, setSentMessage] = useState(false);
+
+  useEffect(() => {
+    if (sentMessage === true) {
+      setTimeout(() => {
+        setSentMessage(false);
+        window.location.reload();
+      }, 10000);
+    }
+  }, [sentMessage]);
 
   // submit form
   function submitForm() {
@@ -99,7 +108,7 @@ function Messages(props) {
   if (sentMessage === true) {
     displaySuccessMessage = (
       <div>
-        <p>
+        <p className="success">
           {appState
             ? appState.formSubmit[appState.language].success_message
             : ''}
@@ -109,7 +118,7 @@ function Messages(props) {
   }
 
   return (
-    <div className="booking-form">
+    <div className="booking-form message-form">
       <form>
         <div className="user-box">
           <input

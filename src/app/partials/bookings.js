@@ -37,7 +37,6 @@ function Bookings(props) {
   const [dateError, setDateError] = useState(false);
   const [message, setMessage] = useState('');
   const [bookingSent, setBookingSent] = useState(false);
-  console.log(bookingSent, 'booking');
 
   useEffect(() => {
     addRoomsToBooking();
@@ -48,7 +47,7 @@ function Bookings(props) {
       setTimeout(() => {
         setBookingSent(false);
         window.location.reload();
-      }, 5000);
+      }, 10000);
     }
   }, [bookingSent]);
 
@@ -204,9 +203,9 @@ function Bookings(props) {
   if (bookingSent === true) {
     displaySuccessMessage = (
       <div>
-        <p>
+        <p className="success">
           {appState
-            ? appState.formLabels[appState.language].success_booking
+            ? appState.formSubmit[appState.language].success_booking
             : ''}
         </p>
       </div>
