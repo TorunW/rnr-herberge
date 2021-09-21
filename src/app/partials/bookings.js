@@ -37,10 +37,20 @@ function Bookings(props) {
   const [dateError, setDateError] = useState(false);
   const [message, setMessage] = useState('');
   const [bookingSent, setBookingSent] = useState(false);
+  console.log(bookingSent, 'booking');
 
   useEffect(() => {
     addRoomsToBooking();
   }, [appState]);
+
+  useEffect(() => {
+    if (bookingSent === true) {
+      setTimeout(() => {
+        setBookingSent(false);
+        window.location.reload();
+      }, 5000);
+    }
+  }, [bookingSent]);
 
   function addRoomsToBooking() {
     let newRoomArray = [];
