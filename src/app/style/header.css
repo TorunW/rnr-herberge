@@ -46,6 +46,9 @@
     text-decoration: none;
     color: whitesmoke;
   }
+  .header .menu-right-column .menu-items a:hover {
+    font-size: calc(42px + 9 * ((100vw - 1024px) / 1536));
+  }
 }
 @media (max-width: 870px) {
   .header {
@@ -89,6 +92,9 @@
   .header .menu-right-column .menu-items a {
     margin-left: 2vw;
     text-decoration: none;
-    color: whitesmoke;
+    color: #573f3f;
+  }
+  .header .menu-right-column .menu-items a:hover {
+    color: #c5c4c4;
   }
 }

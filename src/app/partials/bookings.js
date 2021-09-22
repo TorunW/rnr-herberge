@@ -213,7 +213,7 @@ function Bookings(props) {
   }
 
   return (
-    <div className="booking-form">
+    <div className={'booking-form' + (bookingSent === true ? ' sent' : '')}>
       <form>
         <div className="field-box">
           <div className="user-box">

@@ -1,15 +1,16 @@
 .booking-form {
-  padding: 20px 20px 2px;
+  padding: 20px 20px 60px;
   background: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   min-height: 955px;
-  max-height: 1010px;
 }
 .booking-form.message-form {
-  max-height: 350px;
   min-height: 310px;
+}
+.booking-form.sent {
+  padding: 20px 20px 2px;
 }
 .booking-form form {
   position: relative;

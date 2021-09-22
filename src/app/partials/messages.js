@@ -118,7 +118,11 @@ function Messages(props) {
   }
 
   return (
-    <div className="booking-form message-form">
+    <div
+      className={
+        'booking-form message-form' + (sentMessage === true ? ' sent' : '')
+      }
+    >
       <form>
         <div className="user-box">
           <input
