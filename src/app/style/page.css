@@ -122,4 +122,7 @@ html {
   hr {
     margin: 0 2vw;
   }
+  iFrame {
+    max-width: 90%;
+  }
 }

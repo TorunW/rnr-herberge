@@ -70,17 +70,19 @@ function Header(props) {
     menuItemsDisplay = menuItems.map((menuItem, index) => {
       if (menuItem.title !== 'home') {
         return (
-          <a
-            href={
-              menuItem.link +
-              (menuItem.language !== null
-                ? '?language=' + menuItem.language
-                : '')
-            }
-            key={index}
-          >
-            {menuItem.title === 'home' ? '' : menuItem.title}
-          </a>
+          <div className="menu-item-wrapper">
+            <a
+              href={
+                menuItem.link +
+                (menuItem.language !== null
+                  ? '?language=' + menuItem.language
+                  : '')
+              }
+              key={index}
+            >
+              {menuItem.title === 'home' ? '' : menuItem.title}
+            </a>
+          </div>
         );
       }
     });

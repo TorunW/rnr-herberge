@@ -37,16 +37,16 @@
     font-family: 'Six Caps';
     letter-spacing: 1px;
     font-size: calc(40px + 9 * ((100vw - 1024px) / 1536));
-    text-align: left;
     bottom: 1vh;
     position: absolute;
+    display: flex;
   }
-  .header .menu-right-column .menu-items a {
+  .header .menu-right-column .menu-items .menu-item-wrapper a {
     margin-left: 2vw;
     text-decoration: none;
     color: whitesmoke;
   }
-  .header .menu-right-column .menu-items a:hover {
+  .header .menu-right-column .menu-items .menu-item-wrapper a:hover {
     font-size: calc(42px + 9 * ((100vw - 1024px) / 1536));
   }
 }
@@ -83,18 +83,29 @@
   }
   .header .menu-right-column {
     grid-row: 3;
+    width: 100%;
+    text-align: center;
   }
   .header .menu-right-column .menu-items {
-    font-size: calc(40px + 9 * ((100vw - 1024px) / 1536));
-    font-family: 'Six Caps';
-    letter-spacing: 1px;
+    display: table;
+    margin: 0 5vw;
+    text-align: center;
   }
-  .header .menu-right-column .menu-items a {
-    margin-left: 2vw;
+  .header .menu-right-column .menu-items .menu-item-wrapper {
+    width: auto;
+    display: inline;
+    cursor: pointer;
+  }
+  .header .menu-right-column .menu-items .menu-item-wrapper a {
     text-decoration: none;
-    color: #573f3f;
+    color: whitesmoke;
+    font-family: 'Six Caps';
+    letter-spacing: 2px;
+    font-size: calc(40px + 9 * ((100vw - 1024px) / 1536));
+    padding: 0px 7px;
+    display: inline-block;
   }
-  .header .menu-right-column .menu-items a:hover {
-    color: #c5c4c4;
+  .header .menu-right-column .menu-items .menu-item-wrapper a:hover {
+    font-size: calc(42px + 9 * ((100vw - 1024px) / 1536));
   }
 }

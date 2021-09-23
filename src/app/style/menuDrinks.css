@@ -22,7 +22,8 @@
   display: inline-block;
   margin-top: 2vh;
 }
-.title-container .title .menu-item a.active {
+.title-container .title .menu-item a.active,
+.title-container .title .menu-item a:hover {
   background-color: #e0cba885;
 }
 .outer-border {
