@@ -1,6 +1,6 @@
 var db = require('../database/db');
 const nodemailer = require('nodemailer');
-var smtp = require('../config/smtp');
+// var smtp = require('../config/smtp');
 
 exports.getBookings = (req, res) => {
   var sql = 'SELECT * FROM bookings';
@@ -79,7 +79,7 @@ function sendBooking(req, res) {
   // setup email data with unicode symbols
   let mailOptions = {
     from: `"${req.body.first_name} ${req.body.last_name}" <${req.body.email}>`, // sender address
-    to: 'torun.wikstrom@gmail.com', // list of receivers
+    to: 'buchung@rnrherberge.de', // list of receivers
     subject: 'Booking Request- Buchungs Anfrage', // Subject line
     text: 'New booking request - Neue Zimmerbuchung', // plain text body
     html: output, // html body

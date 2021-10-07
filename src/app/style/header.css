@@ -56,7 +56,6 @@
     grid-template-rows: auto 1fr auto;
   }
   .header .language-menu {
-    font-family: 'josefin sans';
     float: right;
     padding: 4px;
   }

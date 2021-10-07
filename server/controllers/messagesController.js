@@ -1,7 +1,7 @@
 var db = require('../database/db');
 const nodemailer = require('nodemailer');
 
-var smtp = require('../config/smtp');
+// var smtp = require('../config/smtp');
 
 exports.getMessages = (req, res) => {
   var sql = 'SELECT * FROM messages ORDER BY created_at DESC';
@@ -63,7 +63,7 @@ function sendMessage(req, res) {
   // setup email data with unicode symbols
   let mailOptions = {
     from: `"${req.body.name}" <${req.body.email}>`, // sender address
-    to: 'torun.wikstrom@gmail.com', // list of receivers
+    to: 'info@rnrherberge.de', // list of receivers
     subject: 'Message - Nachricht', // Subject line
     text: 'New message - Neue nachricht', // plain text body
     html: output, // html body
