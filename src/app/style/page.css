@@ -20,12 +20,7 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-html,
-body {
-  overflow: auto;
-  height: 100%;
-  overscroll-behavior: none;
+  overflow: hidden;
 }
 .page {
   height: 100%;
