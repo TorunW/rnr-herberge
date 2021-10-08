@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className={'App' + (loading === false ? ' loading' : '')}>
-      {/* <img src="bg.jpg" className="background-img" /> */}
+      <div className="image-hero-area"></div>
       {templateDisplay}
     </div>
   );
