@@ -1,6 +1,6 @@
 var db = require('../database/db');
 const nodemailer = require('nodemailer');
-// var smtp = require('../config/smtp');
+var smtp = require('../config/smtp');
 
 exports.getBookings = (req, res) => {
   var sql = 'SELECT * FROM bookings';
@@ -74,7 +74,7 @@ function sendBooking(req, res) {
 `;
 
   // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport(smtp.getSmtpBooking());
+  let transporter = nodemailer.createTransport(smtp.getSmtp());
 
   // setup email data with unicode symbols
   let mailOptions = {

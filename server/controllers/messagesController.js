@@ -1,4 +1,5 @@
 var db = require('../database/db');
+var smtp = require('../config/smtp');
 const nodemailer = require('nodemailer');
 
 // var smtp = require('../config/smtp');
