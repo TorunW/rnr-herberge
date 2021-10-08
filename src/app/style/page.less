@@ -22,14 +22,6 @@
     U+FEFF, U+FFFD;
 }
 
-html {
-  background: url(bg.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
 .page {
   height: 100%;
 }
@@ -42,6 +34,14 @@ html {
 }
 
 @media (min-width: 871px) {
+  html,
+  body {
+    background: url(bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
   .post-container {
     position: relative;
 
@@ -98,6 +98,12 @@ html {
 }
 
 @media (max-width: 870px) {
+  html,
+  body {
+    background: url(bg.jpg) no-repeat center center fixed;
+    background-size: 100% 100%;
+  }
+
   .post-container {
     position: relative;
     width: 100%;
