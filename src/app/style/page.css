@@ -80,7 +80,7 @@
 }
 @media (max-width: 870px) {
   html {
-    overflow: scroll;
+    overflow: hidden;
   }
   body {
     content: '';
