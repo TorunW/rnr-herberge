@@ -34,9 +34,10 @@ function App() {
   if (path === 'signin') {
     templateDisplay = <UserSignin />;
   }
-  <img src="bg.jpg" className="background-img" />;
+
   return (
     <div className={'App' + (loading === false ? ' loading' : '')}>
+      {/* <img src="bg.jpg" className="background-img" /> */}
       {templateDisplay}
     </div>
   );
