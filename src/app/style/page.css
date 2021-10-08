@@ -83,8 +83,8 @@
     position: fixed;
     right: 0;
     bottom: 0;
-    width: 115%;
-    height: 115%;
+    width: 100vw;
+    height: 100vh;
     z-index: -100;
     margin: 0;
     background: url(bg.jpg) center center no-repeat;
