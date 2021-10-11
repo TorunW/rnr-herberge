@@ -1,14 +1,10 @@
 exports.getSmtp = () => {
   return {
-    host: 'smtp-mail.outlook.com',
-    secureConnection: false,
-    port: 587,
+    service: 'gmail',
+    host: 'smtp.gmail.com',
     auth: {
-      user: 'rnrherberge@outlook.de',
+      user: 'herbergernr@gmail.com',
       pass: '???3fragezeichen',
-    },
-    tls: {
-      ciphers: 'SSLv3',
     },
   };
 };
