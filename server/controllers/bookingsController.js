@@ -1,6 +1,6 @@
 var db = require('../database/db');
 const nodemailer = require('nodemailer');
-var smtp = require('../config/smtp');
+var smtp = require('../config/smtp-config');
 
 exports.getBookings = (req, res) => {
   var sql = 'SELECT * FROM bookings';

@@ -1,8 +1,6 @@
 var db = require('../database/db');
-var smtp = require('../config/smtp');
+var smtp = require('../config/smtp-config');
 const nodemailer = require('nodemailer');
-
-// var smtp = require('../config/smtp');
 
 exports.getMessages = (req, res) => {
   var sql = 'SELECT * FROM messages ORDER BY created_at DESC';
