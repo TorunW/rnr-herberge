@@ -12,12 +12,11 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (window.location.href.indexOf('?fbclid=') > -1) window.location.href = "www.rnrherberge.de"
     setTimeout(() => {
       setLoading(true);
     }, 1000);
   }, []);
-
-  console.log(loading);
 
   const path = window.location.pathname.split('/')[1];
   let templateDisplay = (
