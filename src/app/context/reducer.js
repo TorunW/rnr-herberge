@@ -71,6 +71,16 @@ export const appInitialState = {
       add_room: 'Weitere Zimmer hinzfügen',
     },
   },
+  emailLanguage: {
+    EN: {
+      booking_language: 'You have a new booking request',
+      message_language: 'message',
+    },
+    DE: {
+      booking_language: 'Ihr habt eine neue Buchungsanfrage',
+      message_language: 'Nachricht',
+    },
+  },
 
   availableRooms: [1, 3, 4, 5, 6, 7],
   unavailableRooms: {},

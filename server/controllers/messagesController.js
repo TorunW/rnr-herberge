@@ -27,9 +27,10 @@ exports.getMessage = (req, res) => {
 };
 
 exports.createMessage = (req, res) => {
-  const { name, email, msg } = req.body;
-  var sql = 'INSERT INTO messages (name, email, msg ) VALUES (?,?,?)';
-  var params = [name, email, msg];
+  const { name, email, msg, language } = req.body;
+  var sql =
+    'INSERT INTO messages (name, email, msg, language ) VALUES (?,?,?,?)';
+  var params = [name, email, msg, language];
   db.run(sql, params, function (err, result) {
     if (err) {
       res.status(400).json({ error: err.message });
@@ -46,7 +47,7 @@ exports.createMessage = (req, res) => {
 
 function sendMessage(req, res) {
   const output = `
-  <p>Message - Nachricht</p>
+  <p>${req.body.language} </p>
   <hr/>
   <ul>  
     <li>Name: ${req.body.name}</li>

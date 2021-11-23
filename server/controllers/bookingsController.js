@@ -25,9 +25,10 @@ exports.createBooking = (req, res) => {
     arrival,
     departure,
     notes,
+    language,
   } = req.body;
   var sql =
-    'INSERT INTO bookings (first_name, last_name, email, telephone, room, guest_count, arrival, departure, notes ) VALUES (?,?,?,?,?,?,?,?,?)';
+    'INSERT INTO bookings (first_name, last_name, email, telephone, room, guest_count, arrival, departure, notes, language ) VALUES (?,?,?,?,?,?,?,?,?,?)';
   var params = [
     first_name,
     last_name,
@@ -38,6 +39,7 @@ exports.createBooking = (req, res) => {
     arrival,
     departure,
     notes,
+    language,
   ];
   db.run(sql, params, function (err, result) {
     console.log(err);
@@ -56,7 +58,7 @@ exports.createBooking = (req, res) => {
 
 function sendBooking(req, res) {
   const output = `
-  <p>You have a new booking request/ Ihr habt eine neue Buchungsanfrage</p>
+  <p>${req.body.language} </p>
   <hr/>
   <ul>  
     <li>Firstname/Vorname: ${req.body.first_name}</li>

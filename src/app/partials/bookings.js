@@ -78,6 +78,7 @@ function Bookings(props) {
         arrival: startDate,
         departure: endDate,
         notes: message,
+        language: appState.emailLanguage[appState.language].booking_language,
       };
 
       $.ajax({

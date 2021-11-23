@@ -31,6 +31,7 @@ function Messages(props) {
         name: fullName,
         email,
         msg: message,
+        language: appState.emailLanguage[appState.language].message_language,
       };
 
       $.ajax({
