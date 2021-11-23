@@ -24,11 +24,10 @@ exports.createBooking = (req, res) => {
     guest_count,
     arrival,
     departure,
-    notes,
-    language,
+    notes
   } = req.body;
   var sql =
-    'INSERT INTO bookings (first_name, last_name, email, telephone, room, guest_count, arrival, departure, notes, language ) VALUES (?,?,?,?,?,?,?,?,?,?)';
+    'INSERT INTO bookings (first_name, last_name, email, telephone, room, guest_count, arrival, departure, notes ) VALUES (?,?,?,?,?,?,?,?,?)';
   var params = [
     first_name,
     last_name,
@@ -38,8 +37,7 @@ exports.createBooking = (req, res) => {
     guest_count,
     arrival,
     departure,
-    notes,
-    language,
+    notes
   ];
   db.run(sql, params, function (err, result) {
     console.log(err);
@@ -75,8 +73,6 @@ function sendBooking(req, res) {
   <h3>${lan === "EN" ? "Message" : "Nachricht"}:</h3>
   <p>${req.body.notes}</p>
 `;
-
-  console.log(output);
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport(smtp.getSmtp());
