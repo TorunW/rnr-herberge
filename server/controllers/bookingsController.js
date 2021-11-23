@@ -57,23 +57,26 @@ exports.createBooking = (req, res) => {
 };
 
 function sendBooking(req, res) {
+
+  const lan = req.body.language;
+  
   const output = `
-  <p>${req.body.language} </p>
   <hr/>
   <ul>  
-    <li>Firstname/Vorname: ${req.body.first_name}</li>
-    <li>Lastname/Name: ${req.body.last_name}</li>
+    <li>${lan === "EN" ? "Firstname" : "Vorname"}: ${req.body.first_name}</li>
+    <li>${lan === "EN" ? "Lastname" : "Name"}: ${req.body.last_name}</li>
     <li>Email: ${req.body.email}</li>
     <li>Phone: ${req.body.telephone}</li>
-    <li>Room/Zimmer: ${req.body.room}</li>
-    <li>Number of guests/ Anzahl personen: ${req.body.guest_count}</li>
-    <li>Arrival/Ankunft: ${req.body.arrival}</li>
-    <li>Departure/Abreise: ${req.body.departure}</li>
-    <li>Message/Nachricht: ${req.body.notes}</li>
+    <li>${lan === "EN" ? "Room" : "Zimmer"}: ${req.body.room}</li>
+    <li>${lan === "EN" ? "Number of guests" : "Anzahl personen"}: ${req.body.guest_count}</li>
+    <li>${lan === "EN" ? "Arrival" : "Ankunft"}: ${req.body.arrival}</li>
+    <li>${lan === "EN" ? "Departure" : "Abreise"}: ${req.body.departure}</li>
   </ul>
-  <h3>Message/Nachricht:</h3>
+  <h3>${lan === "EN" ? "Message" : "Nachricht"}:</h3>
   <p>${req.body.notes}</p>
 `;
+
+  console.log(output);
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport(smtp.getSmtp());
@@ -82,8 +85,8 @@ function sendBooking(req, res) {
   let mailOptions = {
     from: `"${req.body.first_name} ${req.body.last_name}" <${req.body.email}>`, // sender address
     to: 'buchung@rnrherberge.de', // list of receivers
-    subject: 'Booking Request- Buchungs Anfrage', // Subject line
-    text: 'New booking request - Neue Zimmerbuchung', // plain text body
+    subject: `${lan === "EN" ? "Booking Request" : "Buchungs Anfrage"}`, // Subject line
+    text: `${lan === "EN" ? "New booking request" : "Neue Zimmerbuchung"} - `, // plain text body
     html: output, // html body
   };
 
