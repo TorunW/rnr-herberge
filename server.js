@@ -7,6 +7,7 @@ var path = require('path');
 var app = express();
 var fileUpload = require('express-fileupload');
 var cors = require('cors');
+require('dotenv').config()
 
 // Body Parser
 var bodyParser = require('body-parser');

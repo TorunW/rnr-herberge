@@ -1,12 +1,9 @@
 var db = require('../database/db');
-const nodemailer = require('nodemailer');
-var smtp = require('../config/smtp-config');
-
 var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 // Configure API key authorization: api-key
 var apiKey = defaultClient.authentications["api-key"];
-apiKey.apiKey = "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"
+apiKey.apiKey = process.env.SMTP_API_KEY
 
 exports.getBookings = (req, res) => {
   var sql = 'SELECT * FROM bookings';
@@ -83,11 +80,12 @@ function sendBooking(req, res) {
   sendSmtpEmail = {
     sender: { 
       email: "info@rnrherberge.de",
+      name:"Booking"
     },
     to: [
       {
         email: 'buchung@rnrherberge.de',
-        // email:"dnelband@gmail.com"
+        email:"dnelband@gmail.com"
       }
     ],
     replyTo: {
@@ -107,57 +105,3 @@ function sendBooking(req, res) {
     }
   );
 }
-
-
-function SendTestEmail(address) {
-  var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-  // console.log(apiInstance, " API INSTANCE")
-  var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
-  sendSmtpEmail = {
-    sender: { email: "sender@email.com" },
-    to: [
-      {
-        email: "person@email.com",
-        name: "Person Name",
-      },
-    ],
-    subject: "Test Email",
-    textContent: "Test Email Content",
-  };
-
-  // console.log(sendSmtpEmail," SEND SMTP EMAIL")
-
-  apiInstance.sendTransacEmail(sendSmtpEmail).then(
-    function (data) {
-      console.log("API called successfully. Returned data: " + data);
-    },
-    function (error) {
-      console.error(error);
-    }
-  );
-}
-
-/*
-
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport(smtp.getSmtp());
-
-  // setup email data with unicode symbols
-  let mailOptions = {
-    from: `"${req.body.first_name} ${req.body.last_name}" <${req.body.email}>`, // sender address
-    to: 'buchung@rnrherberge.de', // list of receivers
-    subject: `${lan === "EN" ? "Booking Request" : "Buchungs Anfrage"}`, // Subject line
-    text: `${lan === "EN" ? "New booking request" : "Neue Zimmerbuchung"} - `, // plain text body
-    html: output, // html body
-  };
-
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-  });
-
-  */
