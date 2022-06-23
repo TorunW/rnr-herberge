@@ -46,7 +46,7 @@ function Bookings(props) {
     if (bookingSent === true) {
       setTimeout(() => {
         setBookingSent(false);
-        window.location.reload();
+        // window.location.reload();
       }, 10000);
     }
   }, [bookingSent]);
@@ -87,16 +87,16 @@ function Bookings(props) {
         data: newBooking,
       }).done(function (res) {
         setBookingSent(true);
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setTelephone('');
-        setRoom('');
-        setGuest('');
-        setStartDate(null);
-        setEndDate(null);
-        setMessage('');
-        appDispatch({ type: 'SET_FORM_SUBMITTED', val: true });
+        // setFirstName('');
+        // setLastName('');
+        // setEmail('');
+        // setTelephone('');
+        // setRoom('');
+        // setGuest('');
+        // setStartDate(null);
+        // setEndDate(null);
+        // setMessage('');
+        // appDispatch({ type: 'SET_FORM_SUBMITTED', val: true });
       });
     }
   }

@@ -58,7 +58,7 @@ export const appInitialState = {
       submit_booking: 'Book the room',
       submit_message: 'Send message',
       success_booking:
-        'Booking sent! You will recive an email soon with confirmation and payment details',
+        'Thank you for your booking! You will recive a confirmation within 48 hours.',
       success_message: 'Thank you for your message!',
       add_room: 'Add another room',
     },
@@ -66,7 +66,7 @@ export const appInitialState = {
       submit_booking: 'Zimmer buchen',
       submit_message: 'Absenden',
       success_booking:
-        'Buchung durchgeführt! Sie bekommen bald einem Email mit eine Bestätigung und weitere Details zum Zahlung des Zimmer',
+        'Danke für Deine Anfrage! Spätetens in 48 Stunden werden wir uns bei dir zurückmelden!',
       success_message: 'Danke für deine Nachricht!',
       add_room: 'Weitere Zimmer hinzfügen',
     },

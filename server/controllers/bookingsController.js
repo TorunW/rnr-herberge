@@ -2,6 +2,12 @@ var db = require('../database/db');
 const nodemailer = require('nodemailer');
 var smtp = require('../config/smtp-config');
 
+var SibApiV3Sdk = require("sib-api-v3-sdk");
+var defaultClient = SibApiV3Sdk.ApiClient.instance;
+// Configure API key authorization: api-key
+var apiKey = defaultClient.authentications["api-key"];
+apiKey.apiKey = "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"
+
 exports.getBookings = (req, res) => {
   var sql = 'SELECT * FROM bookings';
   var params = [req.params.id];
@@ -57,9 +63,8 @@ exports.createBooking = (req, res) => {
 function sendBooking(req, res) {
 
   const lan = req.body.language;
-  
-  const output = `
-  <hr/>
+  const output = 
+  `<hr/>
   <ul>  
     <li>${lan === "EN" ? "Firstname" : "Vorname"}: ${req.body.first_name}</li>
     <li>${lan === "EN" ? "Lastname" : "Name"}: ${req.body.last_name}</li>
@@ -71,8 +76,68 @@ function sendBooking(req, res) {
     <li>${lan === "EN" ? "Departure" : "Abreise"}: ${req.body.departure}</li>
   </ul>
   <h3>${lan === "EN" ? "Message" : "Nachricht"}:</h3>
-  <p>${req.body.notes}</p>
-`;
+  <p>${req.body.notes}</p>`;
+
+  var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+  var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
+  sendSmtpEmail = {
+    sender: { 
+      email: "info@rnrherberge.de",
+    },
+    to: [
+      {
+        email: 'buchung@rnrherberge.de',
+        // email:"dnelband@gmail.com"
+      }
+    ],
+    replyTo: {
+      email: req.body.email,
+      name: `"${req.body.first_name} ${req.body.last_name}"`
+    },
+    subject: `${lan === "EN" ? "Booking Request" : "Buchungs Anfrage"}`, // Subject line
+    htmlContent: output,
+  };
+  apiInstance.sendTransacEmail(sendSmtpEmail).then(
+    function (data) {
+      console.log("API called successfully. Returned data: " + data);
+    },
+    function (error) {
+      console.error(error);
+      console.log('ERROR')
+    }
+  );
+}
+
+
+function SendTestEmail(address) {
+  var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+  // console.log(apiInstance, " API INSTANCE")
+  var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
+  sendSmtpEmail = {
+    sender: { email: "sender@email.com" },
+    to: [
+      {
+        email: "person@email.com",
+        name: "Person Name",
+      },
+    ],
+    subject: "Test Email",
+    textContent: "Test Email Content",
+  };
+
+  // console.log(sendSmtpEmail," SEND SMTP EMAIL")
+
+  apiInstance.sendTransacEmail(sendSmtpEmail).then(
+    function (data) {
+      console.log("API called successfully. Returned data: " + data);
+    },
+    function (error) {
+      console.error(error);
+    }
+  );
+}
+
+/*
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport(smtp.getSmtp());
@@ -94,4 +159,5 @@ function sendBooking(req, res) {
     console.log('Message sent: %s', info.messageId);
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   });
-}
+
+  */

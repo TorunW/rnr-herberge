@@ -29,10 +29,12 @@ exports.getMessage = (req, res) => {
 exports.createMessage = (req, res) => {
   const { name, email, msg, language } = req.body;
   var sql =
-    'INSERT INTO messages (name, email, msg, language ) VALUES (?,?,?,?)';
-  var params = [name, email, msg, language];
+    'INSERT INTO messages (name, email, msg ) VALUES (?,?,?)';
+  var params = [name, email, msg];
+  console.log(sql,params);
   db.run(sql, params, function (err, result) {
     if (err) {
+      console.log(err);
       res.status(400).json({ error: err.message });
       return;
     }
