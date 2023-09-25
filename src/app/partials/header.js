@@ -2,11 +2,6 @@ import { useEffect, useState, useContext } from 'react';
 import '../style/header.css';
 import { Context } from '../context/context-provider';
 
-// the img as home
-// the menu
-// show menu
-// show post
-// style
 function Header(props) {
   const { appState, appDispatch } = useContext(Context);
   const [menuItems, setMenuItems] = useState();
@@ -27,7 +22,7 @@ function Header(props) {
   }, [appState.pageId]);
 
   function getPages() {
-    fetch(`/db/pages/${appState.language}`)
+    fetch(`http://localhost:3000/db/pages/${appState.language}`)
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res);
@@ -116,7 +111,8 @@ function Header(props) {
                 : '/home?language=EN'
             }
           >
-            <img src="RnR Logo.png" className="header-img" />
+            {/*             <img src="RnR Logo.png" className="header-img" />
+             */}
           </a>
         </div>
         <div className="menu-right-column">
@@ -219,7 +215,8 @@ function Header(props) {
                 : '/home?language=EN'
             }
           >
-            <img src="RnR Logo.png" className="header-img" />
+            {/*             <img src="RnR Logo.png" className="header-img" />
+             */}
           </a>
         </div>
         <div className="menu-right-column">

@@ -7,7 +7,7 @@ var path = require('path');
 var app = express();
 var fileUpload = require('express-fileupload');
 var cors = require('cors');
-require('dotenv').config()
+require('dotenv').config();
 
 // Body Parser
 var bodyParser = require('body-parser');
@@ -105,7 +105,7 @@ app.use(function (req, res) {
 });
 
 // Server port
-var HTTP_PORT = 8080;
+var HTTP_PORT = 3000;
 
 // Start server
 app.listen(HTTP_PORT, () => {
