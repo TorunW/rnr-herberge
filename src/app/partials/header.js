@@ -22,7 +22,7 @@ function Header(props) {
   }, [appState.pageId]);
 
   function getPages() {
-    fetch(`http://localhost:3000/db/pages/${appState.language}`)
+    fetch(`/db/pages/${appState.language}`)
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res);
