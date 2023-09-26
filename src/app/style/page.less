@@ -3,23 +3,19 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/sixcaps/v11/6ae_4KGrU7VR7bNmaYcV_3Q.woff2)
-    format('woff2');
+  src: url(https://fonts.gstatic.com/s/sixcaps/v11/6ae_4KGrU7VR7bNmaYcV_3Q.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: 'Josefin Sans';
+  font-family: 'Archivo Narrow';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/josefinsans/v17/Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2)
-    format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-    U+FEFF, U+FFFD;
+  src: url(https://fonts.gstatic.com/s/archivonarrow/v30/tss5ApVBdCYD5Q7hcxTE1ArZ0Zz8oY2KRmwvKhhvLFG6o3msNiEr6DaY.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 .page {
@@ -28,18 +24,19 @@
 
 .App {
   transition: all 0.5s ease;
+
   &.loading {
     opacity: 0;
   }
 }
 
-  body {
-    background: url(bg.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
+body {
+  background: url(bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 @media (min-width: 871px) {
 
@@ -47,7 +44,8 @@
     position: relative;
 
     .post-display {
-      background-color: #e0cba8a1;
+      background-color: #888888a1;
+
       margin-left: 15vw;
       margin-right: 15vw;
       max-width: 100%;
@@ -56,14 +54,16 @@
 
       .post {
         margin-bottom: 5vh;
+
         .title {
           font-family: 'Six Caps';
           font-size: 40px;
           margin-bottom: 15px;
           letter-spacing: 1px;
         }
+
         .content {
-          font-family: 'Josefin Sans';
+          font-family: 'Archivo Narrow';
           font-size: 18px;
 
           .ql-align-center {
@@ -120,20 +120,22 @@
     padding-top: 1vh;
 
     .post-display {
-      background-color: #e0cba885;
+      background-color: #888888a1;
       margin: 0 5vw;
       padding: 2vh 4vw;
 
       .post {
         padding-bottom: 3vh;
+
         .title {
           font-family: 'Six Caps';
           font-size: 40px;
           margin-bottom: 15px;
           letter-spacing: 1px;
         }
+
         .content {
-          font-family: 'Josefin Sans';
+          font-family: 'Archivo Narrow';
           font-size: 18px;
 
           .ql-align-center {

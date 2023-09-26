@@ -13,17 +13,20 @@
   &.sent {
     padding: 20px 20px 2px;
   }
+
   form {
     position: relative;
   }
+
   textarea::-webkit-scrollbar {
     display: none;
   }
 
   p {
-    font-family: 'josefin sans';
+    font-family: 'Archivo Narrow';
     font-size: 20px;
   }
+
   h2 {
     margin: 0 0 30px;
     padding: 0;
@@ -33,7 +36,7 @@
 
   .user-box {
     position: relative;
-    font-family: 'josefin sans';
+    font-family: 'Archivo Narrow';
 
     .date {
       position: absolute;
@@ -51,6 +54,7 @@
         cursor: pointer;
       }
     }
+
     .date-filled {
       top: -20px;
       left: 0;
@@ -70,7 +74,7 @@
       border-bottom: 1px solid #fff;
       outline: none;
       background: transparent;
-      font-family: 'josefin sans';
+      font-family: 'Archivo Narrow';
 
       textarea::-webkit-scrollbar {
         display: none;
@@ -100,16 +104,16 @@
       transition: 0.5s;
     }
 
-    input:focus ~ label,
-    select:focus ~ label,
-    textarea:focus ~ label {
+    input:focus~label,
+    select:focus~label,
+    textarea:focus~label {
       top: -20px;
       left: 0;
       color: #b3c4b3;
       font-size: 14px;
     }
 
-    .filled ~ label {
+    .filled~label {
       top: -20px;
       left: 0;
       color: #b3c4b3;
@@ -193,6 +197,7 @@
 
 .new-room-field-container {
   position: relative;
+
   #select-room-list {
     .new-room-field {
       margin-bottom: 22px;
@@ -201,6 +206,7 @@
       border-radius: 10px;
       background: rgba(0, 0, 0, 0.5);
       padding: 30px 30px 10px;
+
       &:last-of-type {
         padding: 30px 30px 40px;
       }

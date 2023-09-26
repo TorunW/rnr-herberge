@@ -5,13 +5,14 @@
     position: relative;
   }
   .Footer .abg-footer {
-    font-family: 'Six caps';
+    font-family: 'Archivo Narrow';
     text-decoration: none;
     color: blanchedalmond;
     font-size: 32px;
     top: 7px;
     position: absolute;
-    width: 110px;
+    width: 330px;
+    left: 0;
   }
 }
 @media (max-width: 870px) {
@@ -21,7 +22,7 @@
     position: relative;
   }
   .Footer .abg-footer {
-    font-family: 'Six caps';
+    font-family: 'Archivo Narrow';
     text-decoration: none;
     color: blanchedalmond;
     font-size: 32px;

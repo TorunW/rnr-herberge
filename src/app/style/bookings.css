@@ -19,7 +19,7 @@
   display: none;
 }
 .booking-form p {
-  font-family: 'josefin sans';
+  font-family: 'Archivo Narrow';
   font-size: 20px;
 }
 .booking-form h2 {
@@ -30,7 +30,7 @@
 }
 .booking-form .user-box {
   position: relative;
-  font-family: 'josefin sans';
+  font-family: 'Archivo Narrow';
 }
 .booking-form .user-box .date {
   position: absolute;
@@ -63,7 +63,7 @@
   border-bottom: 1px solid #fff;
   outline: none;
   background: transparent;
-  font-family: 'josefin sans';
+  font-family: 'Archivo Narrow';
 }
 .booking-form .user-box input textarea::-webkit-scrollbar,
 .booking-form .user-box select textarea::-webkit-scrollbar,
@@ -178,7 +178,7 @@
 .field-box {
   margin-bottom: 22px;
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 15px 25px rgb(0 0 0%);
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.5);
   padding: 30px 30px 10px;
@@ -189,7 +189,7 @@
 .new-room-field-container #select-room-list .new-room-field {
   margin-bottom: 22px;
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 15px 25px rgb(0 0 0%);
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.5);
   padding: 30px 30px 10px;

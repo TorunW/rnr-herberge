@@ -12,7 +12,7 @@ body .admin-page,
   height: auto;
   min-height: 100%;
   padding-bottom: 15px;
-  font-family: 'josefin sans';
+  font-family: 'Archivo Narrow';
 }
 html .admin-page .password,
 body .admin-page .password,
@@ -152,7 +152,8 @@ html .admin-page .page-form,
 body .admin-page .page-form,
 #root .admin-page .page-form,
 .App .admin-page .page-form {
-  font-family: 'josefin sans';
+  font-family: '
+Archivo Narrow';
 }
 html .admin-page .page-form .change-password-modal,
 body .admin-page .page-form .change-password-modal,
@@ -162,7 +163,7 @@ body .admin-page .page-form .change-password-modal,
   top: 0;
   right: 0;
   padding: 5px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 1px 2px rgb(0 0 0%);
   border: 1px solid black;
   color: whitesmoke;
 }
@@ -332,7 +333,8 @@ body .admin-page .page-form .original-form .page-input input,
   border-width: 3px;
   background-color: #b2e3af;
   border-radius: 5px;
-  font-family: 'josefin sans';
+  font-family: '
+Archivo Narrow';
   font-size: 20px;
   height: 4vh;
   padding-left: 4px;
@@ -372,7 +374,7 @@ body .admin-page .page-form .original-form .delete-modal,
   top: 0;
   right: 0;
   padding: 5px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 1px 2px rgb(0 0 0%);
   border: 1px solid black;
   color: whitesmoke;
 }
@@ -511,7 +513,8 @@ body .admin-page .page-form .translation .page-form-grid .translation-form .page
   border-width: 3px;
   background-color: #b2e3af;
   border-radius: 5px;
-  font-family: 'josefin sans';
+  font-family: '
+Archivo Narrow';
   font-size: 20px;
   height: 4vh;
   padding-left: 4px;
@@ -571,7 +574,7 @@ body .admin-page .form .post-form .delete-modal,
   top: 0;
   right: 0;
   padding: 5px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 1px 2px rgb(0 0 0%);
   border: 1px solid black;
   color: whitesmoke;
 }
@@ -689,7 +692,8 @@ body .admin-page .form .post-form-input select,
   border-width: 3px;
   background-color: #b2e3af;
   border-radius: 10px;
-  font-family: 'josefin sans';
+  font-family: '
+Archivo Narrow';
   font-size: 20px;
   height: 30px;
   left: 0;
