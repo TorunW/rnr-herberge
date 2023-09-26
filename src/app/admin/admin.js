@@ -17,7 +17,6 @@ function Admin(props) {
   );
   const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
   const [user, setUser] = useState(null);
-  console.log(window.location.pathname, 'pathname');
 
   // run pages
   useEffect(() => {

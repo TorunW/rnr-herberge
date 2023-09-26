@@ -28,7 +28,6 @@ function TextEditor(props) {
     'load',
     function () {
       // convert image file to base64 string
-      console.log(reader.result);
       setFileData(reader.result);
     },
     false
@@ -49,9 +48,7 @@ function TextEditor(props) {
 
   const uploadFile = (file, fileName, quillObj) => {
     const formData = new FormData();
-    console.log(file);
     formData.append('file', file); // appending file
-    console.log(formData);
     axios
       .post('/upload', formData)
       .then(res => {
@@ -59,7 +56,6 @@ function TextEditor(props) {
         quillObj
           .getEditor()
           .insertEmbed(range.index, 'image', '/' + res.data.path);
-        console.log(res.data.path, 'jdjsjs');
       })
       .catch(err => console.log(err));
   };

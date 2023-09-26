@@ -52,7 +52,6 @@ function PostForm(props) {
       method: ajaxMethod,
       data: newPostValues,
     }).done(function (res) {
-      console.log(res, 'res');
       setUpdateSuccess(true);
       if (props.type === 'translation' && isEditPostMode === false) {
         props.createTranslation(res.id);
@@ -65,8 +64,6 @@ function PostForm(props) {
   }
 
   function onDelete() {
-    console.log(props.postId);
-    console.log(props.post);
     $.ajax({
       url: `http://localhost:3000/db/posts/${props.post.post_id}`,
       method: 'DELETE',

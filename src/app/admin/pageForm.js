@@ -22,7 +22,6 @@ function PageForm(props) {
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
   const [updatePageSuccess, setUpdatePageSuccess] = useState(false);
   const [translation, setTranslation] = useState(null);
-  console.log(translation, 'translateion');
   const [showDeleteButton, setShowDeleteButton] = useState(false);
 
   useEffect(() => {
