@@ -10,7 +10,6 @@ function Footer() {
     setTimeout(() => {
       if (window.location.href.indexOf('#') > -1) {
         var urlHashtag = window.location.href.split('#')[1];
-        console.log(urlHashtag, 'snhfiafj');
         if (urlHashtag !== null) {
           if (document.getElementById(urlHashtag) !== null)
             document.getElementById(urlHashtag).scrollIntoView();

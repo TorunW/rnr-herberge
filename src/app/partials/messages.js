@@ -35,7 +35,7 @@ function Messages(props) {
       };
 
       $.ajax({
-        url: '/db/message/',
+        url: 'http://localhost:3000/db/message/',
         method: 'POST',
         data: newMessage,
       }).done(function (res) {

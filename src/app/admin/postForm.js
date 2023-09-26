@@ -42,7 +42,9 @@ function PostForm(props) {
       language,
     };
 
-    let ajaxUrl = `/db/posts/` + (props.post ? props.post.post_id : '');
+    let ajaxUrl =
+      `http://localhost:3000/db/posts/` +
+      (props.post ? props.post.post_id : '');
     let ajaxMethod = props.post ? 'PUT' : 'POST';
 
     $.ajax({
@@ -66,15 +68,15 @@ function PostForm(props) {
     console.log(props.postId);
     console.log(props.post);
     $.ajax({
-      url: `/db/posts/${props.post.post_id}`,
+      url: `http://localhost:3000/db/posts/${props.post.post_id}`,
       method: 'DELETE',
     }).done(function (res) {
       $.ajax({
-        url: `/db/translation/${translation.translation_id}`,
+        url: `http://localhost:3000/db/translation/${translation.translation_id}`,
         method: 'DELETE',
       }).done(function (res) {
         $.ajax({
-          url: `/db/posts/${translation.eng_id}`,
+          url: `http://localhost:3000/db/posts/${translation.eng_id}`,
           method: 'DELETE',
         }).done(function (res) {
           window.location.href = `/admin/pages/edit/${props.pageId}`;

@@ -46,7 +46,7 @@ function Bookings(props) {
     if (bookingSent === true) {
       setTimeout(() => {
         setBookingSent(false);
-        // window.location.reload();
+        window.location.reload();
       }, 10000);
     }
   }, [bookingSent]);
@@ -58,7 +58,6 @@ function Bookings(props) {
     for (var i in appState.unavailableRooms) {
       newRoomArray.push(i);
       newGuestArray.push(appState.unavailableRooms[i]);
-      console.log(newGuestArray, 'newguest', newRoomArray, 'newroom');
     }
 
     setRoom(JSON.stringify(newRoomArray));
@@ -78,11 +77,11 @@ function Bookings(props) {
         arrival: startDate,
         departure: endDate,
         notes: message,
-        language:appState.language,
+        language: appState.language,
       };
 
       $.ajax({
-        url: '/db/bookings/',
+        url: 'http://localhost:3000/db/bookings/',
         method: 'POST',
         data: newBooking,
       }).done(function (res) {

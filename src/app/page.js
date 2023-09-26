@@ -3,6 +3,9 @@ import './style/page.css';
 import Post from './partials/post';
 import MenuDrinks from './partials/menuDrinks';
 import { Context } from './context/context-provider';
+import { pages } from '../db/data-pages';
+import { postsData } from '../db/data-posts';
+import { filter } from 'lodash';
 
 function Page(props) {
   const { appState, appDispatch } = useContext(Context);
@@ -23,23 +26,15 @@ function Page(props) {
   }, [page]);
 
   function getPage() {
-    fetch(`/db/page/${props.path}`)
-      .then(res => res.text())
-      .then(res => {
-        const result = JSON.parse(res)[0];
-        setPage(result);
-      });
+    const pagePath = pages.find(item => item.link === props.path);
+    setPage(pagePath);
   }
 
   function getPosts() {
-    fetch(`/db/postsbypageid/${page.page_id}`)
-      .then(res => res.text())
-      .then(res => {
-        const result = JSON.parse(res);
-        const filteredArray = result.filter(post => post.type === 'drinks');
-        setDrinksMenu(filteredArray);
-        setPosts(result);
-      });
+    const postById = postsData.filter(item => item.page_id === page.page_id);
+    const filteredArray = postById.filter(post => post.type === 'drinks');
+    setDrinksMenu(filteredArray);
+    setPosts(postById);
   }
 
   let hasDrinksMenu = false;

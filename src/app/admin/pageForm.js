@@ -42,7 +42,7 @@ function PageForm(props) {
   }, 3000);
 
   function getPage() {
-    fetch(`/db/pagesbyid/${pageId}`)
+    fetch(`http://localhost:3000/db/pagesbyid/${pageId}`)
       .then(res => res.text())
       .then(res => {
         const page = JSON.parse(res)[0];
@@ -54,7 +54,7 @@ function PageForm(props) {
   }
 
   function getPosts() {
-    fetch(`/db/postsbypageid/${pageId}`)
+    fetch(`http://localhost:3000/db/postsbypageid/${pageId}`)
       .then(res => res.text())
       .then(res => {
         setPosts(JSON.parse(res));
@@ -70,7 +70,9 @@ function PageForm(props) {
     };
 
     $.ajax({
-      url: `/db/pages/` + (props.formType === 'edit' ? pageId : ''),
+      url:
+        `http://localhost:3000/db/pages/` +
+        (props.formType === 'edit' ? pageId : ''),
       method: props.formType === 'edit' ? 'PUT' : 'POST',
       data: newValues,
     }).done(function (res) {
@@ -89,15 +91,15 @@ function PageForm(props) {
 
   function onDelete() {
     $.ajax({
-      url: `/db/pages/${props.pageId}`,
+      url: `http://localhost:3000/db/pages/${props.pageId}`,
       method: 'DELETE',
     }).done(function (res) {
       $.ajax({
-        url: `/db/translation/${translation.translation_id}`,
+        url: `http://localhost:3000/db/translation/${translation.translation_id}`,
         method: 'DELETE',
       }).done(function (res) {
         $.ajax({
-          url: `/db/pages/${translation.eng_id}`,
+          url: `http://localhost:3000/db/pages/${translation.eng_id}`,
           method: 'DELETE',
         }).done(function (res) {
           window.location.href = '/admin';

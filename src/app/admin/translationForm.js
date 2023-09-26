@@ -13,7 +13,7 @@ function TranslationForm(props) {
   }, []);
 
   function getTranslation() {
-    const ajaxUrl = `/db/get${props.itemType}translation/${props.itemId}`;
+    const ajaxUrl = `http://localhost:3000/db/get${props.itemType}translation/${props.itemId}`;
     fetch(ajaxUrl)
       .then(res => res.text())
       .then(res => {
@@ -33,7 +33,7 @@ function TranslationForm(props) {
 
   function getTranslatedItem(engId) {
     // we need to get a single item (page or post) by its id
-    fetch(`/db/${props.itemType}sbyid/${engId}`)
+    fetch(`http://localhost:3000/db/${props.itemType}sbyid/${engId}`)
       .then(res => res.text())
       .then(res => {
         const result = JSON.parse(res)[0];
@@ -50,7 +50,7 @@ function TranslationForm(props) {
     };
 
     $.ajax({
-      url: `/db/translation`,
+      url: `http://localhost:3000/db/translation`,
       method: 'POST',
       data: newTranslationValue,
     }).done(function (res) {

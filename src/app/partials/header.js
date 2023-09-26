@@ -1,6 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import '../style/header.css';
 import { Context } from '../context/context-provider';
+import { pages } from '../../db/data-pages';
+import { translations } from '../../db/data-translations';
 
 function Header(props) {
   const { appState, appDispatch } = useContext(Context);
@@ -22,38 +24,22 @@ function Header(props) {
   }, [appState.pageId]);
 
   function getPages() {
-    fetch(`/db/pages/${appState.language}`)
-      .then(res => res.text())
-      .then(res => {
-        const result = JSON.parse(res);
-        setMenuItems(result);
-      });
+    setMenuItems(pages.filter(p => p.language === appState.language));
   }
 
   function getPageTranslation() {
-    fetch(
-      `/db/getpage${appState.language === 'DE' ? 'translation' : 'origin'}/${
-        appState.pageId
-      }`
-    )
-      .then(res => res.text())
-      .then(res => {
-        const translation = JSON.parse(res)[0];
-        getTranslatedPage(translation);
-      });
+    const pageTranslation = translations.find(translation => {
+      return (
+        translation[`${appState.language === 'DE' ? 'de' : 'eng'}_id`] ===
+        appState.pageId.toString()
+      );
+    });
+
+    getTranslatedPage(pageTranslation);
   }
 
   function getTranslatedPage(translation) {
-    fetch(
-      `/db/pagesbyid/${
-        translation[(appState.language === 'DE' ? 'eng' : 'de') + '_id']
-      }`
-    )
-      .then(res => res.text())
-      .then(res => {
-        const result = JSON.parse(res)[0];
-        setTranslatedPage(result);
-      });
+    setTranslatedPage(pages.find(page => page.page_id === appState.pageId));
   }
 
   function onWindowResize() {

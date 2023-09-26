@@ -3,6 +3,8 @@ import PageForm from './pageForm';
 import { Context } from '../context/context-provider';
 import '../style/admin.css';
 import $ from 'jquery';
+import { pages } from '../../db/data-pages';
+import { users } from '../../db/data-users';
 
 function Admin(props) {
   const { appState, appDispatch } = useContext(Context);
@@ -28,16 +30,11 @@ function Admin(props) {
 
   // fetch the pages
   function getMenuItems() {
-    fetch(`/db/pages/${appState.language}`)
-      .then(res => res.text())
-      .then(res => {
-        const result = JSON.parse(res);
-        setMenuItems(result);
-      });
+    setMenuItems(pages.filter(p => p.language === appState.language));
   }
 
   function getUser() {
-    fetch('/db/user/')
+    fetch('http://localhost:3000/db/user/')
       .then(res => res.text())
       .then(res => {
         setUser(JSON.parse(res));
@@ -45,7 +42,7 @@ function Admin(props) {
   }
 
   function onLogoutClick() {
-    fetch('/db/signout/')
+    fetch('http://localhost:3000/db/signout/')
       .then(res => res.text())
       .then(res => {
         window.location.href = '/';
@@ -260,7 +257,7 @@ function ChangePasswordForm(props) {
       password: newPassword,
     };
     $.ajax({
-      url: `/db/user/${props.user.id}`,
+      url: `.http://localhost:3000/db/user/${props.user.id}`,
       method: 'POST',
       data: newUserData,
     }).done(function (res) {
