@@ -4,7 +4,6 @@ import { Context } from '../context/context-provider';
 import '../style/admin.css';
 import $ from 'jquery';
 import { pages } from '../../db/data-pages';
-import { users } from '../../db/data-users';
 
 function Admin(props) {
   const { appState, appDispatch } = useContext(Context);

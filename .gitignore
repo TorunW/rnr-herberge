@@ -27,9 +27,3 @@ yarn-error.log*
 
 
 #database
-/src/db/data-bookings.js
-/src/db/data-messages.js
-/src/db/data-pages.js
-/src/db/data-posts.js
-/src/db/data-translations.js
-/src/db/data-users.js
